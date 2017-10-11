@@ -31,6 +31,7 @@ class ViewController: UIViewController {
                     self.labelResult.text = "ddc succeed"
                 } else {
                     self.labelResult.text = String(format: "ddc failed with error: %@",error!.description)
+                    print("ddc failed with error: ",error!.description)
                 }
             }
         }

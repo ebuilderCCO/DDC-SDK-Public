@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		021097E61F8E13080016B935 /* iddc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 021097E51F8E12FE0016B935 /* iddc.framework */; };
+		021097E71F8E13080016B935 /* iddc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 021097E51F8E12FE0016B935 /* iddc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0253275C1F8E02DC00AF302B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253275B1F8E02DC00AF302B /* AppDelegate.swift */; };
 		0253275E1F8E02DC00AF302B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253275D1F8E02DC00AF302B /* ViewController.swift */; };
 		025327611F8E02DC00AF302B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0253275F1F8E02DC00AF302B /* Main.storyboard */; };
@@ -14,8 +16,6 @@
 		025327661F8E02DC00AF302B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025327641F8E02DC00AF302B /* LaunchScreen.storyboard */; };
 		025327711F8E02DC00AF302B /* iddc_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025327701F8E02DC00AF302B /* iddc_swiftTests.swift */; };
 		0253277C1F8E02DD00AF302B /* iddc_swiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253277B1F8E02DD00AF302B /* iddc_swiftUITests.swift */; };
-		0253278D1F8E044E00AF302B /* iddc.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0253278C1F8E03CC00AF302B /* iddc.framework */; };
-		0253278E1F8E044E00AF302B /* iddc.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0253278C1F8E03CC00AF302B /* iddc.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0253278E1F8E044E00AF302B /* iddc.framework in Embed Frameworks */,
+				021097E71F8E13080016B935 /* iddc.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,6 +50,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		021097E51F8E12FE0016B935 /* iddc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iddc.framework; sourceTree = "<group>"; };
 		025327581F8E02DC00AF302B /* iddc-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iddc-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0253275B1F8E02DC00AF302B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0253275D1F8E02DC00AF302B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,7 +64,6 @@
 		025327771F8E02DD00AF302B /* iddc-swiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iddc-swiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0253277B1F8E02DD00AF302B /* iddc_swiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iddc_swiftUITests.swift; sourceTree = "<group>"; };
 		0253277D1F8E02DD00AF302B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0253278C1F8E03CC00AF302B /* iddc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iddc.framework; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0253278D1F8E044E00AF302B /* iddc.framework in Frameworks */,
+				021097E61F8E13080016B935 /* iddc.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,7 +121,7 @@
 				025327621F8E02DC00AF302B /* Assets.xcassets */,
 				025327641F8E02DC00AF302B /* LaunchScreen.storyboard */,
 				025327671F8E02DC00AF302B /* Info.plist */,
-				0253278C1F8E03CC00AF302B /* iddc.framework */,
+				021097E51F8E12FE0016B935 /* iddc.framework */,
 			);
 			path = "iddc-swift";
 			sourceTree = "<group>";
@@ -451,6 +451,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/iddc-swift",
 				);
 				INFOPLIST_FILE = "iddc-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -470,6 +471,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/iddc-swift",
 				);
 				INFOPLIST_FILE = "iddc-swift/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

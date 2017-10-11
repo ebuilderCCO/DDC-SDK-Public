@@ -86,5 +86,5 @@ fastlane/report.xml
 fastlane/screenshots
  
 .DS_Store
-iddc-swift/iddc-swift/iddc.framework
-iddc-oc/iddc-oc/iddc.framework
+ios/iddc-swift/iddc-swift/iddc.framework
+ios/iddc-oc/iddc-oc/iddc.framework
