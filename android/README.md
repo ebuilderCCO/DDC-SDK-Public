@@ -28,7 +28,22 @@ DeviceDataCollectorFactory.init(context); //not required
 Replace <YOUR LICENSE KEY> with your unique key which you will receive from eBuilder.
 
 ### Gradle Integration
-**TBD**: eBuilder's public artifacts repository.
+
+eBuilder maven repository:
+```
+allprojects {
+    repositories {
+        maven {
+            url "https://artifacts.ebuilder.io/repository/eBuilder-external/"
+            credentials {
+                username <mavenUser>
+                password <mavenPassword>
+            }
+        }
+    }
+}
+
+```
 
 Add the compile dependency to your build.gradle
 
