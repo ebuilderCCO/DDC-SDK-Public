@@ -34,7 +34,7 @@ eBuilder maven repository:
 allprojects {
     repositories {
         maven {
-            url "https://artifacts.ebuilder.io/repository/eBuilder-external/"
+            url "https://artifacts.ebuilder.io/repository/ebuilder-external-android/"
             credentials {
                 username <mavenUser>
                 password <mavenPassword>
