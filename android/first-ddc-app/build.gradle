@@ -43,10 +43,6 @@ allprojects {
 
         maven {
             url repoUrl
-            credentials {
-                username mavenUser
-                password mavenPassword
-            }
         }
     }
 }
