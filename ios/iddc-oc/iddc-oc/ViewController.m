@@ -30,7 +30,7 @@
 
 - (IBAction)buttonPressed:(UIButton *)sender {
     NSString *uniqueIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" deviceId: uniqueIdentifier deviceIdType: DeviceIdTypeInstallationId];
+    DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" systemId: @"YOUR-SYSTEM-ID" deviceId: uniqueIdentifier deviceIdType: DeviceIdTypeInstallationId];
     [ddcManager runWithCompletion:^(DdcError * error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error == nil || error.code == 0) {

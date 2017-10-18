@@ -10,8 +10,6 @@ To run the example project, clone the repo, and run `pod install` from the **idd
 
 ## Installation
 
-## How to integrate
-
 iOS DDC SDK **iddc** is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
@@ -25,6 +23,8 @@ pod 'iddc'
 
 ## Usage
 
+####  Use the framework in Objective-C project 
+
 ```objective-c
 #import <iddc/iddc.h>
 
@@ -36,7 +36,7 @@ initWithKey: License key for DDC
 deviceId: Unique id for the device.
 deviceIdType: The type for the deviceId, it could be IMEI/GAID/IDFA/PhoneNumber/InstallationId.
 */
-DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" deviceId: @"YOU-DEVICE-ID" deviceIdType: deviceIdType];
+DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" systemId: @"YOUR-SYSTEM-ID" deviceId: @"YOU-DEVICE-ID" deviceIdType: deviceIdType];
 [ddcManager runWithCompletion:^(DdcError * error) {    
     if (error == nil || [error code] == 0) {
         NSLog(@"ddc succeed");
@@ -47,7 +47,7 @@ DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" dev
 
 ```
 
-## Use the framework in Swift project 
+#### Use the framework in Swift project 
 
 ```Swift
 import iddc
@@ -60,8 +60,7 @@ initWithKey: License key for DDC
 deviceId: Unique id for the device.
 deviceIdType: The type for the deviceId, it could be IMEI/GAID/IDFA/PhoneNumber/InstallationId.
 */
-let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "uuid-unavailable"
-let manager = DdcManager(key: "YOUR-LICENSE-KEY", deviceId: deviceId, deviceIdType: .installationId)
+let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: "YOU-DEVICE-ID", deviceIdType: deviceIdType)
 manager.run { (error) in
     if error == nil || error?.code == 0 {
         print("ddc succeed")
@@ -101,9 +100,10 @@ public enum DeviceIdType : Int {
 
 ## Input Parameters:
 
-* **initWithKey**: License key for DDC
-* **deviceId**: Unique id for the device.
-* **deviceIdType**: The type for the deviceId, it could be IMEI/GAID/IDFA/PhoneNumber/InstallationId.
+* **initWithKey**:mandatory,  license key for DDC
+* **systemId**: mandatory, the name of the application using/embedding the SDK
+* **deviceId**: mandatory, unique id for the device.
+* **deviceIdType**: mandatory, the type for the deviceId, it could be IMEI/GAID/IDFA/PhoneNumber/InstallationId.
 
 ### Output:
 * **[ddcManager runWithCompletion]** returns a DdcError object. If `DdcError == nil or DdcError.code == 0`, that means DDC report succeed. Otherwise you can get the failure reason from `DdcError.description`

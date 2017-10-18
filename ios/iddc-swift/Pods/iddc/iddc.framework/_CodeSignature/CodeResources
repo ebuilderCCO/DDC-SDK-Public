@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/iddc-Swift.h</key>
 		<data>
-		cm901xv2WPRO/HOEGqUdi2nSrHA=
+		oSeP1ELNTPJdQ1iVZgRmXWGRhNM=
 		</data>
 		<key>Headers/iddc.h</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ImMzi8RUeEPk6AF4JUPCicPo1mc=
+		nL0qEV6LiQef5KDc5sBsvnL8XaQ=
 		</data>
 		<key>Modules/iddc.swiftmodule/i386.swiftdoc</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Modules/iddc.swiftmodule/i386.swiftmodule</key>
 		<data>
-		PKC3JMWM8RXS2CGWb0OJjtJNx6A=
+		T5FK9hlaPokLRcTLCt3P8/W7Aoc=
 		</data>
 		<key>Modules/iddc.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Modules/iddc.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		OmAuF9NY6hPrYc/pC5yqra7f/lU=
+		PjBKYUS3Ac85fetmK4XHMlfdOiI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -58,11 +58,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cm901xv2WPRO/HOEGqUdi2nSrHA=
+			oSeP1ELNTPJdQ1iVZgRmXWGRhNM=
 			</data>
 			<key>hash2</key>
 			<data>
-			jtjOq1ssYIyBrGPUS8b30L3MJ6DDUvSQez0+2IGSqps=
+			Xoaag8yy5Bt2D6eQvhyouH0V6V8lJVeU8xlFcA6Zs2M=
 			</data>
 		</dict>
 		<key>Headers/iddc.h</key>
@@ -91,11 +91,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			PKC3JMWM8RXS2CGWb0OJjtJNx6A=
+			T5FK9hlaPokLRcTLCt3P8/W7Aoc=
 			</data>
 			<key>hash2</key>
 			<data>
-			tXg14pqG5Kk/4Hape8bgA1/wtGeDAwLjpvaQYUuJSME=
+			cl8R9JXjbf+7lC32Djj97bcHwb6BWp8tkplAnMxFBBI=
 			</data>
 		</dict>
 		<key>Modules/iddc.swiftmodule/x86_64.swiftdoc</key>
@@ -113,11 +113,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			OmAuF9NY6hPrYc/pC5yqra7f/lU=
+			PjBKYUS3Ac85fetmK4XHMlfdOiI=
 			</data>
 			<key>hash2</key>
 			<data>
-			ka8d+aPHcq71VeQ7q9goTMsMKg2nawAYz0HtOvETqNg=
+			rEvhDhhn0y2+g7yvimhA6DPXf90Wb+g3ezjTJfarrLU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

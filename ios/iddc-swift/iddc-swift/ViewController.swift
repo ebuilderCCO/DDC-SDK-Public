@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 
     @IBAction func buttonPressed(_ sender: UIButton) {
         let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "uuid-unavailable"
-        let manager = DdcManager(key: "YOUR-LICENSE-KEY", deviceId: deviceId, deviceIdType: .installationId)
+        let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: deviceId, deviceIdType: .installationId)
         manager.run { (error) in
             DispatchQueue.main.async {
                 if error == nil || error?.code == 0 {

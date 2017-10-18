@@ -205,8 +205,8 @@ SWIFT_CLASS("_TtC4iddc10DdcManager")
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull versionInfo;)
 + (NSString * _Nonnull)versionInfo SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithKey:(NSString * _Nonnull)key deviceId:(NSString * _Nonnull)deviceId deviceIdType:(enum DeviceIdType)deviceIdType;
-- (nonnull instancetype)initWithKey:(NSString * _Nonnull)key deviceId:(NSString * _Nonnull)deviceId deviceIdType:(enum DeviceIdType)deviceIdType environment:(NSString * _Nonnull)environment OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithKey:(NSString * _Nonnull)key systemId:(NSString * _Nonnull)systemId deviceId:(NSString * _Nonnull)deviceId deviceIdType:(enum DeviceIdType)deviceIdType;
+- (nonnull instancetype)initWithKey:(NSString * _Nonnull)key systemId:(NSString * _Nonnull)systemId deviceId:(NSString * _Nonnull)deviceId deviceIdType:(enum DeviceIdType)deviceIdType environment:(NSString * _Nonnull)environment OBJC_DESIGNATED_INITIALIZER;
 - (void)runWithCompletion:(void (^ _Nonnull)(DdcError * _Nullable))completion;
 @end
 
