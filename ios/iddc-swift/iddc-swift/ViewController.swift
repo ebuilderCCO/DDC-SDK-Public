@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var labelResult: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.title = "DDC(\(DdcManager.versionInfo))"
     }
 
     override func didReceiveMemoryWarning() {

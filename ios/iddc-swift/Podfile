@@ -1,0 +1,21 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'iddc-swift' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for iddc-swift
+  pod 'iddc'
+
+  target 'iddc-swiftTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'iddc-swiftUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
