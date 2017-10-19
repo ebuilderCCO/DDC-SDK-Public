@@ -109,21 +109,69 @@ public enum DeviceIdType : Int {
 * **[ddcManager runWithCompletion]** returns a DdcError object. If `DdcError == nil or DdcError.code == 0`, that means DDC report succeed. Otherwise you can get the failure reason from `DdcError.description`
 
 
-## 5. Upload your host App to AppStore
+## 5. Upload host App to AppStore
 
 The iddc.framework is a universal framework. The Appp with this framework can be run in both simulator and real device, but it is not allowed to be uploaded to AppStore.
 So we need remove simulator architectures from the framework before we archiving and uploading to AppStore.
 #### 5.1 Add [script](https://gist.github.com/zhihuitang/1046b71bf7fe6c169a29405c37f99a66) to **Archive: pre-actions**
-Please remember to replace the framework name with **your own framework name**
+Please remember to replace the framework name with **iddc**
 ![pre actions](./res/pre-actions.jpg "pre actions")  
 
+```shell
+exec > /tmp/${PROJECT_NAME}_archive.log 2>&1
+
+FRAMEWORK_NAME="iddc"
+
+cd ${SRCROOT}/Pods/${FRAMEWORK_NAME}/
+
+echo "🚀backup ${SRCROOT}/Pods/${FRAMEWORK_NAME}/${FRAMEWORK_NAME}.framework"
+if [ -f "${FRAMEWORK_NAME}.zip" ]
+then
+    unzip -o ${FRAMEWORK_NAME}.zip
+else
+    zip -r ${FRAMEWORK_NAME}.zip ./${FRAMEWORK_NAME}.framework
+fi
+
+# extract armv7/arm64
+echo "🚀extracting armv7"
+lipo ${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME} -thin armv7 -output ${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}armv7
+
+echo "🚀extracting arm64"
+lipo ${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME} -thin arm64 -output ${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}arm64
+rm -rf ${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}
+
+echo "🚀making new framework"
+lipo -create ${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}armv7 ${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}arm64 -output ${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}
+rm -rf ${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}armv7
+rm -rf ${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}arm64
+
+echo "🚀removing i386*/x86*"
+rm -rf ${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule/i386*
+rm -rf ${FRAMEWORK_NAME}.framework/Modules/${FRAMEWORK_NAME}.swiftmodule/x86*
+
+```
+
+
 #### 5.2 Add [script](https://gist.github.com/zhihuitang/69fc4784df749137b5ecf890b3c591e9) to **Archive: post-actions**
-Please remember to replace the framework name with **your own framework name**
+Please remember to replace the framework name with **iddc**
 ![post actions](./res/post-actions.jpg "post actions")  
 
-> Ref: [Your executable contains unsupported architecture](https://dahuayuan.wordpress.com/2017/10/18/how-to-upload-an-app-with-universal-framework/)
+```shell
+exec >> /tmp/${PROJECT_NAME}_archive.log 2>&1
+
+FRAMEWORK_NAME="iddc"
+
+cd ${SRCROOT}/Pods/${FRAMEWORK_NAME}/
+
+echo "🚀restore ${SRCROOT}/Pods/${FRAMEWORK_NAME}"
+rm -rf ./${FRAMEWORK_NAME}.framework
+unzip -o ${FRAMEWORK_NAME}.zip
+rm -rf ${FRAMEWORK_NAME}.zip
+```
 
 #### 5.3 Then you can archive your host App as usual.
+
+> Ref: [Your executable contains unsupported architecture](https://dahuayuan.wordpress.com/2017/10/18/how-to-upload-an-app-with-universal-framework/)
 
 
 
