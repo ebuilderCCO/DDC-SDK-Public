@@ -1,7 +1,7 @@
 [![N|Solid](https://ebuilder.com/wp-content/uploads/2017/02/ebuilder-effortless-logo.png)](https://ebuilder.com/)
 
 ### About the SDK
-SDK works for Android v4.4 and later
+Minimum supported SDK for DDC SDK is [14](https://source.android.com/source/build-numbers)
 
 ### How to init the SDK?
 
@@ -53,8 +53,9 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
-    compile 'com.android.support:support-v4:25.3.1' // Added only for checking for runtime 
-    											// permissions has been set or not
+    // Added only for checking for runtime 
+    // permissions has been set or not
+    compile 'com.android.support:support-v4:25.3.1'
 }
 ```
 Replace “x.y.z” with current version of eBuilder DDC
