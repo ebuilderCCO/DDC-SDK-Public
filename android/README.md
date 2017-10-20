@@ -1,7 +1,7 @@
 [![N|Solid](https://ebuilder.com/wp-content/uploads/2017/02/ebuilder-effortless-logo.png)](https://ebuilder.com/)
 
 ### About the SDK
-Minimum supported SDK for DDC SDK is [14](https://source.android.com/source/build-numbers)
+Minimum supported SDK for DDC SDK is [16](https://source.android.com/source/build-numbers)
 
 ### How to init the SDK?
 
