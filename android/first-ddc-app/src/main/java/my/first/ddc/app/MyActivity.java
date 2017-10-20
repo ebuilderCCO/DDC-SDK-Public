@@ -3,6 +3,7 @@ package my.first.ddc.app;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -28,11 +29,32 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActivityCompat.requestPermissions(this,
-                new String[]{
-                        Manifest.permission.READ_PHONE_STATE,
-                        Manifest.permission.GET_ACCOUNTS
-                }, REQUEST_CODE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{
+                            Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.GET_ACCOUNTS
+                    }, REQUEST_CODE);
+        } else {
+            setup();
+        }
+    }
+
+    private void setup() {
+        if (PermissionUtils.allGranted(this,
+                Manifest.permission.READ_PHONE_STATE,
+                Manifest.permission.GET_ACCOUNTS)) {
+            final TelephonyManager telephonyManager = (TelephonyManager)
+                    getSystemService(TELEPHONY_SERVICE);
+            if (telephonyManager != null) {
+                final String imei = telephonyManager.getDeviceId();
+                DeviceDataCollectorFactory.setup(getApplicationContext(),
+                        SYSTEM_ID, imei, DeviceIdType.IMEI)
+                        .loggingEnabled()
+                        .collectGoogleAccounts()
+                        .build(getApplicationContext());
+            }
+        }
     }
 
     @SuppressLint("HardwareIds")
@@ -41,20 +63,7 @@ public class MyActivity extends Activity {
                                            final @NonNull String[] permissions,
                                            final @NonNull int[] grantResults) {
         if (REQUEST_CODE == requestCode) {
-            if (PermissionUtils.allGranted(this,
-                    Manifest.permission.READ_PHONE_STATE,
-                    Manifest.permission.GET_ACCOUNTS)) {
-                final TelephonyManager telephonyManager = (TelephonyManager)
-                        getSystemService(TELEPHONY_SERVICE);
-                if (telephonyManager != null) {
-                    final String imei = telephonyManager.getDeviceId();
-                    DeviceDataCollectorFactory.setup(getApplicationContext(),
-                            SYSTEM_ID, imei, DeviceIdType.IMEI)
-                            .loggingEnabled()
-                            .collectGoogleAccounts()
-                            .build(getApplicationContext());
-                }
-            }
+            setup();
         }
     }
 }
