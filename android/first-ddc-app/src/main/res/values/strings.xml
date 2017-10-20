@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">MyFirstDDCApp</string>
-    <string name="license_key">Place here a license</string>
+    <string name="license_key">LICENSE ID</string>
 </resources>
