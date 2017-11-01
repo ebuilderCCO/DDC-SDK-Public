@@ -30,7 +30,14 @@ pod update
 
 ## 4. Usage
 
-####  4.1 Use the framework in Objective-C project 
+#### 4.1 Add NSBluetoothPeripheralUsageDescription to Info.list
+Since **iddc.framework** need Bluetooth permission to read its status(on/off), it needs to contain an NSBluetoothPeripheralUsageDescription key with a string value explaining to the user how the app uses this data.
+But actually, the **iddc.framwork** won't show the permission dialogue at run time.
+```xml
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>REASON-WHY-NEED-PERMISSION</string>
+```
+#### 4.2 Use the framework in Objective-C project 
  * (Objective-C project only)Select your project in **"TARGETS"**(Not PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes** 
    ![embed-swift](./res/embed-swift.png "embed-swift")        
 
@@ -71,7 +78,7 @@ typedef SWIFT_ENUM(NSInteger, DeviceIdType) {
 ```
 
 
-#### 4.2 Use the framework in Swift project 
+#### 4.3 Use the framework in Swift project 
 
 ```Swift
 import iddc
@@ -109,7 +116,7 @@ public enum DeviceIdType : Int {
 }
 ```
 
-#### 4.3 Output:
+#### 4.4 Output:
 * **DdcManager.run()** returns a DdcError object. If `DdcError == nil or DdcError.code == 0`, that means DDC report succeed. Otherwise you can get the failure reason from `DdcError.description`
 
 
