@@ -128,7 +128,7 @@ Generally, it is the host App should decide when/where to trigger the DDC collec
 ......
 
 
-In our demo [Swift Demo App](../iddc-swift/iddc-swift/ViewController.swift), the DDC collections were triggered when a user tapped a Button.
+In our demo [Swift Demo App](./iddc-swift/iddc-swift/ViewController.swift), the DDC collections were triggered when a user tapped a Button.
 
 ```swift
 @IBAction func buttonPressed(_ sender: UIButton) {
