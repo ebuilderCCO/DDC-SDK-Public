@@ -51,7 +51,7 @@ But actually, the **iddc.framwork** won't show the permission dialogue at run ti
  initWithKey: License key for DDC
     systemId: the name of the application using/embedding the SDK
     deviceId: Unique id for the device.
-deviceIdType: The type for the deviceId, it could be IMEI/GAID/IDFA/PhoneNumber/InstallationId.
+deviceIdType: The type for the deviceId, it could be IMEI/IDFA/PhoneNumber/InstallationId.
 */
 DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" systemId: @"YOUR-SYSTEM-ID" deviceId: @"YOU-DEVICE-ID" deviceIdType: deviceIdType];
 [ddcManager runWithCompletion:^(DdcError * error) {    
@@ -69,7 +69,6 @@ DeviceIdType in Objective-C
 ```objective-c
 typedef SWIFT_ENUM(NSInteger, DeviceIdType) {
   DeviceIdTypeImei = 0,
-  DeviceIdTypeGaid = 1,
   DeviceIdTypeIdfa = 2,
   DeviceIdTypeIccid = 3,
   DeviceIdTypePhoneNumber = 4,
@@ -90,7 +89,7 @@ import iddc
          key: License key for DDC
     systemId: the name of the application using/embedding the SDK
     deviceId: Unique id for the device.
-deviceIdType: The type for the deviceId, it could be IMEI/GAID/IDFA/PhoneNumber/InstallationId.
+deviceIdType: The type for the deviceId, it could be IMEI/IDFA/PhoneNumber/InstallationId.
 */
 let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: "YOU-DEVICE-ID", deviceIdType: deviceIdType)
 manager.run { (error) in
@@ -108,7 +107,6 @@ DeviceIdType in Swift
 ```Swift
 public enum DeviceIdType : Int {
     case imei
-    case gaid
     case idfa
     case iccid
     case phoneNumber
