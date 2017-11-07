@@ -1,6 +1,6 @@
 # iddc.framework
 
-[![Build Status](https://img.shields.io/badge/Platform-iOS-lightgrey.svg)](https://www.apple.com)   [![iOS](https://img.shields.io/badge/iOS-8.0-brightgreen.svg)](https://www.apple.com) [![ide](https://img.shields.io/badge/IDE-Xcode9-lightgrey.svg)](https://img.shields.io/badge/IDE-Xcode9-lightgrey.svg)
+[![Build Status](https://img.shields.io/badge/Platform-iOS-lightgrey.svg)](https://www.apple.com)   [![iOS](https://img.shields.io/badge/iOS-8.0-brightgreen.svg)](https://www.apple.com) [![Xcode](https://img.shields.io/badge/Xcode-9.0-green.svg)](https://img.shields.io/badge/Xcode-9.0-green.svg)
 
 ## 1. Example
 
@@ -119,6 +119,26 @@ public enum DeviceIdType : Int {
 #### 4.4 Output:
 * **DdcManager.run()** returns a DdcError object. If `DdcError == nil or DdcError.code == 0`, that means DDC report succeed. Otherwise you can get the failure reason from `DdcError.description`
 
+#### 4.5 Usage tips
+Generally, it is the host App should decide when/where to trigger the DDC collection. DDC collection can be either put in when `func applicationDidEnterBackground(_ application: UIApplication)`, `func applicationWillEnterForeground(_ application: UIApplication)` or some background process like
+
+* Callback of location updates
+* Background fetch
+* Audio process
+......
+
+
+In our demo [Swift Demo App](../iddc-swift/iddc-swift/ViewController.swift), the DDC collections were triggered when a user tapped a Button.
+
+```swift
+@IBAction func buttonPressed(_ sender: UIButton) {
+    let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "uuid-unavailable"
+    let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: deviceId, deviceIdType: .installationId)
+    manager.run { (error) in
+        // result handling
+    }
+}
+```
 
 ## 5. Upload host App to AppStore
 
