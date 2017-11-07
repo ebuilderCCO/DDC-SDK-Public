@@ -119,14 +119,21 @@ public enum DeviceIdType : Int {
 #### 4.4 Output:
 * **DdcManager.run()** returns a DdcError object. If `DdcError == nil or DdcError.code == 0`, that means DDC report succeed. Otherwise you can get the failure reason from `DdcError.description`
 
-#### 4.5 Usage tips
-Generally, it is the host App should decide when/where to trigger the DDC collection. DDC collection can be either put in when `func applicationDidEnterBackground(_ application: UIApplication)`, `func applicationWillEnterForeground(_ application: UIApplication)` or some background process like
+#### 4.5 Alternatives for triggering DDC
+Generally, it is the responsibility of the host-app to trigger the DDC.
+Every time the host-app triggers the DDC - the DDC will collect and upload a DDC event.
+In order for the collected data to be of maximum business use a certain number of DDC events must be collected over time. 
+Fewer DDC events collected means less value can be realised.
 
-* Callback of location updates
+Best practise is to trigger DDC based on location updates - however this requires the host-app to have a reason (use case) to subscribe to location updates from iOS.
+
+Other options include tying triggering of DDC to:
 * Background fetch
 * Audio process
-......
 
+As a last resort, DDC can be triggered when application state changes, e.g. when `func applicationDidEnterBackground(_ application: UIApplication)`, `func applicationWillEnterForeground(_ application: UIApplication)`
+
+......
 
 In our demo [Swift Demo App](./iddc-swift/iddc-swift/ViewController.swift), the DDC collections were triggered when a user tapped a Button.
 
