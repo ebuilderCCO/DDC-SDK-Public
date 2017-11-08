@@ -20,12 +20,44 @@ Once the setup is performed it is enough to call init when the app starts. You c
 ```java
 DeviceDataCollectorFactory.init(context); //not required
 ```
+### The parameters of the DeviceDataCollectorFactory.setup function
+```java
+DeviceDataCollectorFactory.setup(context, applicationName, deviceID, DeviceIdType)
+    .loggingEnabled()
+    .build(context);
+```
+#### context ####
+the android app context
+
+#### applicationName ####
+the name of your app, useful when analysing the data
+
+#### deviceID ####
+the ID of the device the code will be running on. We have historically used IMEI
+
+#### DeviceIdType ####
+the type of the device ID
+
+
 ### How to define license?
  In AndroidManifest.xml manifest add the following line under application tag:
 ```xml
 <meta-data android:name="ddc-sdk-license" android:value="<YOUR LICENSE KEY>" />
 ```
 Replace <YOUR LICENSE KEY> with your unique key which you will receive from eBuilder.
+	
+Another option is to edit your strings.xml file:
+```
+DDC-SDK-Public/android/first-ddc-app/src/main/res/values/strings.xml
+```
+There you can change the name of the example app as well as the license key.
+
+```xml
+resources>
+    <string name="app_name">MyFirstDDCApp</string>
+    <string name="license_key">LICENSE ID</string>
+</resources>
+```
 
 ### Gradle Integration
 
@@ -35,10 +67,6 @@ allprojects {
     repositories {
         maven {
             url "https://artifacts.ebuilder.io/repository/ebuilder-external-android/"
-            credentials {
-                username <mavenUser>
-                password <mavenPassword>
-            }
         }
     }
 }
