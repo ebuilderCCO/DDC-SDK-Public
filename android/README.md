@@ -45,15 +45,16 @@ the type of the device ID
 <meta-data android:name="ddc-sdk-license" android:value="<YOUR LICENSE KEY>" />
 ```
 Replace <YOUR LICENSE KEY> with your unique key which you will receive from eBuilder.
-	
-Another option is to edit your strings.xml file:
+
+#### For the test application update strings.xml ####
+For the test application you only need to alter the strings.xml file:
 ```
 DDC-SDK-Public/android/first-ddc-app/src/main/res/values/strings.xml
 ```
-There you can change the name of the example app as well as the license key.
+There you can change the name of the app as well as set your license key.
 
 ```xml
-resources>
+<resources>
     <string name="app_name">MyFirstDDCApp</string>
     <string name="license_key">LICENSE ID</string>
 </resources>
