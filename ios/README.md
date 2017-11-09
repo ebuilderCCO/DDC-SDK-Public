@@ -37,6 +37,8 @@ But actually, the **iddc.framwork** won't show the permission dialogue at run ti
 <key>NSBluetoothPeripheralUsageDescription</key>
 <string>REASON-WHY-NEED-PERMISSION</string>
 ```
+> Please replace **REASON-WHY-NEED-PERMISSION** with some meaningful words.
+
 #### 4.2 Use the framework in Objective-C project 
  * (Objective-C project only)Select your project in **"TARGETS"**(Not PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes** 
    ![embed-swift](./res/embed-swift.png "embed-swift")        
