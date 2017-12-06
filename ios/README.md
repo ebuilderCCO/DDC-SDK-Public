@@ -66,6 +66,11 @@ DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" sys
 
 ```
 
+> In develop environment, the DDC log output can be enabled by setting:
+> ```
+> ddcManager.debug = true;
+> ```
+
 DeviceIdType in Objective-C
 
 ```objective-c
