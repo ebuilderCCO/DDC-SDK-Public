@@ -100,10 +100,21 @@ deviceIdType: The type for the deviceId, it could be IMEI/IDFA/PhoneNumber/Insta
 */
 let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: "YOU-DEVICE-ID", deviceIdType: deviceIdType)
 manager.run { (error) in
-    if error == nil || error?.code == 0 {
-        print("ddc succeed")
-    } else {
-        print("ddc failed with error ",error!.description)
+    guard let ddcError = error else {
+        print("DDC succeed")
+        return
+    }
+    
+    switch ddcError.code {
+    case DdcErrorCode.succeed.rawValue:
+        print("DDC succeed")
+    case DdcErrorCode.tooManyRequests.rawValue:
+        print("DDC failed due to too many requests in short time")
+    case DdcErrorCode.ddcIsRunning.rawValue:
+        print("DDC failed due to last requst is still running")
+    default:
+        // failed, other reason
+        print("failed: \(ddcError)")
     }
 }
 ```
@@ -130,7 +141,29 @@ Every time the host-app triggers the DDC - the DDC will collect and upload a DDC
 In order for the collected data to be of maximum business use a certain number of DDC events must be collected over time. 
 Fewer DDC events collected means less value can be realised.
 
-Best practise is to trigger DDC based on location updates - however this requires the host-app to have a reason (use case) to subscribe to location updates from iOS.
+Best practise is to trigger DDC based on location updates - however this requires the host-app to have a reason (use case) to subscribe to location updates from iOS. 
+
+Putting the DDC in the callback of system-callback (e.g:`didUpdateToLocation`) event directly(e.g.: `didUpdateToLocation` -> 
+`DDC`) ensures separation of concerns and eliminate any risk of impacting other features, and vice versa. 
+
+```objective-c
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" systemId: @"YOUR-SYSTEM-ID" deviceId: @"YOU-DEVICE-ID" deviceIdType: deviceIdType];
+    [ddcManager runWithCompletion:^(DdcError * error) {
+        if (error == nil || [error code] == 0) {
+            // succeed
+            NSLog(@"ddc succeed");
+        } else if( [error code] == DdcErrorCodeTooManyRequests ){
+            // failed due to too many requests in short time
+        } else if( [error code] == DdcErrorCodeDdcIsRunning ){
+            // failed due to last request is still running
+        } else {
+            // failed, other reason
+            NSLog(@"ddc completed with error: %@",error);
+        }
+    }];
+}
+```
 
 Other options include tying triggering of DDC to:
 * Background fetch
