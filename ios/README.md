@@ -143,7 +143,7 @@ Fewer DDC events collected means less value can be realised.
 
 Best practise is to trigger DDC based on location updates - however this requires the host-app to have a reason (use case) to subscribe to location updates from iOS. 
 
-Putting the DDC in the callback of system-callback (e.g:`didUpdateToLocation`) event directly(e.g.: `didUpdateToLocation` -> 
+Putting the DDC in the system-callback (e.g:`didUpdateToLocation`) event directly(e.g.: `didUpdateToLocation` -> 
 `DDC`) ensures separation of concerns and eliminate any risk of impacting other features, and vice versa. 
 
 ```objective-c
