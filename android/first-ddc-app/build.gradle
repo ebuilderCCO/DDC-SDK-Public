@@ -1,5 +1,3 @@
-apply plugin: 'com.android.application'
-
 buildscript {
     repositories {
         jcenter()
@@ -10,35 +8,11 @@ buildscript {
     }
 }
 
-android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
-    defaultConfig {
-        applicationId "my.first.ddc.app"
-        minSdkVersion 16
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
-
-        resValue "string", "data_content_provider_authority", "${applicationId}.ddc"
-    }
-
-    lintOptions {
-        abortOnError false
-    }
-
-}
-
-dependencies {
-    compile "com.android.support:support-v4:25.3.1"
-    compile "io.ebuilder.mobile.services:ddc-sdk:1.1.27"
-}
-
 allprojects {
     repositories {
         jcenter()
         maven {
-            url repoUrl
+            url "https://artifacts-int.ebuilder.io/repository/maven/"
         }
     }
 }
