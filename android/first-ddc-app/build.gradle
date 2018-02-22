@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
 
     dependencies {
@@ -12,7 +13,9 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            url "https://artifacts-int.ebuilder.io/repository/maven/"
+            url "https://artifacts.ebuilder.io/repository/maven/"
+
         }
+        google()
     }
 }
