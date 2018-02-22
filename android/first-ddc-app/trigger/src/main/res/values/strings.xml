@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyFirstDDCApp</string>
+    <string name="license_key">MyLicenseId</string>
+</resources>
