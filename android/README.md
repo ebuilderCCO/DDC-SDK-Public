@@ -3,23 +3,23 @@
 ### About the SDK
 Minimum supported SDK for DDC SDK is [16](https://source.android.com/source/build-numbers)
 
+### Mods supported by DDC SDK
+
+* Non-scheduled behaviour using [ServiceTrigger](#servicetrigger) (Default behaviour)
+* [GCM network manager](#scheduler) based scheduler
+
 ### How to init the SDK?
 
 ```java
-DeviceDataCollectorFactory.setup(context, "SystemId", "IMEI", SettingsBuilder.DeviceIdType.IMEI)
+final ServiceTrigger serviceTrigger = DeviceDataCollectorFactory.setup(context, "SystemId", "IMEI", SettingsBuilder.DeviceIdType.IMEI)
     .loggingEnabled()
     .build(context);
 ```
+More about **SystemTrigger** please see [here](#servicetrigger)
+
 * The **SystemId** is mandatory and is the name of the application using/embedding the SDK
 
 
-By calling `setup(...).build(context)` the DDC SDK would start using internal scheduler. If you're prefer not to use DDC scheduler please use [OnDemandTrigger](#ondemand-trigger).
-
-Once the setup is performed it is enough to call init when the app starts. You can use setup every time as well if prefered.
-
-```java
-DeviceDataCollectorFactory.init(context); //not required
-```
 ### The parameters of the DeviceDataCollectorFactory.setup function
 ```java
 DeviceDataCollectorFactory.setup(context, applicationName, deviceID, DeviceIdType)
@@ -27,10 +27,10 @@ DeviceDataCollectorFactory.setup(context, applicationName, deviceID, DeviceIdTyp
     .build(context);
 ```
 #### context ####
-the android app context
+the application context
 
 #### applicationName ####
-the name of your app, useful when analysing the data
+the name of your application, useful when analysing the data
 
 #### deviceID ####
 the ID of the device the code will be running on. We have historically used IMEI
@@ -94,15 +94,15 @@ Replace “x.y.z” with current version of eBuilder DDC
 ### All parameter used
 DDC SDK supports the following parameters.
 
-| Builder function                      | Description                              | Default value | Mandatory |
-| ------------------------------------- | ---------------------------------------- | ------------- | --------- |
-| loggingEnabled()                      | Turn on android logging. DDC SDK will dump a lot useful messages for debugging | false         |           |
-| wifiOnly()                            | Send data to eBuilder backend only when connected to wifi | false         |           |
-| collectGoogleAccounts()               | Give a permissions to DDC to collect device accounts | false         |           |
-| externalUserId(final String value)    | External user ID to send in event        | empty         |           |
-| sampleTime(final int value)           | Time in seconds how often to read data from device | 300 seconds   |           |
-| sendEventSchedule(final int value)    | Time in seconds how often to send data to eBuilder backend | 300 seconds   |           |
-| staticData(final Map<String, ?> data) | static data to add into the event. Could be anything. | empty         |           |
+| Builder function                           | Description                                                  | Default value | Mandatory |
+| ------------------------------------------ | ------------------------------------------------------------ | ------------- | --------- |
+| loggingEnabled()                           | Turn on android logging. DDC SDK will dump a lot useful messages for debugging | false         |           |
+| wifiOnly()                                 | Send data to eBuilder backend only when connected to wifi    | false         |           |
+| collectGoogleAccounts()                    | Give a permissions to DDC to collect device accounts         | false         |           |
+| externalUserId(final String value)         | External user ID to send in event                            | empty         |           |
+| sampleTime(final int value)                | Time in seconds how often to read data from device           | 300 seconds   |           |
+| sendEventSchedule(final int value)         | Time in seconds how often to send data to eBuilder backend   | 300 seconds   |           |
+| staticData(final Map<String, String> data) | static data to add into the event. Could be anything.        | empty         |           |
 
 #### Example
 ```java
@@ -118,21 +118,70 @@ DeviceDataCollectorFactory.setup(this, "Name of the app", "IMEI", SettingsBuilde
 
 Permissions are removed from DDC SDK and it doesn't required anymore any permissions to run. By default if no permissions are set by host-app DDC will only collect data which are not required any permissions to be gathered. But if you need to collect information about bluetooth adapter, for example, the host-app must include `android.permission.BLUETOOTH` permission to be able DDC SDK collect such information.
 
-| Permission                               | Description                              | Runtime |
-| ---------------------------------------- | ---------------------------------------- | ------- |
-| android.permission.ACCESS_WIFI_STATE     | Used for getting WiFi status to be included in event | no      |
-| android.permission.ACCESS_NETWORK_STATE  | Used for getting current network status to be included in event | no      |
-| android.permission.BLUETOOTH             | To gather information about Bluetooth adapter | no      |
-| android.permission.INTERNET              | To enable SDK to make network call       | no      |
-| android.permission.RECEIVE_BOOT_COMPLETED | Used for scheduling jobs to run services-on-demand | no      |
-| android.permission.WAKE_LOCK             | Used for scheduling jobs to run services-on-demand | no      |
-| android.permission.GET_ACCOUNTS          | Used to request information about available accounts on device | *yes*   |
+| Permission                                | Description                                                  | Runtime |
+| ----------------------------------------- | ------------------------------------------------------------ | ------- |
+| android.permission.ACCESS_WIFI_STATE      | Used for getting WiFi status to be included in event         | no      |
+| android.permission.ACCESS_NETWORK_STATE   | Used for getting current network status to be included in event | no      |
+| android.permission.BLUETOOTH              | To gather information about Bluetooth adapter and paired devices | no      |
+| android.permission.INTERNET               | To enable SDK to make network call                           | no      |
+| android.permission.RECEIVE_BOOT_COMPLETED | Used for scheduling jobs to run services-on-demand           | no      |
+| android.permission.WAKE_LOCK              | Used for scheduling jobs to run services-on-demand           | no      |
+| android.permission.GET_ACCOUNTS           | Used to request information about available accounts on device | *yes*   |
 
-### OnDemand trigger
-If you wish to turn off DDC scheduler and use your own way to run the jobs in sequence please use on-demand trigger while doing a setup:
+### ServiceTrigger
+The default way the DDC is working is with using the ServiceTrigger. It will not use any schedulers and it became the hostapp's responsibility to run the services.
 ```java
-final OnDemandTrigger onDemandTrigger = DeviceDataCollectorFactory
-	.setup(context, "SystemId", deviceId, deviceIdType).onDemandTrigger(context);
-onDemandTrigger.run(context);
+final ServiceTrigger serviceTrigger = DeviceDataCollectorFactory
+	.setup(context, "SystemId", deviceId, deviceIdType).build(context);
+serviceTrigger.run(context);
 ```
-**Developer note**: `onDemandTrigger.run(context)` will run inside a pooled thread created using by Executors API. Please be aware of it.
+**Developer note**: `serviceTrigger.run(context)` will run inside a pooled thread created using by Executors API. Please be aware of it.
+
+### Scheduler
+
+To be able to run the jobs periodically even after the device has rebooted you can use GCM scheduler in that case. To be able to do that you need to update your `build.gradle` with the following dependencies:
+
+```groovy
+dependencies {
+    compile "com.google.code.gson:gson:2.7"
+    compile "org.apache.commons:commons-lang3:3.5"
+    
+    compile "io.ebuilder.mobile.services:ddc-sdk:x.y.z@aar"
+    compile "io.ebuilder.mobile.services.scheduler.gcm:ddc-gcm-scheduler:x.y.z@aar"        	   compile "com.google.android.gms:play-services-gcm:11.6.0"
+}
+```
+
+To setup the scheduler please use the following code:
+
+```java
+final SchedulerSettingsBuilder builder = (SchedulerSettingsBuilder)ScheduledDDCFactory.setup(this, SYSTEM_ID, telephonyManager.getDeviceId(), DeviceIdType.IMEI)
+    .loggingEnabled()
+    .collectGoogleAccounts();
+builder.scheduler(this, ScheduledLicense.class).reschedule(this);
+
+```
+
+If you no longer want to use the scheduler you can unschedule it:
+
+```
+final SchedulerSettingsBuilder builder = (SchedulerSettingsBuilder)ScheduledDDCFactory.setup(this, SYSTEM_ID, telephonyManager.getDeviceId(), DeviceIdType.IMEI)
+    .loggingEnabled()
+    .collectGoogleAccounts();
+builder.scheduler(this, ScheduledLicense.class).cancel(this);
+```
+
+You can see the scheduled jobs via [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb.html)
+
+```sh
+$ adb shell dumpsys activity service GcmService | grep "<YOUR PACKAGE ID>"
+```
+
+For example:
+
+```sh
+$ adb shell dumpsys activity service GcmService | grep "my.first.ddc.app/io.ebuilder.mobile.services.scheduler.gcm.services.CollectorService"
+
+    (scheduled) my.first.ddc.app/io.ebuilder.mobile.services.scheduler.gcm.services.CollectorService{u=0 tag="DataCollectorService" trigger=window{period=1800s,flex=10s,earliest=221s,latest=311s} requirements=[NET_ANY] attributes=[PERSISTED,RECURRING] scheduled=-1488s last_run=N/A jid=N/A status=PENDING retries=0 client_lib=MANCHEGO_GCM-11717000}
+    (finished) [my.first.ddc.app/io.ebuilder.mobile.services.scheduler.gcm.services.CollectorService:DataCollectorService,u0]
+```
+
