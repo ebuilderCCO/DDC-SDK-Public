@@ -147,7 +147,8 @@ dependencies {
     compile "org.apache.commons:commons-lang3:3.5"
     
     compile "io.ebuilder.mobile.services:ddc-sdk:x.y.z@aar"
-    compile "io.ebuilder.mobile.services.scheduler.gcm:ddc-gcm-scheduler:x.y.z@aar"        	   compile "com.google.android.gms:play-services-gcm:11.6.0"
+    compile "io.ebuilder.mobile.services.scheduler.gcm:ddc-gcm-scheduler:x.y.z@aar"
+    compile "com.google.android.gms:play-services-gcm:11.6.0"
 }
 ```
 
