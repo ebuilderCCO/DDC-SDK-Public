@@ -1,10 +1,15 @@
 # iddc.framework
 
-[![Build Status](https://img.shields.io/badge/Platform-iOS-lightgrey.svg)](https://www.apple.com)   [![iOS](https://img.shields.io/badge/iOS-8.0-brightgreen.svg)](https://www.apple.com) [![Xcode](https://img.shields.io/badge/Xcode-9.0-green.svg)](https://img.shields.io/badge/Xcode-9.0-green.svg)
+[![Build Status](https://img.shields.io/badge/Platform-iOS-lightgrey.svg)](https://www.apple.com)   [![iOS](https://img.shields.io/badge/iOS-8.0-brightgreen.svg)](https://www.apple.com) [![Xcode](https://img.shields.io/badge/Xcode-9.2-brightgreen.svg)](https://img.shields.io/badge/Xcode-9.2-brightgreen.svg)
 
 ## 1. Example
 
-To run the example project, clone the repo, and run `pod install` from the **iddc-oc** or **iddc-swift** directory first.
+To run the example project, clone the repo, and run `pod update` from the **iddc-oc** or **iddc-swift** directory first.
+```ruby
+pod update
+```
+ 
+After installing the Cocoapods library,  double click `*.xcworkspace`(NOT `*.xcodeproj`) to open the project in your Xcode, build & run it.
 
 ## 2. Requirements
 
@@ -184,6 +189,5 @@ In our demo [Swift Demo App](./iddc-swift/iddc-swift/ViewController.swift), the 
     }
 }
 ```
-
 
 

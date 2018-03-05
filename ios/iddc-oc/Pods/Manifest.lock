@@ -1,11 +1,11 @@
 PODS:
-  - iddc (0.0.8)
+  - iddc (0.1.45)
 
 DEPENDENCIES:
   - iddc
 
 SPEC CHECKSUMS:
-  iddc: b6d916b0e6a8d363b8fab87db0520644fee2b6ba
+  iddc: 263d5fb915aaac7f62de227d719771c308c722bb
 
 PODFILE CHECKSUM: 985781a1080c512c50c2228d2b6eb2706ac4a4b9
 

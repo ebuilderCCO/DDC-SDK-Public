@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/iddc-Swift.h</key>
 		<data>
-		oSeP1ELNTPJdQ1iVZgRmXWGRhNM=
+		qXzNST5CiGaz95iHbTPWTNAJs/k=
 		</data>
 		<key>Headers/iddc.h</key>
 		<data>
@@ -18,23 +18,23 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		nL0qEV6LiQef5KDc5sBsvnL8XaQ=
+		alCmDRyGoKmuvtfPjspz2V9VwzE=
 		</data>
 		<key>Modules/iddc.swiftmodule/i386.swiftdoc</key>
 		<data>
-		w6GgzZVfR/dy9QmWSafS9cPQeRM=
+		161+f7+CzxrPWGUuMAKPgAsHx18=
 		</data>
 		<key>Modules/iddc.swiftmodule/i386.swiftmodule</key>
 		<data>
-		T5FK9hlaPokLRcTLCt3P8/W7Aoc=
+		a4bSCVsN5tVis4QakNmFuerP9mg=
 		</data>
 		<key>Modules/iddc.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		vOCZSEc2GqZ+HgJMQnYsY9kcuRU=
+		znx4VtpyJxG4YyWuRsievvR/s1k=
 		</data>
 		<key>Modules/iddc.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		PjBKYUS3Ac85fetmK4XHMlfdOiI=
+		7zf8/9j6YBlkgwJeLJcjdpA5u8M=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -58,11 +58,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oSeP1ELNTPJdQ1iVZgRmXWGRhNM=
+			qXzNST5CiGaz95iHbTPWTNAJs/k=
 			</data>
 			<key>hash2</key>
 			<data>
-			Xoaag8yy5Bt2D6eQvhyouH0V6V8lJVeU8xlFcA6Zs2M=
+			LMlBnDyO1IKGKNXfonjOWNoRC9j8q1btbM5GpQhLxx8=
 			</data>
 		</dict>
 		<key>Headers/iddc.h</key>
@@ -80,44 +80,44 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			w6GgzZVfR/dy9QmWSafS9cPQeRM=
+			161+f7+CzxrPWGUuMAKPgAsHx18=
 			</data>
 			<key>hash2</key>
 			<data>
-			IjTMuzVMEhiiKbRAxilDRrwAVe1w8urPzaPozeFuWxE=
+			aqfCk9U1ubEqC0VF0muZF0w5kDK0UCG7EgfOjCr22co=
 			</data>
 		</dict>
 		<key>Modules/iddc.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			T5FK9hlaPokLRcTLCt3P8/W7Aoc=
+			a4bSCVsN5tVis4QakNmFuerP9mg=
 			</data>
 			<key>hash2</key>
 			<data>
-			cl8R9JXjbf+7lC32Djj97bcHwb6BWp8tkplAnMxFBBI=
+			42rNNhxdtMYMfuWHL8I/RIg0LqNySaixDL1xHCnVRgo=
 			</data>
 		</dict>
 		<key>Modules/iddc.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			vOCZSEc2GqZ+HgJMQnYsY9kcuRU=
+			znx4VtpyJxG4YyWuRsievvR/s1k=
 			</data>
 			<key>hash2</key>
 			<data>
-			r7+ZtoLby94LpOlSSsvy4qk12KqCL8u2eir0qk6QIZw=
+			czDdlvkRBZUxNHw2i98xbZVTnvfc7HFMPQ6SVa88cqE=
 			</data>
 		</dict>
 		<key>Modules/iddc.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			PjBKYUS3Ac85fetmK4XHMlfdOiI=
+			7zf8/9j6YBlkgwJeLJcjdpA5u8M=
 			</data>
 			<key>hash2</key>
 			<data>
-			rEvhDhhn0y2+g7yvimhA6DPXf90Wb+g3ezjTJfarrLU=
+			ryrlXRXhj+OzbysGO7AfD6VwyjV5pDC0jI5ZEMZqwko=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
