@@ -22,14 +22,14 @@ More about **SystemTrigger** please see [here](#servicetrigger)
 
 ### The parameters of the DeviceDataCollectorFactory.setup function
 ```java
-DeviceDataCollectorFactory.setup(context, applicationName, deviceID, DeviceIdType)
+DeviceDataCollectorFactory.setup(context, systemID, deviceID, DeviceIdType)
     .loggingEnabled()
     .build(context);
 ```
 #### context ####
 the application context
 
-#### applicationName ####
+#### systemID ####
 the name of your application, useful when analysing the data
 
 #### deviceID ####
@@ -106,7 +106,7 @@ DDC SDK supports the following parameters.
 
 #### Example
 ```java
-DeviceDataCollectorFactory.setup(this, "Name of the app", "IMEI", SettingsBuilder.DeviceIdType.IMEI)
+DeviceDataCollectorFactory.setup(this, "SystemID", "IMEI", SettingsBuilder.DeviceIdType.IMEI)
     .loggingEnabled() //Not recommended for production
     .wifiOnly() // Only send data when connected via Wifi
     .phoneNumber(getPhonenumber()) //The phonenumber of the user
