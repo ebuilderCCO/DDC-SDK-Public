@@ -1,6 +1,6 @@
 # iddc.framework
 
-[![Build Status](https://img.shields.io/badge/Platform-iOS-lightgrey.svg)](https://www.apple.com)   [![iOS](https://img.shields.io/badge/iOS-8.0-brightgreen.svg)](https://www.apple.com) [![Xcode](https://img.shields.io/badge/Xcode-9.2-brightgreen.svg)](https://img.shields.io/badge/Xcode-9.2-brightgreen.svg)
+[![Build Status](https://img.shields.io/badge/Platform-iOS-lightgrey.svg)](https://www.apple.com)   [![iOS](https://img.shields.io/badge/iOS-8.0-brightgreen.svg)](https://www.apple.com) [![Xcode](https://img.shields.io/badge/Xcode-9.3-brightgreen.svg)](https://img.shields.io/badge/Xcode-9.3-brightgreen.svg)
 
 ## 1. Example
 
@@ -12,6 +12,12 @@ pod update
 After installing the Cocoapods library,  double click `*.xcworkspace`(NOT `*.xcodeproj`) to open the project in your Xcode, build & run it.
 
 ## 2. Requirements
+
+| iddc.framwork  | Xcode |
+| ------------- | ------------- |
+| < 0.1.80  | 9.2  |
+| >= 0.1.80  | 9.3  |
+
 
 ## 3. Installation
 
