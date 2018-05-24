@@ -69,12 +69,12 @@ public class MyActivity extends Activity {
                     getSystemService(TELEPHONY_SERVICE);
             if (telephonyManager != null) {
                 return DeviceDataCollectorFactory.setup(
+                        this,
                         SYSTEM_ID,
                         telephonyManager.getDeviceId(),
                         DeviceIdType.IMEI
                 )
                         .loggingEnabled()
-                        .collectGoogleAccounts()
                         .build(this);
             }
         }
