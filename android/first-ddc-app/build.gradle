@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.1.2'
     }
 }
 
@@ -13,7 +13,8 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            url "https://artifacts.ebuilder.io/repository/ebuilder-external-android/"
+            //url "https://artifacts.ebuilder.io/repository/ebuilder-external-android/"
+            url "https://artifacts-int.ebuilder.io/repository/maven/"
         }
         google()
     }
