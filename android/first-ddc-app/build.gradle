@@ -13,8 +13,7 @@ allprojects {
     repositories {
         jcenter()
         maven {
-            //url "https://artifacts.ebuilder.io/repository/ebuilder-external-android/"
-            url "https://artifacts-int.ebuilder.io/repository/maven/"
+            url "https://artifacts.ebuilder.io/repository/ebuilder-external-android/"
         }
         google()
     }

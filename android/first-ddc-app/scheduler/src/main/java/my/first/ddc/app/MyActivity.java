@@ -20,10 +20,6 @@ import io.ebuilder.mobile.services.scheduler.gcm.settings.SchedulerSettingsBuild
 import io.ebuilder.mobile.services.settings.DeviceIdType;
 import io.ebuilder.mobile.services.utils.PermissionUtils;
 
-/**
- * Created by <a href="mailto:dmitry.gorohov@ebuilder.com">Dmitry Gorohov</a>
- * Date: 10/6/17
- */
 
 public class MyActivity extends Activity {
 
@@ -57,26 +53,25 @@ public class MyActivity extends Activity {
     }
 
     private void setup() {
-        final SchedulerSettingsBuilder<SchedulerSettingsBuilder, ScheduledLicense> builder = requestBuilder();
+        final SchedulerSettingsBuilder<ScheduledLicense> builder = requestBuilder();
         builder.scheduler(this, ScheduledLicense.class).reschedule(this);
     }
 
     private void cancel() {
-        final SchedulerSettingsBuilder<SchedulerSettingsBuilder, ScheduledLicense> builder = requestBuilder();
+        final SchedulerSettingsBuilder<ScheduledLicense> builder = requestBuilder();
         builder.scheduler(this, ScheduledLicense.class).cancel(this);
     }
 
     @SuppressLint("MissingPermission")
-    private SchedulerSettingsBuilder requestBuilder() {
+    private SchedulerSettingsBuilder<ScheduledLicense> requestBuilder() {
         if (PermissionUtils.allGranted(this,
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.GET_ACCOUNTS)) {
             final TelephonyManager telephonyManager = (TelephonyManager)
                     getSystemService(TELEPHONY_SERVICE);
             if (telephonyManager != null) {
-                return (SchedulerSettingsBuilder)ScheduledDDCFactory.setup(this, SYSTEM_ID, telephonyManager.getDeviceId(), DeviceIdType.IMEI)
-                        .loggingEnabled()
-                        .collectGoogleAccounts();
+                return ScheduledDDCFactory.setup(this, SYSTEM_ID, telephonyManager.getDeviceId(), DeviceIdType.IMEI)
+                        .loggingEnabled();
             }
         }
         return null;

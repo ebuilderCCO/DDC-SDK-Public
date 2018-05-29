@@ -19,10 +19,6 @@ import io.ebuilder.mobile.services.scheduler.ServiceTrigger;
 import io.ebuilder.mobile.services.settings.DeviceIdType;
 import io.ebuilder.mobile.services.utils.PermissionUtils;
 
-/**
- * Created by <a href="mailto:dmitry.gorohov@ebuilder.com">Dmitry Gorohov</a>
- * Date: 10/6/17
- */
 
 public class MyActivity extends Activity {
 
