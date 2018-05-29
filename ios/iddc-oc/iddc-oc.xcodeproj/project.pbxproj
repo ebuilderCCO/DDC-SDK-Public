@@ -198,7 +198,6 @@
 				025327971F8E069C00AF302B /* Resources */,
 				025327D11F8E06B700AF302B /* Embed Frameworks */,
 				321C281741E4CA9460E27E32 /* [CP] Embed Pods Frameworks */,
-				900A24E30AE61D920989FCBF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -217,8 +216,6 @@
 				025327AD1F8E069C00AF302B /* Sources */,
 				025327AE1F8E069C00AF302B /* Frameworks */,
 				025327AF1F8E069C00AF302B /* Resources */,
-				30F5051C3EC00B71208784B4 /* [CP] Embed Pods Frameworks */,
-				30F2BB615F24A90001B7921A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -238,8 +235,6 @@
 				025327B81F8E069C00AF302B /* Sources */,
 				025327B91F8E069C00AF302B /* Frameworks */,
 				025327BA1F8E069C00AF302B /* Resources */,
-				36ACCBFEFA91808AB1D710CD /* [CP] Embed Pods Frameworks */,
-				070614493EFE3884D1620D3D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -342,51 +337,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		070614493EFE3884D1620D3D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iddc-ocUITests/Pods-iddc-ocUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		30F2BB615F24A90001B7921A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iddc-ocTests/Pods-iddc-ocTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		30F5051C3EC00B71208784B4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iddc-ocTests/Pods-iddc-ocTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		321C281741E4CA9460E27E32 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -394,7 +344,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-iddc-oc/Pods-iddc-oc-frameworks.sh",
-				"${PODS_ROOT}/iddc/iddc.framework",
+				"${PODS_ROOT}/iddc-xcode9.3/iddc.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -403,36 +353,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iddc-oc/Pods-iddc-oc-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		36ACCBFEFA91808AB1D710CD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iddc-ocUITests/Pods-iddc-ocUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		900A24E30AE61D920989FCBF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iddc-oc/Pods-iddc-oc-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		905A1D8F165875781094E879 /* [CP] Check Pods Manifest.lock */ = {
