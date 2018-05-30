@@ -24,7 +24,7 @@ import io.ebuilder.mobile.services.utils.PermissionUtils;
 public class MyActivity extends Activity {
 
     private final static int REQUEST_CODE = 100;
-    private final static String SYSTEM_ID = "MySystemId";
+    private final static String SYSTEM_ID = "SchedulerSampleApp";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -3,6 +3,18 @@
 ### About the SDK
 Minimum supported SDK for DDC SDK is [16](https://source.android.com/source/build-numbers)
 
+### Proguard
+In case your app has proguard rules enabled you need to ensure that DDC SDK classes are excluded from the proguard processing.
+For more on proguard see [https://developer.android.com/studio/build/shrink-code](https://developer.android.com/studio/build/shrink-code)
+
+
+Adjust your *proguard-rules.pro* file including the following lines:
+
+```
+-keep class io.ebuilder.mobile.services.** { *; }
+-keep interface io.ebuilder.mobile.services.** { *; }
+```
+
 ### Mods supported by DDC SDK
 
 * Non-scheduled behaviour using [ServiceTrigger](#servicetrigger) (Default behaviour)
@@ -78,13 +90,10 @@ Add the compile dependency to your build.gradle
 
 ```groovy
 dependencies {
-    compile ("io.ebuilder.mobile.services:ddc-sdk:x.y.z@aar")
-    compile 'org.apache.commons:commons-lang3:3.5'
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'com.squareup.okhttp3:okhttp:3.8.0'
-    // Added only for checking for runtime 
-    // permissions has been set or not
-    compile 'com.android.support:support-v4:25.3.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'org.apache.commons:commons-lang3:3.5'
+    implementation 'io.ebuilder.mobile.services:ddc-sdk:1.2.0.145@aar'
 }
 ```
 Replace “x.y.z” with current version of eBuilder DDC
@@ -98,15 +107,11 @@ DDC SDK supports the following parameters.
 | ------------------------------------------ | ------------------------------------------------------------ | ------------- | --------- |
 | loggingEnabled()                           | Turn on android logging. DDC SDK will dump a lot useful messages for debugging | false         |           |
 | wifiOnly()                                 | Send data to eBuilder backend only when connected to wifi    | false         |           |
-| collectGoogleAccounts()                    | Give a permissions to DDC to collect device accounts         | false         |           |
 | externalUserId(final String value)         | External user ID to send in event                            | empty         |           |
-| sampleTime(final int value)                | Time in seconds how often to read data from device           | 300 seconds   |           |
-| sendEventSchedule(final int value)         | Time in seconds how often to send data to eBuilder backend   | 300 seconds   |           |
-| staticData(final Map<String, String> data) | static data to add into the event. Could be anything.        | empty         |           |
 
 #### Example
 ```java
-DeviceDataCollectorFactory.setup(this, "SystemID", "IMEI", SettingsBuilder.DeviceIdType.IMEI)
+DeviceDataCollectorFactory.setup(this, "SystemID", "IMEI", DeviceIdType.IMEI)
     .loggingEnabled() //Not recommended for production
     .wifiOnly() // Only send data when connected via Wifi
     .phoneNumber(getPhonenumber()) //The phonenumber of the user
@@ -126,7 +131,7 @@ Permissions are removed from DDC SDK and it doesn't required anymore any permiss
 | android.permission.INTERNET               | To enable SDK to make network call                           | no      |
 | android.permission.RECEIVE_BOOT_COMPLETED | Used for scheduling jobs to run services-on-demand           | no      |
 | android.permission.WAKE_LOCK              | Used for scheduling jobs to run services-on-demand           | no      |
-| android.permission.GET_ACCOUNTS           | Used to request information about available accounts on device | *yes*   |
+
 
 ### ServiceTrigger
 The default way the DDC is working is with using the ServiceTrigger. It will not use any schedulers and it became the hostapp's responsibility to run the services.
@@ -143,12 +148,12 @@ To be able to run the jobs periodically even after the device has rebooted you c
 
 ```groovy
 dependencies {
-    compile "com.google.code.gson:gson:2.7"
-    compile "org.apache.commons:commons-lang3:3.5"
-    
-    compile "io.ebuilder.mobile.services:ddc-sdk:x.y.z@aar"
-    compile "io.ebuilder.mobile.services.scheduler.gcm:ddc-gcm-scheduler:x.y.z@aar"
-    compile "com.google.android.gms:play-services-gcm:11.6.0"
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.google.code.gson:gson:2.8.4'
+    implementation 'org.apache.commons:commons-lang3:3.5'
+    implementation 'com.google.android.gms:play-services-gcm:15.0.1'
+    implementation 'io.ebuilder.mobile.services:ddc-sdk:1.2.0.145@aar'
+    implementation 'io.ebuilder.mobile.services.scheduler.gcm:ddc-gcm-scheduler:1.1.0.10@aar'
 }
 ```
 
@@ -156,8 +161,7 @@ To setup the scheduler please use the following code:
 
 ```java
 final SchedulerSettingsBuilder builder = (SchedulerSettingsBuilder)ScheduledDDCFactory.setup(this, SYSTEM_ID, telephonyManager.getDeviceId(), DeviceIdType.IMEI)
-    .loggingEnabled()
-    .collectGoogleAccounts();
+    .loggingEnabled();
 builder.scheduler(this, ScheduledLicense.class).reschedule(this);
 
 ```
@@ -166,8 +170,7 @@ If you no longer want to use the scheduler you can unschedule it:
 
 ```
 final SchedulerSettingsBuilder builder = (SchedulerSettingsBuilder)ScheduledDDCFactory.setup(this, SYSTEM_ID, telephonyManager.getDeviceId(), DeviceIdType.IMEI)
-    .loggingEnabled()
-    .collectGoogleAccounts();
+    .loggingEnabled();
 builder.scheduler(this, ScheduledLicense.class).cancel(this);
 ```
 
@@ -185,4 +188,3 @@ $ adb shell dumpsys activity service GcmService | grep "my.first.ddc.app/io.ebui
     (scheduled) my.first.ddc.app/io.ebuilder.mobile.services.scheduler.gcm.services.CollectorService{u=0 tag="DataCollectorService" trigger=window{period=1800s,flex=10s,earliest=221s,latest=311s} requirements=[NET_ANY] attributes=[PERSISTED,RECURRING] scheduled=-1488s last_run=N/A jid=N/A status=PENDING retries=0 client_lib=MANCHEGO_GCM-11717000}
     (finished) [my.first.ddc.app/io.ebuilder.mobile.services.scheduler.gcm.services.CollectorService:DataCollectorService,u0]
 ```
-
