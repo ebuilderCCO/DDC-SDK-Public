@@ -15,8 +15,8 @@ After installing the Cocoapods library,  double click `*.xcworkspace`(NOT `*.xco
 
 | iddc.framwork  | Xcode |
 | ------------- | ------------- |
-| < 0.1.80  | 9.2  |
-| >= 0.1.80  | 9.3  |
+| iddc-xcode9.2  | 9.2  |
+| iddc-xcode9.3  | 9.3  |
 
 
 ## 3. Installation
@@ -25,7 +25,9 @@ iOS DDC SDK **iddc** is available through [CocoaPods](http://cocoapods.org). To 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'iddc'
+pod 'iddc-xcode9.3'
+# or
+# pod 'iddc-xcode9.2'
 ```
 
 * To install iddc.framework, run the script from command-line:
@@ -37,6 +39,16 @@ pod install
 
 ```ruby
 pod update
+```
+
+You can get available versions information of the framework by
+```ruby
+pod trunk info iddc-xcode9.2
+```
+
+or 
+```
+pod trunk info iddc-xcode9.3
 ```
 
 ## 4. Usage

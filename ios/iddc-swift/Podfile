@@ -6,7 +6,7 @@ target 'iddc-swift' do
   use_frameworks!
 
   # Pods for iddc-swift
-  pod 'iddc'
+  pod 'iddc-xcode9.3', '0.1.100'
 
   target 'iddc-swiftTests' do
     inherit! :search_paths
