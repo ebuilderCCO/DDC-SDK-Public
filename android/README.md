@@ -1,7 +1,7 @@
 [![N|Solid](https://ebuilder.com/wp-content/uploads/2017/02/ebuilder-effortless-logo.png)](https://ebuilder.com/)
 
 ## Android compatibility
-Minimum supported Android SDK version is [16](https://source.android.com/source/build-numbers)
+Minimum supported Android SDK version is 16 (4.1.x / Jelly Bean) [https://source.android.com/source/build-numbers](https://source.android.com/source/build-numbers)
 
 ## Project Setup
 
@@ -55,7 +55,10 @@ dependencies {
 ```
 
 ### Proguard
-DDC SDK classes need to be excluded from the proguard processing.
+In case your app has proguard rules enabled you need to ensure that DDC SDK classes are excluded from the proguard processing.
+For more on proguard see [https://developer.android.com/studio/build/shrink-code](https://developer.android.com/studio/build/shrink-code)
+
+
 Adjust your *proguard-rules.pro* file including the following lines:
 
 ```
@@ -84,7 +87,7 @@ DeviceDataCollectorFactory.setup(...) has following mandatory arguments:
 * *context* : application context
 * *systemId* : name of your application
 * *deviceId* : id of the device (for ex: device IMEI)
-* *deviceIdType* : device id type. Possible values are DeviceIdType.IMEI, DeviceIdType.INSTALLATION_ID, DeviceIdType.PHONE_NUMBER
+* *deviceIdType* : device id type. Possible values are DeviceIdType.IMEI, DeviceIdType.INSTALLATION_ID
 
 #### Non mandatory settings
 Following initialization settings can also be used using the fluent interface of *SettingsBuilder*:
@@ -95,7 +98,6 @@ Following initialization settings can also be used using the fluent interface of
 | wifiOnly()                                 | Transfer data only when connected to WIFI                    | false         |
 | externalUserId(final String value)         | External user ID to include in the transferred data          | empty         |
 | phoneNumber(final String value)            | Phone number to to include in the transferred data           | empty         |
-| staticData(final Map<String, String> data) | Anything else you might want to include in the transferred data        | empty         |
 
 
 ### Usage
@@ -115,7 +117,7 @@ Scheduling is built on GCM network manager [https://developers.google.com/cloud-
 Scheduled jobs will continue to run even when the host app is not running or is put in background. Frequency is defined in the licence.
 
 ### Project Setup
-Two extra dependencies are required in order to use the scheduler: *io.ebuilder.mobile.services:ddc-sdk* and *com.google.android.gms:play-services-gcm*
+Two extra dependencies are required in order to use the scheduler: *io.ebuilder.mobile.services.scheduler.gcm:ddc-gcm-scheduler* and *com.google.android.gms:play-services-gcm*
 
 Adjust your *build.gradle* as following:
 
