@@ -27,7 +27,7 @@ import io.ebuilder.mobile.services.utils.PermissionUtils;
 public class MyActivity extends Activity {
 
     private final static int REQUEST_CODE = 100;
-    private final static String SYSTEM_ID = "MySystemId";
+    private final static String SYSTEM_ID = "OnDemandTriggerSampleApp";
 
     private ServiceTrigger serviceTrigger;
 
