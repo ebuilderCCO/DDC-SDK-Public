@@ -180,6 +180,8 @@ scheduler.reschedule(this);
  scheduler.cancel(this);
  ```
 
+ Calling *scheduler.reschedule(Context context)* multiple times is safe. Services will not be rescheduled if they are already in a scheduled state.
+
  ### Debugging
  You can see the scheduled jobs via Android Debug Bridge (adb) [https://developer.android.com/studio/command-line/adb.html](https://developer.android.com/studio/command-line/adb.html)
 
