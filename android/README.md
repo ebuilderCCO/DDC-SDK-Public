@@ -10,10 +10,11 @@ DDC SDK will not ask for any permissions; it's a host-app responsibility to requ
 
 DDC SDK doesn't need any permissions in order to run.If no permissions are set by host-app DDC will only collect data for which permissions are not required.
 
-Following are the permissions along with their purpose that can be requested:
+Following are the permissions(along with their purpose) that can be requested:
 
 | Permission                                | Description                                                   | Runtime |
 | ----------------------------------------- | ------------------------------------------------------------  | ------- |
+| android.permission.READ_PHONE_STATE       | Retrieve device ids, network operator names                   | no      |
 | android.permission.ACCESS_WIFI_STATE      | Retrieve WiFi status                                          | no      |
 | android.permission.ACCESS_NETWORK_STATE   | Retrieve network status                                      | no      |
 | android.permission.BLUETOOTH              | Retrieve information about Bluetooth adapter and paired devices | no      |
@@ -65,6 +66,30 @@ Adjust your *proguard-rules.pro* file including the following lines:
 -keep class io.ebuilder.mobile.services.** { *; }
 -keep interface io.ebuilder.mobile.services.** { *; }
 ```
+
+### Content Provider configuration
+The SDK is using Content Provider to manage access to locally stored data. For more on Content Providers and their advantages see android documentation [https://developer.android.com/guide/topics/providers/content-providers](https://developer.android.com/guide/topics/providers/content-providers)
+
+The host app is required to specify a unique app content uri. DDC reads this value as the attribute *data_content_provider_authority* that can be configured in *build.gradle*
+
+```groovy
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
+
+    defaultConfig {
+        applicationId "com.company.app"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 2
+        versionName "1.0"
+
+        resValue "string", "data_content_provider_authority", "${applicationId}.ddc"
+    }
+}
+```
+
+
 
 
 
