@@ -36,6 +36,6 @@ dependencies {
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.google.code.gson:gson:2.8.4'
     implementation 'org.apache.commons:commons-lang3:3.5'
-    implementation 'io.ebuilder.mobile.services:ddc-sdk:1.2.0.156@aar'
+    implementation 'io.ebuilder.mobile.services:ddc-sdk:1.2.0.163@aar'
     implementation 'com.facebook.stetho:stetho:1.5.0'
 }

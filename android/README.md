@@ -51,7 +51,7 @@ dependencies {
     implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.google.code.gson:gson:2.8.4'
     implementation 'org.apache.commons:commons-lang3:3.5'
-    implementation 'io.ebuilder.mobile.services:ddc-sdk:1.2.0.156@aar'
+    implementation 'io.ebuilder.mobile.services:ddc-sdk:1.2.0.163@aar'
 }
 ```
 
@@ -74,14 +74,14 @@ The host app is required to specify a unique app content uri. DDC reads this val
 
 ```groovy
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         applicationId "com.company.app"
         minSdkVersion 16
-        targetSdkVersion 26
-        versionCode 2
+        targetSdkVersion 27
+        versionCode 1
         versionName "1.0"
 
         resValue "string", "data_content_provider_authority", "${applicationId}.ddc"
@@ -152,8 +152,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.4'
     implementation 'org.apache.commons:commons-lang3:3.5'
     implementation 'com.google.android.gms:play-services-gcm:15.0.1'
-    implementation 'io.ebuilder.mobile.services:ddc-sdk:1.2.0.156@aar'
-    implementation 'io.ebuilder.mobile.services.scheduler.gcm:ddc-gcm-scheduler:1.1.0.19@aar'
+    implementation 'io.ebuilder.mobile.services:ddc-sdk:1.2.0.163@aar'
+    implementation 'io.ebuilder.mobile.services.scheduler.gcm:ddc-gcm-scheduler:1.1.0.22@aar'
 }
 ```
 
@@ -164,8 +164,8 @@ Initialization is similar to the On Demand Trigger having same mandatory and opt
 Obtain a reference of the scheduler:
 
 ```java
-Scheduler<ScheduledLicense> scheduler = ScheduledDDCFactory.setup(this, SYSTEM_ID, "deviceId", DeviceIdType.IMEI)
-                .loggingEnabled().scheduler(this, ScheduledLicense.class);
+Scheduler scheduler = ScheduledDDCFactory.setup(this, SYSTEM_ID, "deviceId", DeviceIdType.IMEI)
+                .loggingEnabled().scheduler(this);
 ```
 
 Then you can schedule the jobs (*scheduler.reschedule(Context context)*):
