@@ -64,12 +64,9 @@ public class MyActivity extends Activity {
     private SchedulerSettingsBuilder requestBuilder() {
         if (PermissionUtils.allGranted(this,
                 Manifest.permission.GET_ACCOUNTS)) {
-            final TelephonyManager telephonyManager = (TelephonyManager)
-                    getSystemService(TELEPHONY_SERVICE);
-            if (telephonyManager != null) {
-                return ScheduledDDCFactory.setup(this, SYSTEM_ID, telephonyManager.getDeviceId(), DeviceIdType.IMEI)
+           return ScheduledDDCFactory.setup(this, SYSTEM_ID, "fakeIMEI", DeviceIdType.IMEI)
                         .loggingEnabled();
-            }
+
         }
         return null;
     }
