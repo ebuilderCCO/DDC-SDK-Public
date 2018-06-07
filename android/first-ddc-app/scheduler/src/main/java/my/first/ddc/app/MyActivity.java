@@ -36,7 +36,6 @@ public class MyActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ActivityCompat.requestPermissions(this,
                     new String[]{
-                            Manifest.permission.READ_PHONE_STATE,
                             Manifest.permission.GET_ACCOUNTS
                     }, REQUEST_CODE);
         } else {
@@ -64,7 +63,6 @@ public class MyActivity extends Activity {
     @SuppressLint("MissingPermission")
     private SchedulerSettingsBuilder requestBuilder() {
         if (PermissionUtils.allGranted(this,
-                Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.GET_ACCOUNTS)) {
             final TelephonyManager telephonyManager = (TelephonyManager)
                     getSystemService(TELEPHONY_SERVICE);

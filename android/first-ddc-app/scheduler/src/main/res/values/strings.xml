@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">MyFirstDDCApp</string>
-    <string name="license_key">YOUR_LICENCE_KEY</string>
+    <string name="app_name">Public SDK scheduler</string>
+    <string name="license_key">eyJ1cmwiOiJodHRwczovL2FwaS1hcC1ub3J0aGVhc3QuZWJ1aWxkZXIuaW8iLCAibGljZW5zZSI6IjUwYjM4MGIwYThkNjFmNTRjYmRhYmY0MWRiNTg2NzQ5In0K</string>
 </resources>
