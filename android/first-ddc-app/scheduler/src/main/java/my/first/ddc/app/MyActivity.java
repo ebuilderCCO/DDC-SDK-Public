@@ -15,7 +15,6 @@ import android.widget.Button;
 import com.facebook.stetho.Stetho;
 
 import io.ebuilder.mobile.services.ScheduledDDCFactory;
-import io.ebuilder.mobile.services.scheduler.gcm.license.ScheduledLicense;
 import io.ebuilder.mobile.services.scheduler.gcm.settings.SchedulerSettingsBuilder;
 import io.ebuilder.mobile.services.settings.DeviceIdType;
 import io.ebuilder.mobile.services.utils.PermissionUtils;
@@ -53,17 +52,17 @@ public class MyActivity extends Activity {
     }
 
     private void setup() {
-        final SchedulerSettingsBuilder<ScheduledLicense> builder = requestBuilder();
-        builder.scheduler(this, ScheduledLicense.class).reschedule(this);
+        final SchedulerSettingsBuilder builder = requestBuilder();
+        builder.scheduler(this).reschedule(this);
     }
 
     private void cancel() {
-        final SchedulerSettingsBuilder<ScheduledLicense> builder = requestBuilder();
-        builder.scheduler(this, ScheduledLicense.class).cancel(this);
+        final SchedulerSettingsBuilder builder = requestBuilder();
+        builder.scheduler(this).cancel(this);
     }
 
     @SuppressLint("MissingPermission")
-    private SchedulerSettingsBuilder<ScheduledLicense> requestBuilder() {
+    private SchedulerSettingsBuilder requestBuilder() {
         if (PermissionUtils.allGranted(this,
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.GET_ACCOUNTS)) {
