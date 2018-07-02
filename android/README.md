@@ -182,6 +182,28 @@ scheduler.reschedule(this);
 
  Calling *scheduler.reschedule(Context context)* multiple times is safe. Services will not be rescheduled if they are already in a scheduled state.
 
+### Disabling the scheduler for specific devices
+There are use cases where you need to disable/enable the scheduler service for specific devices.
+Such a use case, for instance,  is a requirement for compliance by the EU GDPR: users are in control on shared personal information. They may decide to switch off the SDK.
+
+By default the scheduler service is *enabled* once initialized.
+However, having the *scheduler* reference in hand,  you can always *disable* it or re-*enable* it as many times as required.
+
+```java
+// user choses to opt-out -> disable collection and upload of events from now on
+scheduler.disable(getContext().getApplicationContext());
+```
+
+```java
+// user choses to opt-in again -> enable collection and upload of events from now on
+scheduler.enable(getContext().getApplicationContext());
+```
+
+Calling *enable* on a scheduler that is already enabled is safe.
+
+
+
+
  ### Debugging
  You can see the scheduled jobs via Android Debug Bridge (adb) [https://developer.android.com/studio/command-line/adb.html](https://developer.android.com/studio/command-line/adb.html)
 
