@@ -1,6 +1,6 @@
 # iddc.framework
 
-[![Build Status](https://img.shields.io/badge/Platform-iOS-lightgrey.svg)](https://www.apple.com)   [![iOS](https://img.shields.io/badge/iOS-8.0-brightgreen.svg)](https://www.apple.com) [![Xcode](https://img.shields.io/badge/Xcode-9.3-brightgreen.svg)](https://img.shields.io/badge/Xcode-9.3-brightgreen.svg)
+[![Build Status](https://img.shields.io/badge/Platform-iOS-lightgrey.svg)](https://www.apple.com)   [![iOS](https://img.shields.io/badge/iOS-8.0-brightgreen.svg)](https://www.apple.com) [![Xcode](https://img.shields.io/badge/Xcode-9.4-brightgreen.svg)](https://img.shields.io/badge/Xcode-9.4-brightgreen.svg)
 
 ## 1. Example
 
@@ -8,15 +8,15 @@ To run the example project, clone the repo, and run `pod update` from the **iddc
 ```ruby
 pod update
 ```
- 
+
 After installing the Cocoapods library,  double click `*.xcworkspace`(NOT `*.xcodeproj`) to open the project in your Xcode, build & run it.
 
 ## 2. Requirements
 
 | iddc.framwork  | Xcode |
 | ------------- | ------------- |
-| iddc-xcode9.2  | 9.2  |
 | iddc-xcode9.3  | 9.3  |
+| iddc-xcode9.4  | 9.4  |
 
 
 ## 3. Installation
@@ -25,9 +25,9 @@ iOS DDC SDK **iddc** is available through [CocoaPods](http://cocoapods.org). To 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'iddc-xcode9.3'
+pod 'iddc-xcode9.4'
 # or
-# pod 'iddc-xcode9.2'
+# pod 'iddc-xcode9.3'
 ```
 
 * To install iddc.framework, run the script from command-line:
@@ -43,12 +43,12 @@ pod update
 
 You can get available versions information of the framework by
 ```ruby
-pod trunk info iddc-xcode9.2
+pod trunk info iddc-xcode9.3
 ```
 
-or 
+or
 ```
-pod trunk info iddc-xcode9.3
+pod trunk info iddc-xcode9.4
 ```
 
 ## 4. Usage
@@ -62,9 +62,9 @@ But actually, the **iddc.framwork** won't show the permission dialogue at run ti
 ```
 > Please replace **REASON-WHY-NEED-PERMISSION** with some meaningful words.
 
-#### 4.2 Use the framework in Objective-C project 
- * (Objective-C project only)Select your project in **"TARGETS"**(Not PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes** 
-   ![embed-swift](./res/embed-swift.png "embed-swift")        
+#### 4.2 Use the framework in Objective-C project
+ * (Objective-C project only)Select your project in **"TARGETS"**(Not PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes**
+   ![embed-swift](./res/embed-swift.png "embed-swift")
 
 ```objective-c
 #import <iddc/iddc.h>
@@ -79,7 +79,7 @@ But actually, the **iddc.framwork** won't show the permission dialogue at run ti
 deviceIdType: The type for the deviceId, it could be IMEI/IDFA/PhoneNumber/InstallationId.
 */
 DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" systemId: @"YOUR-SYSTEM-ID" deviceId: @"YOU-DEVICE-ID" deviceIdType: deviceIdType];
-[ddcManager runWithCompletion:^(DdcError * error) {    
+[ddcManager runWithCompletion:^(DdcError * error) {
     if (error == nil || [error code] == 0) {
         NSLog(@"ddc succeed");
     } else {
@@ -107,7 +107,7 @@ typedef SWIFT_ENUM(NSInteger, DeviceIdType) {
 ```
 
 
-#### 4.3 Use the framework in Swift project 
+#### 4.3 Use the framework in Swift project
 
 ```Swift
 import iddc
@@ -127,7 +127,7 @@ manager.run { (error) in
         print("DDC succeed")
         return
     }
-    
+
     switch ddcError.code {
     case DdcErrorCode.succeed.rawValue:
         print("DDC succeed")
@@ -161,13 +161,13 @@ public enum DeviceIdType : Int {
 #### 4.5 Alternatives for triggering DDC
 Generally, it is the responsibility of the host-app to trigger the DDC.
 Every time the host-app triggers the DDC - the DDC will collect and upload a DDC event.
-In order for the collected data to be of maximum business use a certain number of DDC events must be collected over time. 
+In order for the collected data to be of maximum business use a certain number of DDC events must be collected over time.
 Fewer DDC events collected means less value can be realised.
 
-Best practise is to trigger DDC based on location updates - however this requires the host-app to have a reason (use case) to subscribe to location updates from iOS. 
+Best practise is to trigger DDC based on location updates - however this requires the host-app to have a reason (use case) to subscribe to location updates from iOS.
 
-Putting the DDC in the system-callback (e.g:`didUpdateToLocation`) event directly(e.g.: `didUpdateToLocation` -> 
-`DDC`) ensures separation of concerns and eliminate any risk of impacting other features, and vice versa. 
+Putting the DDC in the system-callback (e.g:`didUpdateToLocation`) event directly(e.g.: `didUpdateToLocation` ->
+`DDC`) ensures separation of concerns and eliminate any risk of impacting other features, and vice versa.
 
 ```objective-c
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
@@ -208,4 +208,23 @@ In our demo [Swift Demo App](./iddc-swift/iddc-swift/ViewController.swift), the 
 }
 ```
 
+#### 4.6 User ID
+In order to predict churn events you need to provide an external user ID. This ID will be used to correlate user data across devices. It is important that the user ID remains consistent on all devices. For example a login ID (username). Here is an example of how to set this:
+```swift
+// you need to implement a function that fetches a user ID that is unique to the user.
+func getExternalUserID() -> String {
+    return "this is my unique value that identifies this user"
+}
 
+@IBAction func buttonPressed(_ sender: UIButton) {
+    let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "uuid-unavailable"
+    let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: deviceId, deviceIdType: .installationId)
+
+    manager.externalUserID = getExternalUserID()
+
+    manager.run { (error) in
+        // result handling
+    }
+}
+```
+This data is of course encrypted and handled in accordance with GDPR in EU.
