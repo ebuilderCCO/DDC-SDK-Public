@@ -21,10 +21,17 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func getExternalUserID() -> String {
+            return "this is my very unique value that identifies a user"
+    }
+    
     @IBAction func buttonPressed(_ sender: UIButton) {
         let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "uuid-unavailable"
         let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: deviceId, deviceIdType: .installationId)
+        
+        manager.externalUserID = self.getExternalUserID()
+        
         manager.run { (error) in
             DispatchQueue.main.async {
                 if error == nil || error?.code == 0 {
