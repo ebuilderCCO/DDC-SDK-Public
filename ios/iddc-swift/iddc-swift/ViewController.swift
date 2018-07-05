@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     }
     
     func getExternalUserID() -> String {
-            return "this is my very unique value that identifies a user"
+            return "this is my unique value that identifies a user"
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
