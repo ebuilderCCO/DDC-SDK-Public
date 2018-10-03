@@ -31,10 +31,9 @@ After installing the Cocoapods library,  double click `*.xcworkspace`(NOT `*.xco
 ## 2. Requirements
 
 | iddc.framework  | Xcode |
-| ------------- | ------------- |
-| iddc-xcode9.3  | 9.3  |
-| iddc-xcode9.4  | 9.4  |
-| iddc-xcode10.0 | 10.0 |
+| --------------- | ----- |
+| iddc-xcode9.4   | 9.4   |
+| iddc-xcode10.0  | 10.0  |
 
 
 ## 3. Installation
@@ -46,8 +45,6 @@ it, simply add the following line to your Podfile:
 pod 'iddc-xcode10.0'
 # or
 # pod 'iddc-xcode9.4'
-# or
-# pod 'iddc-xcode9.3'
 ```
 
 * To install iddc.framework, run the script from command-line:
