@@ -294,6 +294,7 @@ Although the app and the extension behave as separate entities at runtime, havin
 There is only one ipa archive file that is published to appstore.
 
 This is depicted in the figure bellow:
+
 ![ios_ddc_with_notification_extension_packaging](./res/ios_ddc_with_notification_extension_packaging.png "ios_ddc_with_notification_extension_packaging")
 
 
