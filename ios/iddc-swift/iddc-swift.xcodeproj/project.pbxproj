@@ -14,7 +14,10 @@
 		025327661F8E02DC00AF302B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 025327641F8E02DC00AF302B /* LaunchScreen.storyboard */; };
 		025327711F8E02DC00AF302B /* iddc_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025327701F8E02DC00AF302B /* iddc_swiftTests.swift */; };
 		0253277C1F8E02DD00AF302B /* iddc_swiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0253277B1F8E02DD00AF302B /* iddc_swiftUITests.swift */; };
+		0875D90D23E9DCBDC1CDD905 /* Pods_iddcSwiftNotification.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3805BDDFAE7CF9BE768972F7 /* Pods_iddcSwiftNotification.framework */; };
 		48935652CF35F5B0386B48A9 /* Pods_iddc_swiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2180FC78979BF0EE5034A781 /* Pods_iddc_swiftTests.framework */; };
+		54C9E76B2147E8C300A208FD /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C9E76A2147E8C300A208FD /* NotificationService.swift */; };
+		54C9E76F2147E8C300A208FD /* iddcSwiftNotification.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 54C9E7682147E8C300A208FD /* iddcSwiftNotification.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		551691929CAB75E18FF4DE70 /* Pods_iddc_swiftUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399F84C9D73DE425FAAA8DA2 /* Pods_iddc_swiftUITests.framework */; };
 		7890E59BE85EC9AC99AC1632 /* Pods_iddc_swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF91E5B7041C2B0426C4A4D /* Pods_iddc_swift.framework */; };
 /* End PBXBuildFile section */
@@ -34,6 +37,13 @@
 			remoteGlobalIDString = 025327571F8E02DC00AF302B;
 			remoteInfo = "iddc-swift";
 		};
+		54C9E76D2147E8C300A208FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 025327501F8E02DC00AF302B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 54C9E7672147E8C300A208FD;
+			remoteInfo = iddcSwiftNotification;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +55,17 @@
 			files = (
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54C9E7732147E8C300A208FD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				54C9E76F2147E8C300A208FD /* iddcSwiftNotification.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -67,10 +88,18 @@
 		1E7CA6FABA25145E9224CEB8 /* Pods-iddc-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iddc-swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iddc-swift/Pods-iddc-swift.debug.xcconfig"; sourceTree = "<group>"; };
 		2180FC78979BF0EE5034A781 /* Pods_iddc_swiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iddc_swiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CA5A82052D2EC41760269AD /* Pods-iddc-swiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iddc-swiftTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iddc-swiftTests/Pods-iddc-swiftTests.release.xcconfig"; sourceTree = "<group>"; };
+		3805BDDFAE7CF9BE768972F7 /* Pods_iddcSwiftNotification.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iddcSwiftNotification.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		399F84C9D73DE425FAAA8DA2 /* Pods_iddc_swiftUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iddc_swiftUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		54C9E7682147E8C300A208FD /* iddcSwiftNotification.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = iddcSwiftNotification.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		54C9E76A2147E8C300A208FD /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		54C9E76C2147E8C300A208FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54C9E7742147E96900A208FD /* iddcSwiftNotification.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iddcSwiftNotification.entitlements; sourceTree = "<group>"; };
+		54C9E7752147E9F100A208FD /* iddc-swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "iddc-swift.entitlements"; sourceTree = "<group>"; };
 		75CDE1C7F7C09FF51304767E /* Pods-iddc-swiftUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iddc-swiftUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iddc-swiftUITests/Pods-iddc-swiftUITests.release.xcconfig"; sourceTree = "<group>"; };
+		83C9857571438A8CCD5F271D /* Pods-iddcSwiftNotification.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iddcSwiftNotification.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iddcSwiftNotification/Pods-iddcSwiftNotification.debug.xcconfig"; sourceTree = "<group>"; };
 		ADF91E5B7041C2B0426C4A4D /* Pods_iddc_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iddc_swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4E93EC51738B401E9AE0324 /* Pods-iddc-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iddc-swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-iddc-swift/Pods-iddc-swift.release.xcconfig"; sourceTree = "<group>"; };
+		CEEB6532B1442148FFCB0A9B /* Pods-iddcSwiftNotification.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iddcSwiftNotification.release.xcconfig"; path = "Pods/Target Support Files/Pods-iddcSwiftNotification/Pods-iddcSwiftNotification.release.xcconfig"; sourceTree = "<group>"; };
 		E32A33175E2E1491EEABCC70 /* Pods-iddc-swiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iddc-swiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iddc-swiftTests/Pods-iddc-swiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +128,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		54C9E7652147E8C300A208FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0875D90D23E9DCBDC1CDD905 /* Pods_iddcSwiftNotification.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -108,6 +145,7 @@
 				0253275A1F8E02DC00AF302B /* iddc-swift */,
 				0253276F1F8E02DC00AF302B /* iddc-swiftTests */,
 				0253277A1F8E02DD00AF302B /* iddc-swiftUITests */,
+				54C9E7692147E8C300A208FD /* iddcSwiftNotification */,
 				025327591F8E02DC00AF302B /* Products */,
 				D6752FAB2167103688328D0A /* Pods */,
 				23771425A06EFABA3C2D5EE6 /* Frameworks */,
@@ -120,6 +158,7 @@
 				025327581F8E02DC00AF302B /* iddc-swift.app */,
 				0253276C1F8E02DC00AF302B /* iddc-swiftTests.xctest */,
 				025327771F8E02DD00AF302B /* iddc-swiftUITests.xctest */,
+				54C9E7682147E8C300A208FD /* iddcSwiftNotification.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,6 +166,7 @@
 		0253275A1F8E02DC00AF302B /* iddc-swift */ = {
 			isa = PBXGroup;
 			children = (
+				54C9E7752147E9F100A208FD /* iddc-swift.entitlements */,
 				0253275B1F8E02DC00AF302B /* AppDelegate.swift */,
 				0253275D1F8E02DC00AF302B /* ViewController.swift */,
 				0253275F1F8E02DC00AF302B /* Main.storyboard */,
@@ -161,8 +201,19 @@
 				ADF91E5B7041C2B0426C4A4D /* Pods_iddc_swift.framework */,
 				2180FC78979BF0EE5034A781 /* Pods_iddc_swiftTests.framework */,
 				399F84C9D73DE425FAAA8DA2 /* Pods_iddc_swiftUITests.framework */,
+				3805BDDFAE7CF9BE768972F7 /* Pods_iddcSwiftNotification.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		54C9E7692147E8C300A208FD /* iddcSwiftNotification */ = {
+			isa = PBXGroup;
+			children = (
+				54C9E7742147E96900A208FD /* iddcSwiftNotification.entitlements */,
+				54C9E76A2147E8C300A208FD /* NotificationService.swift */,
+				54C9E76C2147E8C300A208FD /* Info.plist */,
+			);
+			path = iddcSwiftNotification;
 			sourceTree = "<group>";
 		};
 		D6752FAB2167103688328D0A /* Pods */ = {
@@ -174,6 +225,8 @@
 				2CA5A82052D2EC41760269AD /* Pods-iddc-swiftTests.release.xcconfig */,
 				005FE9964BFE88B383CCDC8C /* Pods-iddc-swiftUITests.debug.xcconfig */,
 				75CDE1C7F7C09FF51304767E /* Pods-iddc-swiftUITests.release.xcconfig */,
+				83C9857571438A8CCD5F271D /* Pods-iddcSwiftNotification.debug.xcconfig */,
+				CEEB6532B1442148FFCB0A9B /* Pods-iddcSwiftNotification.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -191,10 +244,12 @@
 				025327561F8E02DC00AF302B /* Resources */,
 				0253278F1F8E044E00AF302B /* Embed Frameworks */,
 				2560901EA819C73763827E9C /* [CP] Embed Pods Frameworks */,
+				54C9E7732147E8C300A208FD /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				54C9E76E2147E8C300A208FD /* PBXTargetDependency */,
 			);
 			name = "iddc-swift";
 			productName = "iddc-swift";
@@ -239,19 +294,48 @@
 			productReference = 025327771F8E02DD00AF302B /* iddc-swiftUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		54C9E7672147E8C300A208FD /* iddcSwiftNotification */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 54C9E7722147E8C300A208FD /* Build configuration list for PBXNativeTarget "iddcSwiftNotification" */;
+			buildPhases = (
+				5507CFEA656E82102AC05E49 /* [CP] Check Pods Manifest.lock */,
+				54C9E7642147E8C300A208FD /* Sources */,
+				54C9E7652147E8C300A208FD /* Frameworks */,
+				54C9E7662147E8C300A208FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iddcSwiftNotification;
+			productName = iddcSwiftNotification;
+			productReference = 54C9E7682147E8C300A208FD /* iddcSwiftNotification.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		025327501F8E02DC00AF302B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Crafttang;
 				TargetAttributes = {
 					025327571F8E02DC00AF302B = {
 						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.AccessWiFi = {
+								enabled = 0;
+							};
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					0253276B1F8E02DC00AF302B = {
 						CreatedOnToolsVersion = 9.0;
@@ -262,6 +346,18 @@
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 025327571F8E02DC00AF302B;
+					};
+					54C9E7672147E8C300A208FD = {
+						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -281,6 +377,7 @@
 				025327571F8E02DC00AF302B /* iddc-swift */,
 				0253276B1F8E02DC00AF302B /* iddc-swiftTests */,
 				025327761F8E02DD00AF302B /* iddc-swiftUITests */,
+				54C9E7672147E8C300A208FD /* iddcSwiftNotification */,
 			);
 		};
 /* End PBXProject section */
@@ -310,6 +407,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		54C9E7662147E8C300A208FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -320,7 +424,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-iddc-swift/Pods-iddc-swift-frameworks.sh",
-				"${PODS_ROOT}/iddc-xcode9.4/iddc.framework",
+				"${PODS_ROOT}/iddc-xcode10.0/iddc.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -329,6 +433,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iddc-swift/Pods-iddc-swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5507CFEA656E82102AC05E49 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iddcSwiftNotification-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5F9C42E887B93446C7006740 /* [CP] Check Pods Manifest.lock */ = {
@@ -413,6 +535,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		54C9E7642147E8C300A208FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54C9E76B2147E8C300A208FD /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -425,6 +555,11 @@
 			isa = PBXTargetDependency;
 			target = 025327571F8E02DC00AF302B /* iddc-swift */;
 			targetProxy = 025327781F8E02DD00AF302B /* PBXContainerItemProxy */;
+		};
+		54C9E76E2147E8C300A208FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 54C9E7672147E8C300A208FD /* iddcSwiftNotification */;
+			targetProxy = 54C9E76D2147E8C300A208FD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -561,8 +696,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1E7CA6FABA25145E9224CEB8 /* Pods-iddc-swift.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = "iddc-swift/iddc-swift.entitlements";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 39F7ZCTB24;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -573,6 +710,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ebuilder.iddcdemo.swift.iddc-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "DDC Swift Demo (dev)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -582,9 +720,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C4E93EC51738B401E9AE0324 /* Pods-iddc-swift.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 39F7ZCTB24;
+				CODE_SIGN_ENTITLEMENTS = "iddc-swift/iddc-swift.entitlements";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -594,6 +734,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ebuilder.iddcdemo.swift.iddc-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -669,6 +810,50 @@
 			};
 			name = Release;
 		};
+		54C9E7702147E8C300A208FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83C9857571438A8CCD5F271D /* Pods-iddcSwiftNotification.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_ENTITLEMENTS = iddcSwiftNotification/iddcSwiftNotification.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 39F7ZCTB24;
+				INFOPLIST_FILE = iddcSwiftNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ebuilder.iddcdemo.swift.iddc-swift.iddcSwiftNotification";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "DDC Swift Demo Notification (dev)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		54C9E7712147E8C300A208FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CEEB6532B1442148FFCB0A9B /* Pods-iddcSwiftNotification.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_ENTITLEMENTS = iddcSwiftNotification/iddcSwiftNotification.entitlements;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = iddcSwiftNotification/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ebuilder.iddcdemo.swift.iddc-swift.iddcSwiftNotification";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -704,6 +889,15 @@
 			buildConfigurations = (
 				025327871F8E02DD00AF302B /* Debug */,
 				025327881F8E02DD00AF302B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		54C9E7722147E8C300A208FD /* Build configuration list for PBXNativeTarget "iddcSwiftNotification" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				54C9E7702147E8C300A208FD /* Debug */,
+				54C9E7712147E8C300A208FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

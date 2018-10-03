@@ -41,5 +41,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>APP_GROUP_ID</key>
+    <string>group.com.ebuilder.iddcdemo.swift.iddc-swift</string>
 </dict>
 </plist>
