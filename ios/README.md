@@ -59,11 +59,7 @@ pod update
 ```
 
 You can get available versions information of the framework by
-```ruby
-pod trunk info iddc-xcode9.3
-```
 
-or
 ```
 pod trunk info iddc-xcode9.4
 ```
