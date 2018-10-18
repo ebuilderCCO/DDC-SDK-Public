@@ -352,6 +352,8 @@ In your POD file add a new target:
 ```
 target 'iddcSwiftNotification' do
     pod 'iddc-xcode10.0', '0.1.164'
+    # or
+    # pod 'iddc-xcode9.4', '0.1.164'
     use_frameworks!
 end
 ```
