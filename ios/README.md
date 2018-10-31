@@ -42,9 +42,9 @@ iOS DDC SDK **iddc** is available through [CocoaPods](http://cocoapods.org). To 
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'iddc-xcode10.0', '0.1.164'
+pod 'iddc-xcode10.0', '0.1.189'
 # or
-# pod 'iddc-xcode9.4', '0.1.164'
+# pod 'iddc-xcode9.4', '0.1.189'
 ```
 
 * To install iddc.framework, run the script from command-line:
@@ -351,9 +351,9 @@ In your POD file add a new target:
 
 ```
 target 'iddcSwiftNotification' do
-    pod 'iddc-xcode10.0', '0.1.164'
+    pod 'iddc-xcode10.0', '0.1.189'
     # or
-    # pod 'iddc-xcode9.4', '0.1.164'
+    # pod 'iddc-xcode9.4', '0.1.189'
     use_frameworks!
 end
 ```
