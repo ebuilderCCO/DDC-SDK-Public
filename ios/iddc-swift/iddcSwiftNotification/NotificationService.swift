@@ -22,9 +22,11 @@ class NotificationService: UNNotificationServiceExtension {
             bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
             
             contentHandler(bestAttemptContent)
+            print("############")
+            print("\(bestAttemptContent)")
         }
         
-        DdcManager.run { error in
+        DeviceDataCollector.run { error in
             if let err = error {
                 print("\(err.description)")
             }

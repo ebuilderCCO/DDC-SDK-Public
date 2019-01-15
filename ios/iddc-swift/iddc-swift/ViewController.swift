@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var labelResult: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "DDC(\(DdcManager.versionInfo))"
+        self.title = "DDC(\(DeviceDataCollector.versionInfo))"
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,12 +27,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "uuid-unavailable"
-        let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: deviceId, deviceIdType: .installationId)
-        
-        manager.externalUserID = self.getExternalUserID()
-        
-        manager.run { (error) in
+        print(DeviceDataCollector.getState(providedDeviceId: nil))
+        let ddc =  DeviceDataCollector.getDefault(key: "eyJ1cmwiOiJodHRwczovL2FwaWd3LmVidWlsZGVyLmlvL21vY2stZW5kIiwgImxpY2Vuc2UiOiJ0aGVzeXN0ZW1zdXJyb2dhdGVwdWJsaWNrZXkiLCAiYXBpLWtleSI6ICJ0aGVtZW1vcnkyIn0K")
+        ddc.debug = true
+        ddc.externalUserID = "8284FFCC-8A3E-4D68-88A8-39BFAF26B76E"
+        ddc.phoneNumber = "0046739698288"
+        ddc.advertisingID = "8284FFCC-8A3E-4D68-88A8-39BFAF26B76E"
+        ddc.run { (error) in
             DispatchQueue.main.async {
                 if error == nil || error?.code == 0 {
                     self.labelResult.text = "ddc succeed"
@@ -42,6 +43,7 @@ class ViewController: UIViewController {
                 }
             }
         }
+        print(DeviceDataCollector.getState(providedDeviceId: nil))
     }
     
 }
