@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SDK Artefact Test</string>
+    <string name="license_key">eyJ1cmwiOiJodHRwczovL2FwaWd3LmVidWlsZGVyLmlvL21vY2stZW5kIiwgImxpY2Vuc2UiOiJqb2hhbnNoaXJ1IiwgImFwaS1rZXkiOiJqb2hhbnNoaXJ1In0K</string>
+    <string name="status_txt">%1$d jobs invocations of tag: %2$s were launched in total since %3$s.\nLatest job execution at %4$s</string>
+    <string name="trigger_btn">Trigger collect</string>
+    <string name="default_value">com.halebop.servicetips.test</string>
+    <string name="continue_label">Continue</string>
+    <string name="collect_label">Collect</string>
+
+    <string name="hint_msg">Enter applicationId below:</string>
+    <string name="refresh">Refresh</string>
+    <string name="surrogate_label">Surrogate DeviceId</string>
+</resources>

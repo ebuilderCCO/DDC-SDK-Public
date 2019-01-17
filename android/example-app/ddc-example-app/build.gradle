@@ -1,0 +1,26 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "io.ebuilder.ddc.example.app"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 4
+        versionName "1.0"
+    }
+
+    buildTypes {
+        debug
+    }
+}
+
+dependencies {
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation "com.android.support:appcompat-v7:27.1.1"
+
+    implementation ("io.ebuilder.mobile.services:ddc-sdk:1.2.0.255") {
+        exclude group: "com.android.support"
+    }
+}
+
