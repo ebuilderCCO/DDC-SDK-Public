@@ -196,16 +196,16 @@ ddc.stopScheduler();
 
 If a user choses to opt in again, simply start the scheduler again. Calling *startScheduler* is safe, even if scheduling already is enabled.
 
- ### Debugging
+### Debugging
 
- You can see the scheduled jobs via [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb.html):
+You can see the scheduled jobs via [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb.html):
 
- ```sh
- $ adb shell dumpsys jobscheduler | grep "<YOUR PACKAGE ID>"
- ```
+```sh
+$ adb shell dumpsys jobscheduler | grep "<YOUR PACKAGE ID>"
+```
 
- For example:
+For example:
 
- ```sh
- $ adb shell dumpsys jobscheduler | grep "io.ebuilder.ddc.example.app"
- ```
+```sh
+$ adb shell dumpsys jobscheduler | grep "io.ebuilder.ddc.example.app"
+```
