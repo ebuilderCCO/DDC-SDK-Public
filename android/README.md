@@ -114,11 +114,11 @@ ddc.loggingEnabled(true);
 #### Associating collected data with a user/device identity
 The following instance methods can be used to optionally provide additional user/device identifiers:
 
-| Name           | Description                                                  |      |
-| -------------- | ------------------------------------------------------------ | ---- |
-| advertisingID  | The [Android advertising ID](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/package-summary) of a device. |      |
-| externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |      |
-| phoneNumber    | The user's phone number.                                     |      |
+| Name           | Description                                                  |
+| -------------- | ------------------------------------------------------------ | 
+| advertisingID  | The [Android advertising ID](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/package-summary) of a device. |
+| externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
+| phoneNumber    | The user's phone number.                                     |
 
 Example:
 
@@ -172,9 +172,9 @@ ddc.stopScheduler();
 
 If a user choses to opt in again, simply start the scheduler again. Calling *startScheduler* is safe, even if scheduling already is enabled.
 
- ### Debugging
+### Debugging
 
- You can see the scheduled jobs via [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb.html):
+You can see the scheduled jobs via [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb.html):
 
  ```sh
  $ adb shell dumpsys jobscheduler | grep "<YOUR PACKAGE ID>"
