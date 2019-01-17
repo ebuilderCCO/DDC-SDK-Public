@@ -12,9 +12,7 @@ public final class DDCSetup {
 
 
         return DeviceDataCollector.getDefault(context,LICENSE_KEY)
-            .loggingEnabled(true)
-            .phoneNumber("+0123456789")
-            .externalUserId("2");
+            .advertisingId("HELLO");
     }
 
     public static SettingsProvider settingsProvider() {

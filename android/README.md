@@ -1,16 +1,16 @@
 [![N|Solid](https://ebuilder.com/wp-content/uploads/2017/02/ebuilder-effortless-logo.png)](https://ebuilder.com/)
 
 ## Android compatibility
-Minimum supported Android SDK version is 16 (4.1.x / Jelly Bean) [https://source.android.com/source/build-numbers](https://source.android.com/source/build-numbers)
+Minimum supported [Android SDK version](https://source.android.com/source/build-numbers) is 16 (4.1.x / Jelly Bean).
 
 ## Project Setup
 
 ### Permissions
-DDC SDK will not ask for any permissions; it's a host-app responsibility to request them. Library *support-v4* has been included only to check permissions state.
+The *Device Data Collector* (DDC) SDK will not ask for any permissions; it's a host application's responsibility to request them. Library *support-v4* has been included only to check permissions state.
 
-DDC SDK doesn't need any permissions in order to run.If no permissions are set by host-app DDC will only collect data for which permissions are not required.
+DDC SDK doesn't need any permissions in order to run. If no permissions are set by the host application, DDC will only collect data for which permissions are not required.
 
-Following are the permissions(along with their purpose) that can be requested:
+However, there are some permissions that improve data quality if already granted to the host application:
 
 | Permission                                | Description                                                   | Runtime |
 | ----------------------------------------- | ------------------------------------------------------------  | ------- |
@@ -26,13 +26,8 @@ Following are the permissions(along with their purpose) that can be requested:
 ### Licence
 In order to use the SDK you need a licence key that you can request from us.
 
-In AndroidManifest.xml add the following line under application tag:
-```xml
-<meta-data android:name="ddc-sdk-license" android:value="<YOUR LICENSE KEY>" />
-```
-
 ### Gradle Dependencies
-Add following repository:
+Add the following repository:
 ```
 allprojects {
     repositories {
@@ -44,23 +39,32 @@ allprojects {
 
 ```
 
-Add following dependencies:
+Add DDC SDK:
 
 ```groovy
 dependencies {
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.google.code.gson:gson:2.8.4'
-    implementation 'org.apache.commons:commons-lang3:3.5'
-    implementation 'io.ebuilder.mobile.services:ddc-sdk:1.2.0.163@aar'
+    implementation "io.ebuilder.mobile.services:ddc-sdk:1.2.0.255"
 }
 ```
 
+**Note**: The DDC SDK has [dependencies of its own](https://artifacts-int.ebuilder.io/repository/ebuilder-maven/io/ebuilder/mobile/services/ddc-sdk/1.2.0.255/ddc-sdk-1.2.0.255.pom). If you run into build or runtime issues because your project depends on an older version of the Android support library, you can exclude the one required by DDC: 
+
+```groovy
+dependencies {
+    implementation ("io.ebuilder.mobile.services:ddc-sdk:1.2.0.255") {
+        exclude group: "com.android.support"
+    }
+}
+```
+
+### 
+
 ### Proguard
-In case your app has proguard rules enabled you need to ensure that DDC SDK classes are excluded from the proguard processing.
-For more on proguard see [https://developer.android.com/studio/build/shrink-code](https://developer.android.com/studio/build/shrink-code)
+
+In case your app has [proguard](https://developer.android.com/studio/build/shrink-code) rules enabled you need to ensure that DDC SDK classes are excluded from the proguard processing.
 
 
-Adjust your *proguard-rules.pro* file including the following lines:
+Adjust your **proguard-rules.pro** file with the following lines:
 
 ```
 -keep class io.ebuilder.mobile.services.** { *; }
@@ -68,9 +72,9 @@ Adjust your *proguard-rules.pro* file including the following lines:
 ```
 
 ### Content Provider configuration
-The SDK is using Content Provider to manage access to locally stored data. For more on Content Providers and their advantages see android documentation [https://developer.android.com/guide/topics/providers/content-providers](https://developer.android.com/guide/topics/providers/content-providers)
+The SDK is using **Content Providers** to manage access to locally stored data. For more on Content Providers and their advantages see the [Android documentation](https://developer.android.com/guide/topics/providers/content-providers). 
 
-The host app is required to specify a unique app content uri. DDC reads this value as the attribute *data_content_provider_authority* that can be configured in *build.gradle*
+The host app is required to specify a unique app content uri. DDC reads this value as the attribute **data_content_provider_authority** that can be configured in *build.gradle*
 
 ```groovy
 android {
@@ -91,121 +95,86 @@ android {
 
 
 
+## Initialization
+
+```java
+DeviceDataCollector ddc = DeviceDataCollector.getDefault(context, "YOUR_LICENSE_KEY");
+```
+
+DeviceDataCollector.getDefault(...) has the following mandatory arguments:
+* *context* (Context) : application context
+* *licenseKey* (String) : the licence key provided by eBuilder
+
+Enable SDK logging:
+
+```java
+ddc.loggingEnabled(true);
+```
+
+#### Associating collected data with a user/device identity
+The following instance methods can be used to optionally provide additional user/device identifiers:
+
+| Name           | Description                                                  |      |
+| -------------- | ------------------------------------------------------------ | ---- |
+| advertisingID  | The [Android advertising ID](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/package-summary) of a device. |      |
+| externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |      |
+| phoneNumber    | The user's phone number.                                     |      |
+
+Example:
+
+```java
+ddc.externalUserID("c23911a2-c455-4a59-96d0-c6fea09176b8"); 
+ddc.phoneNumber("+1234567890");
+ddc.advertisingId(adID);
+```
+
 
 
 ## Modes supported by DDC
 
-* **On demand trigger**: Host app explicitly calls DDC to do its work whenever needed
-* **Scheduled trigger**: DDC owns the scheduling of DDC calls. Scheduling is built on GCM network manager [https://developers.google.com/cloud-messaging/network-manager](https://developers.google.com/cloud-messaging/network-manager)
+* **On demand trigger**: Host app explicitly calls DDC to collect data whenever desired.
+* **Scheduled triggers** (recommended): DDC schedules data collection. It uses the [Android WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager/) for this.
 
-## On Demand Trigger
 
-### Initialization
 
-```java
-final ServiceTrigger serviceTrigger = DeviceDataCollectorFactory.setup(context, "SystemId", "IMEI", DeviceIdType.IMEI)
-    .loggingEnabled()
-    .build(context);
-```
-
-DeviceDataCollectorFactory.setup(...) has following mandatory arguments:
-* *context* : application context
-* *systemId* : name of your application
-* *deviceId* : id of the device (for ex: device IMEI)
-* *deviceIdType* : device id type. Possible values are DeviceIdType.IMEI, DeviceIdType.INSTALLATION_ID
-
-#### Non mandatory settings
-Following initialization settings can also be used using the fluent interface of *SettingsBuilder*:
-
-| Builder function                           | Description                                                  | Default value |
-| ------------------------------------------ | ------------------------------------------------------------ | ------------- |
-| loggingEnabled()                           | Turn on SDK logging                                          | false         |
-| wifiOnly()                                 | Transfer data only when connected to WIFI                    | false         |
-| externalUserId(final String value)         | External user ID to include in the transferred data          | empty         |
-| phoneNumber(final String value)            | Phone number to to include in the transferred data           | empty         |
-
+## On demand trigger
 
 ### Usage
 
-Obtain the ServiceTrigger reference initializing the sdk. Then invoke *run* at the key moments when the sdk should do its work.
+Collect data:
+
 ```java
-final ServiceTrigger serviceTrigger = DeviceDataCollectorFactory
-	.setup(context, "SystemId", deviceId, deviceIdType).build(context);
-
-serviceTrigger.run(context);
+ddc.run();
 ```
 
+**Note:** on demand triggering is not recommended. Read below how to enable scheduling.
 
-## Scheduled Trigger
-You can let the SDK manage the scheduling of the DDC calls. It's only required to initialize it.
-Scheduling is built on GCM network manager [https://developers.google.com/cloud-messaging/network-manager](https://developers.google.com/cloud-messaging/network-manager)
-Scheduled jobs will continue to run even when the host app is not running or is put in background. Frequency is defined in the licence.
 
-### Project Setup
-Two extra dependencies are required in order to use the scheduler: *io.ebuilder.mobile.services.scheduler.gcm:ddc-gcm-scheduler* and *com.google.android.gms:play-services-gcm*
 
-Adjust your *build.gradle* as following:
+## Scheduled triggers
 
-```groovy
-dependencies {
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.google.code.gson:gson:2.8.4'
-    implementation 'org.apache.commons:commons-lang3:3.5'
-    implementation 'com.google.android.gms:play-services-gcm:15.0.1'
-    implementation 'io.ebuilder.mobile.services:ddc-sdk:1.2.0.163@aar'
-    implementation 'io.ebuilder.mobile.services.scheduler.gcm:ddc-gcm-scheduler:1.1.0.22@aar'
-}
-```
-
-### Initialization
-Initialization is similar to the On Demand Trigger having same mandatory and optional settings:
+Scheduled jobs will in most cases continue running even when the host app is not running, or is put in background. Collection frequency is defined in the licence.
 
 ### Usage
-Obtain a reference of the scheduler:
+Start the scheduler:
 
 ```java
-Scheduler scheduler = ScheduledDDCFactory.setup(this, SYSTEM_ID, "deviceId", DeviceIdType.IMEI)
-                .loggingEnabled().scheduler(this);
+ddc.startScheduler();
 ```
 
-Then you can schedule the jobs (*scheduler.reschedule(Context context)*):
+There are use cases where you need to stop the scheduler service for specific devices. Such a use case, for instance, is compliance to the EU GDPR and the user's right to opt out of data collection.
+
+Stop the scheduler:
 
 ```java
-scheduler.reschedule(this);
+ddc.stopScheduler();
 ```
 
- or unschedule the jobs (*scheduler.cancel(Context context)*) if you no longer want to run them:
-
- ```java
- scheduler.cancel(this);
- ```
-
- Calling *scheduler.reschedule(Context context)* multiple times is safe. Services will not be rescheduled if they are already in a scheduled state.
-
-### Disabling the scheduler for specific devices
-There are use cases where you need to disable/enable the scheduler service for specific devices.
-Such a use case, for instance,  is a requirement for compliance by the EU GDPR: users are in control on shared personal information. They may decide to switch off the SDK.
-
-By default the scheduler service is *enabled* once initialized.
-However, having the *scheduler* reference in hand,  you can always *disable* it or re-*enable* it as many times as required.
-
-```java
-// user choses to opt-out -> disable collection and upload of events from now on
-scheduler.disable(getContext().getApplicationContext());
-```
-
-```java
-// user choses to opt-in again -> enable collection and upload of events from now on
-scheduler.enable(getContext().getApplicationContext());
-```
-
-Calling *enable* on a scheduler that is already enabled is safe.
-
-
+If a user choses to opt in again, simply start the scheduler again. Calling *startScheduler* is safe, even if scheduling already is enabled.
 
 
  ### Debugging
- You can see the scheduled jobs via Android Debug Bridge (adb) [https://developer.android.com/studio/command-line/adb.html](https://developer.android.com/studio/command-line/adb.html)
+ You can see the scheduled jobs via [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb.html):
 
  ```sh
  $ adb shell dumpsys activity service GcmService | grep "<YOUR PACKAGE ID>"

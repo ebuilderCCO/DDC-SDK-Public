@@ -38,6 +38,7 @@ public class DdcFragment extends Fragment {
             @Override
             public void onClick(final View v) {
                 if (ddc != null) {
+                    ddc.phoneNumber("123");
                     ddc.run();
                     Toast.makeText(getContext().getApplicationContext(), "Event sent", Toast.LENGTH_SHORT).show();
                 }
