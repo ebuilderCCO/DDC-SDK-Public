@@ -1,6 +1,7 @@
-[![N|Solid](https://ebuilder.com/wp-content/uploads/2017/02/ebuilder-effortless-logo.png)](https://ebuilder.com/)
+# Android
+(https://ebuilder.com/)
 
-- [Android compatibility](#android-compatibility)
+- [Compatibility](#compatibility)
 - [Project Setup](#project-setup)
   - [Permissions](#permissions)
   - [Gradle Dependencies](#gradle-dependencies)
@@ -13,7 +14,7 @@
 - [Scheduled triggers](#scheduled-triggers)
   - [Debugging](#debugging)
 
-## Android compatibility
+## Compatibility
 
 Minimum supported [Android SDK version](https://source.android.com/source/build-numbers) is 16 (4.1.x / Jelly Bean).
 
