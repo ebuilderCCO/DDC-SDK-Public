@@ -15,8 +15,6 @@
 - [Scheduled triggers](#scheduled-triggers)
 	- [Usage](#usage-1)
 
-
-
 ## Android compatibility
 
 Minimum supported [Android SDK version](https://source.android.com/source/build-numbers) is 16 (4.1.x / Jelly Bean).
