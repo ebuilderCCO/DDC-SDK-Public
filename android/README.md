@@ -173,18 +173,15 @@ ddc.stopScheduler();
 If a user choses to opt in again, simply start the scheduler again. Calling *startScheduler* is safe, even if scheduling already is enabled.
 
  ### Debugging
- 
+
  You can see the scheduled jobs via [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb.html):
 
  ```sh
- $ adb shell dumpsys activity service GcmService | grep "<YOUR PACKAGE ID>"
+ $ adb shell dumpsys jobscheduler | grep "<YOUR PACKAGE ID>"
  ```
 
  For example:
 
  ```sh
- $ adb shell dumpsys activity service GcmService | grep "my.first.ddc.app/io.ebuilder.mobile.services.scheduler.gcm.services.CollectorService"
-
-     (scheduled) my.first.ddc.app/io.ebuilder.mobile.services.scheduler.gcm.services.CollectorService{u=0 tag="DataCollectorService" trigger=window{period=1800s,flex=10s,earliest=221s,latest=311s} requirements=[NET_ANY] attributes=[PERSISTED,RECURRING] scheduled=-1488s last_run=N/A jid=N/A status=PENDING retries=0 client_lib=MANCHEGO_GCM-11717000}
-     (finished) [my.first.ddc.app/io.ebuilder.mobile.services.scheduler.gcm.services.CollectorService:DataCollectorService,u0]
+ $ adb shell dumpsys jobscheduler | grep "io.ebuilder.ddc.example.app"
  ```

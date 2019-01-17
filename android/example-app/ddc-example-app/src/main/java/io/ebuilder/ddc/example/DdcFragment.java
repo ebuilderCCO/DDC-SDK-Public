@@ -9,24 +9,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import io.ebuilder.mobile.services.DDCSetup;
 import io.ebuilder.mobile.services.DeviceDataCollector;
-import io.ebuilder.mobile.services.settings.SettingsProvider;
-
 
 
 public class DdcFragment extends Fragment {
 
     private DeviceDataCollector ddc;
-    private SettingsProvider settingsProvider;
+
+    private static final String LICENSE_KEY = "eyJ1cmwiOiJodHRwczovL2FwaWd3LmVidWlsZGVyLmlvL21vY2stZW5kIiwgImxpY2Vuc2UiOiJ0aGVzeXN0ZW0iLCAiYXBpLWtleSI6Im5ld3J1bGVzIn0K";
 
     @Override
     public View onCreateView(final LayoutInflater inflater,
                              final @Nullable ViewGroup container,
                              final @Nullable Bundle savedInstanceState) {
 
-        ddc = DDCSetup.ddc(getContext().getApplicationContext());
-        settingsProvider = DDCSetup.settingsProvider();
+        ddc = DeviceDataCollector.getDefault(getContext().getApplicationContext() ,LICENSE_KEY)
+                .advertisingId("HELLO");
         return inflater.inflate(R.layout.fragment_ddc_setup, container, false);
     }
 
@@ -67,12 +65,5 @@ public class DdcFragment extends Fragment {
             }
         });
 
-        /*final Button surrogateKeyButton = view.findViewById(R.id.surrogateDeviceId);
-        surrogateKeyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println(settingsProvider.getSurrogateDeviceId(getContext().getApplicationContext()));
-            }
-        });*/
     }
 }

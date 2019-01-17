@@ -1,14 +1,10 @@
 package io.ebuilder.ddc.example;
 
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-
-import io.ebuilder.mobile.services.utils.PermissionUtils;
 
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.GET_ACCOUNTS;
@@ -63,5 +59,6 @@ public class MainActivity extends FragmentActivity implements FragmentFacade {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }
