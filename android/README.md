@@ -10,9 +10,8 @@
   - [Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)
 - [Modes supported by DDC](#modes-supported-by-ddc)
 - [On demand trigger](#on-demand-trigger)
-  - [Usage](#usage)
 - [Scheduled triggers](#scheduled-triggers)
-  - [Usage](#usage-1)
+  - [Debugging](#debugging)
 
 ## Android compatibility
 
@@ -163,8 +162,6 @@ ddc.advertisingId(adID);
 
 ## On demand trigger
 
-### Usage
-
 Collect data:
 
 ```java
@@ -179,7 +176,6 @@ ddc.run();
 
 Scheduled jobs will in most cases continue running even when the host app is not running, or is put in background. Collection frequency is defined in the licence.
 
-### Usage
 Start the scheduler:
 
 ```java
