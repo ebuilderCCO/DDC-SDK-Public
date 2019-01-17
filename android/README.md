@@ -113,6 +113,14 @@ android {
 
 ## Initialization
 
+Import DDC:
+
+```java
+import io.ebuilder.mobile.services.DeviceDataCollector;
+```
+
+Create an instance:
+
 ```java
 DeviceDataCollector ddc = DeviceDataCollector.getDefault(context, "YOUR_LICENSE_KEY");
 ```
@@ -121,7 +129,7 @@ DeviceDataCollector.getDefault(...) has the following mandatory arguments:
 * *context* (Context) : application context
 * *licenseKey* (String) : the licence key provided by eBuilder
 
-Enable SDK logging:
+Enable SDK logging (optional):
 
 ```java
 ddc.loggingEnabled(true);
@@ -130,11 +138,11 @@ ddc.loggingEnabled(true);
 #### Associating collected data with a user/device identity
 The following instance methods can be used to optionally provide additional user/device identifiers:
 
-| Name           | Description                                                  |      |
-| -------------- | ------------------------------------------------------------ | ---- |
-| advertisingID  | The [Android advertising ID](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/package-summary) of a device. |      |
-| externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |      |
-| phoneNumber    | The user's phone number.                                     |      |
+| Name           | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| advertisingID  | The [Android advertising ID](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/package-summary) of a device. |
+| externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
+| phoneNumber    | The user's phone number.                                     |
 
 Example:
 
