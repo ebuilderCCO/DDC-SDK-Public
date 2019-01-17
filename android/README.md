@@ -2,18 +2,17 @@
 
 - [Android compatibility](#android-compatibility)
 - [Project Setup](#project-setup)
-	- [Permissions](#permissions)
-	- [Licence](#licence)
-	- [Gradle Dependencies](#gradle-dependencies)
-	- [Proguard](#proguard)
-	- [Content Provider configuration](#content-provider-configuration)
+  - [Permissions](#permissions)
+  - [Gradle Dependencies](#gradle-dependencies)
+  - [Proguard](#proguard)
+  - [Content Provider configuration](#content-provider-configuration)
 - [Initialization](#initialization)
-	- [Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)
+  - [Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)
 - [Modes supported by DDC](#modes-supported-by-ddc)
 - [On demand trigger](#on-demand-trigger)
-	- [Usage](#usage)
+  - [Usage](#usage)
 - [Scheduled triggers](#scheduled-triggers)
-	- [Usage](#usage-1)
+  - [Usage](#usage-1)
 
 ## Android compatibility
 
@@ -39,8 +38,6 @@ However, there are some permissions that improve data quality if already granted
 | android.permission.WAKE_LOCK              | Used for scheduling jobs to run services-on-demand           | no      |
 
 
-### Licence
-In order to use the SDK you need a licence key that you can request from us.
 
 ### Gradle Dependencies
 Add the following repository:
