@@ -1,6 +1,24 @@
 [![N|Solid](https://ebuilder.com/wp-content/uploads/2017/02/ebuilder-effortless-logo.png)](https://ebuilder.com/)
 
+[Android compatibility](#android-compatibility)
+[Project Setup](#project-setup)
+	[Permissions](#permissions)
+	[Licence](#licence)
+	[Gradle Dependencies](#gradle-dependencies)
+	[Proguard](#proguard)
+	[Content Provider configuration](#content-provider-configuration)
+[Initialization](#initialization)
+	[Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)
+	[Modes supported by DDC](#modes-supported-by-ddc)
+[On demand trigger](#on-demand-trigger)
+	[Usage](#usage)
+[Scheduled triggers](#scheduled-triggers)
+	[Usage](#usage-1)
+
+
+
 ## Android compatibility
+
 Minimum supported [Android SDK version](https://source.android.com/source/build-numbers) is 16 (4.1.x / Jelly Bean).
 
 ## Project Setup
@@ -57,7 +75,7 @@ dependencies {
 }
 ```
 
-### 
+###  
 
 ### Proguard
 
