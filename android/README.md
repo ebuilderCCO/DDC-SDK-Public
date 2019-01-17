@@ -151,7 +151,7 @@ ddc.phoneNumber("+1234567890");
 ddc.advertisingId(adID);
 ```
 
-
+**Note:** user data is encrypted and handled in accordance with EU GDPR.
 
 ## Modes supported by DDC
 
