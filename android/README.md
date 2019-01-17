@@ -1,19 +1,19 @@
 [![N|Solid](https://ebuilder.com/wp-content/uploads/2017/02/ebuilder-effortless-logo.png)](https://ebuilder.com/)
 
-[Android compatibility](#android-compatibility)
-[Project Setup](#project-setup)
-	[Permissions](#permissions)
-	[Licence](#licence)
-	[Gradle Dependencies](#gradle-dependencies)
-	[Proguard](#proguard)
-	[Content Provider configuration](#content-provider-configuration)
-[Initialization](#initialization)
-	[Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)
-	[Modes supported by DDC](#modes-supported-by-ddc)
-[On demand trigger](#on-demand-trigger)
-	[Usage](#usage)
-[Scheduled triggers](#scheduled-triggers)
-	[Usage](#usage-1)
+- [Android compatibility](#android-compatibility)
+- [Project Setup](#project-setup)
+	- [Permissions](#permissions)
+	- [Licence](#licence)
+	- [Gradle Dependencies](#gradle-dependencies)
+	- [Proguard](#proguard)
+	- [Content Provider configuration](#content-provider-configuration)
+- [Initialization](#initialization)
+	- [Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)
+- [Modes supported by DDC](#modes-supported-by-ddc)
+- [On demand trigger](#on-demand-trigger)
+	- [Usage](#usage)
+- [Scheduled triggers](#scheduled-triggers)
+	- [Usage](#usage-1)
 
 
 
@@ -89,7 +89,10 @@ Adjust your **proguard-rules.pro** file with the following lines:
 -keep interface io.ebuilder.mobile.services.** { *; }
 ```
 
+
+
 ### Content Provider configuration
+
 The SDK is using **Content Providers** to manage access to locally stored data. For more on Content Providers and their advantages see the [Android documentation](https://developer.android.com/guide/topics/providers/content-providers). 
 
 The host app is required to specify a unique app content uri. DDC reads this value as the attribute **data_content_provider_authority** that can be configured in *build.gradle*
