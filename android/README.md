@@ -1,6 +1,24 @@
 [![N|Solid](https://ebuilder.com/wp-content/uploads/2017/02/ebuilder-effortless-logo.png)](https://ebuilder.com/)
 
+[Android compatibility](#android-compatibility)
+[Project Setup](#project-setup)
+	[Permissions](#permissions)
+	[Licence](#licence)
+	[Gradle Dependencies](#gradle-dependencies)
+	[Proguard](#proguard)
+	[Content Provider configuration](#content-provider-configuration)
+[Initialization](#initialization)
+	[Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)
+	[Modes supported by DDC](#modes-supported-by-ddc)
+[On demand trigger](#on-demand-trigger)
+	[Usage](#usage)
+[Scheduled triggers](#scheduled-triggers)
+	[Usage](#usage-1)
+
+
+
 ## Android compatibility
+
 Minimum supported [Android SDK version](https://source.android.com/source/build-numbers) is 16 (4.1.x / Jelly Bean).
 
 ## Project Setup
@@ -57,7 +75,7 @@ dependencies {
 }
 ```
 
-### 
+###  
 
 ### Proguard
 
@@ -114,11 +132,11 @@ ddc.loggingEnabled(true);
 #### Associating collected data with a user/device identity
 The following instance methods can be used to optionally provide additional user/device identifiers:
 
-| Name           | Description                                                  |
-| -------------- | ------------------------------------------------------------ | 
-| advertisingID  | The [Android advertising ID](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/package-summary) of a device. |
-| externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
-| phoneNumber    | The user's phone number.                                     |
+| Name           | Description                                                  |      |
+| -------------- | ------------------------------------------------------------ | ---- |
+| advertisingID  | The [Android advertising ID](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/package-summary) of a device. |      |
+| externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |      |
+| phoneNumber    | The user's phone number.                                     |      |
 
 Example:
 
@@ -172,9 +190,9 @@ ddc.stopScheduler();
 
 If a user choses to opt in again, simply start the scheduler again. Calling *startScheduler* is safe, even if scheduling already is enabled.
 
-### Debugging
+ ### Debugging
 
-You can see the scheduled jobs via [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb.html):
+ You can see the scheduled jobs via [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb.html):
 
  ```sh
  $ adb shell dumpsys jobscheduler | grep "<YOUR PACKAGE ID>"
