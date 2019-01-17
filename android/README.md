@@ -1,5 +1,4 @@
 # Android
-(https://ebuilder.com/)
 
 - [Compatibility](#compatibility)
 - [Project Setup](#project-setup)
