@@ -9,7 +9,7 @@
 	- [Content Provider configuration](#content-provider-configuration)
 - [Initialization](#initialization)
 	- [Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)
-	- [Modes supported by DDC](#modes-supported-by-ddc)
+- [Modes supported by DDC](#modes-supported-by-ddc)
 - [On demand trigger](#on-demand-trigger)
 	- [Usage](#usage)
 - [Scheduled triggers](#scheduled-triggers)
