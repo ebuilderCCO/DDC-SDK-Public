@@ -2,9 +2,9 @@
 
 The Device Data Collector (**DDC**) for Android manual.
 
-[Compatibility](#compatibility)<br/>[Project Setup](#project-setup)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;[Permissions](#permissions)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;[Gradle Dependencies](#gradle-dependencies)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;[Proguard](#proguard)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;[Content Provider configuration](#content-provider-configuration)<br/>[Initialization](#initialization)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;[Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)</br>
-[Modes supported by DDC](#modes-supported-by-ddc)</br>
-	&nbsp;&nbsp;&nbsp;&nbsp;[On demand trigger](#on-demand-trigger)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;[Scheduled triggers](#scheduled-triggers)<br/>
+[Compatibility](#compatibility)<br/>[Project Setup](#project-setup)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Permissions](#permissions)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Gradle Dependencies](#gradle-dependencies)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Proguard](#proguard)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Content Provider configuration](#content-provider-configuration)<br/>[Initialization](#initialization)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)</br>
+[Modes supported by DDC](#modes-supported-by-ddc)<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[On demand trigger](#on-demand-trigger)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Scheduled triggers](#scheduled-triggers)<br/>
 
 
 
