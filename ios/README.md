@@ -45,11 +45,9 @@ $ pod update
 
 ## Usage
 
-#### Add the framework to a project
+#### Use the framework in Objective-C project
 Select your project in **"TARGETS"** (**not** PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes**. In an Objective-C project it would look like this:
 ![embed-swift](./res/embed-swift.png "embed-swift")
-
-#### Use the framework in Objective-C project
 
 Import DDC:
 
@@ -313,14 +311,13 @@ class NotificationService: UNNotificationServiceExtension {
 }
 ```
 
-To integrate DDC follow the steps:
+Now, to integrate DDC, first import DDC:
 
-###### Import DDC
 ```swift
 import iddc
 ```
 
-###### Trigger the event in the callback method
+Then, trigger data collection in the callback method:
 
 ```swift
 override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
@@ -328,11 +325,13 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
 
-        DdcManager.run { (error) in
+    	// Note that run() is called without instantiating DDC
+        // (that is already done in the main application):
+        DeviceDataCollector.run { error in
             if let err = error {
-                print("\(err.description)")
+            	print("\(err.description)")
             }
-        }
+		}
 
         if let bestAttemptContent = bestAttemptContent {
             // Modify the notification content here...
