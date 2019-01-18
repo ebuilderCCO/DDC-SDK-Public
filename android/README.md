@@ -2,18 +2,11 @@
 
 The Device Data Collector (**DDC**) for Android manual.
 
-- [Compatibility](#compatibility)
-- [Project Setup](#project-setup)
-  - [Permissions](#permissions)
-  - [Gradle Dependencies](#gradle-dependencies)
-  - [Proguard](#proguard)
-  - [Content Provider configuration](#content-provider-configuration)
-- [Initialization](#initialization)
-  - [Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)
-- [Modes supported by DDC](#modes-supported-by-ddc)
-- [On demand trigger](#on-demand-trigger)
-- [Scheduled triggers](#scheduled-triggers)
-  - [Debugging](#debugging)
+[Compatibility](#compatibility)<br/>[Project Setup](#project-setup)<br/>	[Permissions](#permissions)<br/>	[Gradle Dependencies](#gradle-dependencies)<br/>	[Proguard](#proguard)<br/>	[Content Provider configuration](#content-provider-configuration)<br/>[Initialization](#initialization)<br/>	[Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)</br>
+[Modes supported by DDC](#modes-supported-by-ddc)</br>
+	[On demand trigger](#on-demand-trigger)<br/>	[Scheduled triggers](#scheduled-triggers)<br/>
+
+
 
 ## Compatibility
 
