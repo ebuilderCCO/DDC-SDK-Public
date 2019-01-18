@@ -46,7 +46,7 @@ $ pod update
 ## Usage
 
 #### Use the framework in Objective-C project
-Select your project in **"TARGETS"** (**not** PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes**. In an Objective-C project it would look like this:
+Select your project in **"TARGETS"** (**not** PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes**:
 ![embed-swift](./res/embed-swift.png "embed-swift")
 
 Import DDC:
