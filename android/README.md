@@ -1,5 +1,7 @@
 # Android
 
+The Device Data Collector (**DDC**) for Android manual.
+
 - [Compatibility](#compatibility)
 - [Project Setup](#project-setup)
   - [Permissions](#permissions)
@@ -20,8 +22,6 @@ Minimum supported [Android SDK version](https://source.android.com/source/build-
 ## Project Setup
 
 ### Permissions
-The *Device Data Collector* (DDC) SDK will not ask for any permissions; it's a host application's responsibility to request them. Library *support-v4* has been included only to check permissions state.
-
 DDC SDK doesn't need any permissions in order to run. If no permissions are set by the host application, DDC will only collect data for which permissions are not required.
 
 However, there are some permissions that improve data quality if already granted to the host application:

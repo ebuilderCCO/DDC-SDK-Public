@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [NSString stringWithFormat:@"DDC(%@)", DdcManager.versionInfo];
+    self.title = [NSString stringWithFormat:@"DDC(%@)", DeviceDataCollector.versionInfo];
 }
 
 
@@ -29,14 +29,15 @@
 
 
 - (IBAction)buttonPressed:(UIButton *)sender {
-    NSString *uniqueIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-    DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" systemId: @"YOUR-SYSTEM-ID" deviceId: uniqueIdentifier deviceIdType: DeviceIdTypeInstallationId];
-    [ddcManager runWithCompletion:^(DdcError * error) {
+    
+     DeviceDataCollector *ddc = [DeviceDataCollector getDefaultWithKey:@"YOUR_LICENCE_KEY"];
+    
+       [ddc runWithCompletion:^(DdcError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error == nil || error.code == 0) {
-                _labelResult.text = @"🤡 ddc succeed";
+                _labelResult.text = @"ddc succeeded";
             } else {
-                _labelResult.text = [NSString stringWithFormat:@"😟 ddc completed with error: \n%@", error];
+                _labelResult.text = [NSString stringWithFormat:@"ddc failed with error: \n%@", error];
             }
         });
     }];

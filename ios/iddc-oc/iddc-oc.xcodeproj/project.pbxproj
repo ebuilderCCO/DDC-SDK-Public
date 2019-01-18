@@ -344,7 +344,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-iddc-oc/Pods-iddc-oc-frameworks.sh",
-				"${PODS_ROOT}/iddc-xcode9.3/iddc.framework",
+				"${PODS_ROOT}/iddc-xcode10.0/iddc.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (

@@ -33,14 +33,9 @@ class ViewController: UIViewController {
         ddc.externalUserID = "8284FFCC-8A3E-4D68-88A8-39BFAF26B76E"
         ddc.phoneNumber = "0046739698288"
         ddc.advertisingID = "8284FFCC-8A3E-4D68-88A8-39BFAF26B76E"
-        ddc.run { (error) in
-            DispatchQueue.main.async {
-                if error == nil || error?.code == 0 {
-                    self.labelResult.text = "ddc succeed"
-                } else {
-                    self.labelResult.text = String(format: "ddc failed with error: %@",error!.description)
-                    print("ddc failed with error: ",error!.description)
-                }
+        ddc.run { error in
+            if let err = error {
+                print("\(err.description)")
             }
         }
         print(DeviceDataCollector.getState(providedDeviceId: nil))

@@ -1,21 +1,10 @@
 # iOS
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-	- [Add NSBluetoothPeripheralUsageDescription to Info.list](#add-nsbluetoothperipheralusagedescription-to-infolist)
-	- [Use the framework in Objective-C project](#use-the-framework-in-objective-c-project)
-	- [Use the framework in Swift project](#use-the-framework-in-swift-project)
-	- [Output](#output)
-	- [Alternatives for triggering DDC](#alternatives-for-triggering-ddc)
-	- [User ID](#user-id)
-- [Trigger event on push notification](#trigger-event-on-push-notification)
-	- [How it works](#how-it-works)
-	- [Shared data with App Groups](#shared-data-with-app-groups)
-	- [Packaging](#packaging)
-	- [Create and configure a notification service extension](#create-and-configure-a-notification-service-extension)
-	- [SDK Usage](#sdk-usage)
-	- [Push notification requirements](#push-notification-requirements)
-	- [Sample app](#sample-app)
+
+The Device Data Collector (**DDC**) for iOS manual.
+
+[Requirements](#requirements)<br/>[Installation](#installation)<br/>[Usage](#usage)<br/>	[Add the framework to a project](#add-the-framework-to-a-project)<br/>	[Use the framework in Objective-C project](#use-the-framework-in-objective-c-project)<br/>	[Use the framework in Swift project](#use-the-framework-in-swift-project)<br/> 	[Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)<br/>        [Data collection frequency](#data-collection-frequency)<br/>[Trigger event on push notification](#trigger-event-on-push-notification)<br/>	[How it works](#how-it-works)<br/>	[Shared data with App Groups](#shared-data-with-app-groups)<br/>        [Packaging](#packaging)<br/>	[Create and configure a notification service extension](#create-and-configure-a-notification-service-extension)<br/>	[SDK Usage](#sdk-usage)<br/>	[Push notification requirements](#push-notification-requirements)<br/>	[Sample app](#sample-app)
+
+
 
 ## Requirements
 
@@ -28,7 +17,7 @@
 
 ## Installation
 
-iOS Device Data Collector (**DDC**) SDK is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
+iOS DDC SDK is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'iddc-xcode10.1', '0.1.209'
@@ -37,163 +26,125 @@ pod 'iddc-xcode10.1', '0.1.209'
 Or if you are using Xcode 10.0:
 
 ```ruby
-pod 'iddc-xcode10.1', '0.1.209'
+pod 'iddc-xcode10.0', '0.1.209'
 ```
 
 To install iddc.framework, run the script from command-line:
 
-```ruby
-pod install
+```sh
+$ pod install
 ```
 
 To upgrade iddc.framework, run the script from command-line:
 
-```ruby
-pod update
-```
-
-You can get available versions information of the framework by
-
-```
-pod trunk info iddc-xcode10.1
+```sh
+$ pod update
 ```
 
 
 
 ## Usage
 
-#### Add NSBluetoothPeripheralUsageDescription to Info.list
-Since **iddc.framework** need Bluetooth permission to read its status(on/off), it needs to contain an NSBluetoothPeripheralUsageDescription key with a string value explaining to the user how the app uses this data.
-But actually, the **iddc.framwork** won't show the permission dialogue at run time.
-```xml
-<key>NSBluetoothPeripheralUsageDescription</key>
-<string>REASON-WHY-NEED-PERMISSION</string>
-```
-> Please replace **REASON-WHY-NEED-PERMISSION** with some meaningful words.
+#### Add the framework to a project
+Select your project in **"TARGETS"** (**not** PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes**. In an Objective-C project it would look like this:
+![embed-swift](./res/embed-swift.png "embed-swift")
 
 #### Use the framework in Objective-C project
- * (Objective-C project only)Select your project in **"TARGETS"**(Not PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes**
-   ![embed-swift](./res/embed-swift.png "embed-swift")
+
+Import DDC:
 
 ```objective-c
 #import <iddc/iddc.h>
+```
 
-...
-...
+Create an instance:
+```objecive-c
+DeviceDataCollector *ddc = [DeviceDataCollector getDefaultWithKey: @"YOUR_LICENCE_KEY"];
+```
 
-/*
- initWithKey: License key for DDC
-    systemId: the name of the application using/embedding the SDK
-    deviceId: Unique id for the device.
-deviceIdType: The type for the deviceId, it could be IMEI/IDFA/PhoneNumber/InstallationId.
-*/
-DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" systemId: @"YOUR-SYSTEM-ID" deviceId: @"YOU-DEVICE-ID" deviceIdType: deviceIdType];
-[ddcManager runWithCompletion:^(DdcError * error) {
-    if (error == nil || [error code] == 0) {
-        NSLog(@"ddc succeed");
-    } else {
-        NSLog(@"ddc completed with error: %@",error);
+Collect data:
+
+```objecive-c
+[ddc runWithCompletion:^(DdcError *error) {
+    if (error) {
+        NSLog(@"%@",error);
     }
 }];
-
 ```
 
-> In develop environment, the DDC log output can be enabled by setting:
-> ```
-> ddcManager.debug = true;
-> ```
-
-DeviceIdType in Objective-C
-
-```objective-c
-typedef SWIFT_ENUM(NSInteger, DeviceIdType) {
-  DeviceIdTypeImei = 0,
-  DeviceIdTypeIdfa = 2,
-  DeviceIdTypeIccid = 3,
-  DeviceIdTypePhoneNumber = 4,
-  DeviceIdTypeInstallationId = 5,
-};
-```
 
 
 #### Use the framework in Swift project
 
+Import DDC:
 ```Swift
 import iddc
-
-...
-...
-
-/*
-         key: License key for DDC
-    systemId: the name of the application using/embedding the SDK
-    deviceId: Unique id for the device.
-deviceIdType: The type for the deviceId, it could be IMEI/IDFA/PhoneNumber/InstallationId.
-*/
-let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: "YOU-DEVICE-ID", deviceIdType: deviceIdType)
-manager.run { (error) in
-    guard let ddcError = error else {
-        print("DDC succeed")
-        return
-    }
-
-    switch ddcError.code {
-    case DdcErrorCode.succeed.rawValue:
-        print("DDC succeed")
-    case DdcErrorCode.tooManyRequests.rawValue:
-        print("DDC failed due to too many requests in short time")
-    case DdcErrorCode.ddcIsRunning.rawValue:
-        print("DDC failed due to last requst is still running")
-    default:
-        // failed, other reason
-        print("failed: \(ddcError)")
-    }
-}
 ```
 
-
-DeviceIdType in Swift
-
+Create an instance:
 ```Swift
-public enum DeviceIdType : Int {
-    case imei
-    case idfa
-    case iccid
-    case phoneNumber
-    case installationId
+let ddc = DeviceDataCollector.getDefault(key: "YOUR_LICENCE_KEY")
+```
+
+Collect data:
+```Swift
+ddc.run { error in
+    if let err = error {
+        print("\(err.description)")
+    }
 }
 ```
 
-#### Output
-* **DdcManager.run()** returns a DdcError object. If `DdcError == nil or DdcError.code == 0`, that means DDC report succeed. Otherwise you can get the failure reason from `DdcError.description`
 
-#### Alternatives for triggering DDC
-Generally, it is the responsibility of the host-app to trigger the DDC.
-Every time the host-app triggers the DDC - the DDC will collect and upload a DDC event.
-In order for the collected data to be of maximum business use a certain number of DDC events must be collected over time.
-Fewer DDC events collected means less value can be realised.
 
-Best practise is to trigger DDC based on location updates - however this requires the host-app to have a reason (use case) to subscribe to location updates from iOS.
+#### Associating collected data with a user/device identity
 
-Putting the DDC in the system-callback (e.g:`didUpdateToLocation`) event directly(e.g.: `didUpdateToLocation` ->
-`DDC`) ensures separation of concerns and eliminate any risk of impacting other features, and vice versa.
+The following instance methods can be used to optionally provide additional user/device identifiers:
+
+| Name           | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| advertisingID  | The [Apple advertising ID](https://developer.apple.com/documentation/adsupport/asidentifiermanager) of a device. |
+| externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
+| phoneNumber    | The user's phone number.                                     |
+
+In Objective-C:
+
+```objective-c
+ddc.externalUserID = @"c23911a2-c455-4a59-96d0-c6fea09176b8";
+ddc.phoneNumber = @"+1234567890";
+ddc.advertisingID([adID UUIDString]);
+```
+
+In Swift:
+
+```java
+ddc.externalUserID("c23911a2-c455-4a59-96d0-c6fea09176b8"); 
+ddc.phoneNumber("+1234567890");
+ddc.advertisingID(adID);
+```
+
+**Note:** user data is encrypted and handled in accordance with EU GDPR.
+
+
+
+#### Data collection frequency
+
+The higher the frequency of data collection (DDC events), the greater business value. The bare minimum is to trigger events on app open ([applicationDidEnterBackground](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1622997-applicationdidenterbackground )) and/or app close ([applicationWillEnterForeground](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623076-applicationwillenterforeground)). Read more about [state transitions here](https://developer.apple.com/documentation/uikit/uiapplicationdelegate#1965924). There's a minimum interval between two events determined by the licence - so calling DDC too often is harmless.  
+
+An alternative  is to trigger DDC based on location updates. This, however, requires the host application to **already have a legitimate reason** (use case) to subscribe to location updates from iOS.
+
+> Putting the DDC in the system-callback (e.g: `didUpdateToLocation`) event directly (e.g.: `didUpdateToLocation` ->`DDC`) ensures separation of concerns and eliminates any risk of impacting other features, and vice versa.
+
+Example of this in Objective-C:
 
 ```objective-c
 - (void)locationManager:(CLLocationManager * )manager didUpdateToLocation:(CLLocation * )newLocation fromLocation:(CLLocation * )oldLocation {
-    DdcManager * ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" systemId: @"YOUR-SYSTEM-ID" deviceId: @"YOU-DEVICE-ID" deviceIdType: deviceIdType];
-    [ddcManager runWithCompletion:^(DdcError * error) {
-        if (error == nil || [error code] == 0) {
-            // succeed
-            NSLog(@"ddc succeed");
-        } else if( [error code] == DdcErrorCodeTooManyRequests ){
-            // failed due to too many requests in short time
-        } else if( [error code] == DdcErrorCodeDdcIsRunning ){
-            // failed due to last request is still running
-        } else {
-            // failed, other reason
-            NSLog(@"ddc completed with error: %@",error);
+    DeviceDataCollector *ddc = [DeviceDataCollector getDefaultWithKey:@"YOUR_LICENCE_KEY"];
+    [ddc runWithCompletion:^(DdcError *error) {
+        if (error) {
+            NSLog(@"%@",error);
         }
-    }];
+	}];
 }
 ```
 
@@ -201,42 +152,9 @@ Other options include tying triggering of DDC to:
 * Background fetch
 * Audio process
 
-As a last resort, DDC can be triggered when application state changes, e.g. when `func applicationDidEnterBackground(_ application: UIApplication)`, `func applicationWillEnterForeground(_ application: UIApplication)`
+In our example apps data collection is triggered when a button is pressed. Read below how trigger DDC events from within a **notification service extension** - especially if you are already using one.
 
-......
 
-In our demo [Swift Demo App](./iddc-swift/iddc-swift/ViewController.swift), the DDC collections were triggered when a user tapped a Button.
-
-```swift
-@IBAction func buttonPressed(_ sender: UIButton) {
-    let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "uuid-unavailable"
-    let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: deviceId, deviceIdType: .installationId)
-    manager.run { (error) in
-        // result handling
-    }
-}
-```
-
-#### User ID
-In order to predict churn events you need to provide an external user ID. This ID will be used to correlate user data across devices. It is important that the user ID remains consistent on all devices. For example a login ID (username). Here is an example of how to set this:
-```swift
-// you need to implement a function that fetches a user ID that is unique to the user.
-func getExternalUserID() -> String {
-    return "this is my unique value that identifies this user"
-}
-
-@IBAction func buttonPressed(_ sender: UIButton) {
-    let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "uuid-unavailable"
-    let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: deviceId, deviceIdType: .installationId)
-
-    manager.externalUserID = getExternalUserID()
-
-    manager.run { (error) in
-        // result handling
-    }
-}
-```
-**Note:** user data is of course encrypted and handled in accordance with GDPR in EU.
 
 
 ## Trigger event on push notification
@@ -322,7 +240,7 @@ DDC SDK needs to know also the group id in order to discover the shared location
 Since the DDC is integrated independently in both the app and the extension we need to specify the property in both targets.
 
 Add following snippet to both Info.plist's:
-```
+```xml
 <key>APP_GROUP_ID</key>
 <string>group.com.ebuilder.iddcdemo.swift.iddc-swift</string>
 ```
@@ -444,7 +362,7 @@ For a code sample and project configuration check the sample app available in th
 In brief, following actions and settings need to be performed:
 
   1. Enable Push Notifications capability in your app:
- 
+
     ![enable_push_notifications_capability.png](./res/enable_push_notifications_capability.png "enable_push_notifications_capability")
 
   2. Ask the user's [permission to use notifications](https://developer.apple.com/documentation/usernotifications/asking_permission_to_use_notifications).
