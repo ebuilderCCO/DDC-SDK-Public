@@ -1,0 +1,16 @@
+PODS:
+  - iddc-xcode10.0 (0.1.229)
+
+DEPENDENCIES:
+  - iddc-xcode10.0 (= 0.1.229)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - iddc-xcode10.0
+
+SPEC CHECKSUMS:
+  iddc-xcode10.0: 875904889d0ff68dda38b038cea5fe536552ff91
+
+PODFILE CHECKSUM: 147866e9763fce4957e68ddd95377f49e349d146
+
+COCOAPODS: 1.5.3
