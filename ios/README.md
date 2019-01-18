@@ -127,7 +127,7 @@ ddc.advertisingID(adID);
 
 #### Data collection frequency
 
-The higher the frequency of data collection (DDC events), the greater business value. The bare minimum is to trigger events on app open ([applicationDidEnterBackground](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1622997-applicationdidenterbackground )) and/or app close ([applicationWillEnterForeground](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623076-applicationwillenterforeground)). Read more about [state transitions here](https://developer.apple.com/documentation/uikit/uiapplicationdelegate#1965924). There's a minimum interval between two events determined by the licence - so calling DDC too often is harmless.  
+The higher the frequency of data collection (DDC events), the greater the business value. The bare minimum is to trigger events on app open ([applicationDidEnterBackground](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1622997-applicationdidenterbackground )) and/or app close ([applicationWillEnterForeground](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623076-applicationwillenterforeground)). Read more about [state transitions here](https://developer.apple.com/documentation/uikit/uiapplicationdelegate#1965924). There's a minimum interval between two events determined by the licence - so calling DDC too often is harmless.  
 
 An alternative  is to trigger DDC based on location updates. This, however, requires the host application to **already have a legitimate reason** (use case) to subscribe to location updates from iOS.
 
