@@ -131,9 +131,7 @@ The higher the frequency of data collection (DDC events), the greater the busine
 
 An alternative  is to trigger DDC based on location updates. This, however, requires the host application to **already have a legitimate reason** (use case) to subscribe to location updates from iOS.
 
-> Putting the DDC in the system-callback (e.g: `didUpdateToLocation`) event directly (e.g.: `didUpdateToLocation` ->`DDC`) ensures separation of concerns and eliminates any risk of impacting other features, and vice versa.
-
-Example of this in Objective-C:
+Putting the DDC in the system-callback (e.g: `didUpdateToLocation`) event directly (e.g.: `didUpdateToLocation` ->`DDC`) ensures separation of concerns and eliminates any risk of impacting other features, and vice versa. An example (Objective-C):
 
 ```objective-c
 - (void)locationManager:(CLLocationManager * )manager didUpdateToLocation:(CLLocation * )newLocation fromLocation:(CLLocation * )oldLocation {
@@ -158,7 +156,7 @@ In our example apps data collection is triggered when a button is pressed. Read 
 ## Trigger event on push notification
 
 You can trigger events on a push notification delivery.
-To achieve  this functionality you need to implement a notification service extension.(https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension)
+To achieve  this functionality you need to implement a [notification service extension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension).
 
 ### How it works
 Although bundled and published within your app, a notification service extension runs as a separate entity. Upon a push notification delivery the notification service is launched to perform needed work such as modify or enrich the content of the notification message. A lifecycle method is called to perform the work and we'll use same call to trigger an event.
@@ -245,7 +243,7 @@ Add following snippet to both Info.plist's:
 
 
 ##### Provisioning profile
-The extension needs its own provisioning profile. Follow the usual steps to configure the provisioning profile in Apple Developer console. (https://help.apple.com/xcode/mac/current/#/dev3a05256b8)
+The extension needs its own provisioning profile. Follow the usual steps to configure the provisioning profile in Apple Developer console. More on [app signing here](https://help.apple.com/xcode/mac/current/#/dev3a05256b8).
 
 #### SDK Usage
 Upon the creation of the Notification Service Extension, Xcode creates also a service class with a basic implementation of the callback methods.
@@ -256,20 +254,18 @@ Follow the steps below:
 ###### Step1: Add extension target
 In your POD file add a new target:
 
-```
+```ruby
 target 'iddcSwiftNotification' do
-    pod 'iddc-xcode10.0', '0.1.189'
-    # or
-    # pod 'iddc-xcode9.4', '0.1.189'
+    pod 'iddc-xcode10.1', '0.1.229'
     use_frameworks!
 end
 ```
 
 ###### Step2: Install
 Execute the following commands:
-```
-pod repo update
-pod install
+```sh
+$ pod repo update
+$ pod install
 ```
 
 Now you should see a new dependency added to your extension under *General > Linked Frameworks and Libraries*:
