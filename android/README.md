@@ -3,7 +3,8 @@
 The Device Data Collector (**DDC**) for Android manual and [example implementation](./example-app).
 
 [Compatibility](#compatibility)<br/>[Project Setup](#project-setup)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Permissions](#permissions)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Gradle Dependencies](#gradle-dependencies)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Proguard](#proguard)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Content Provider configuration](#content-provider-configuration)<br/>[Initialization](#initialization)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)</br>
-[Modes supported by DDC](#modes-supported-by-ddc)<br/>
+[Data collection](#data-collection)<br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Data collection frequency](#data-collection-frequency)<br/>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[On demand trigger](#on-demand-trigger)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Scheduled triggers](#scheduled-triggers)<br/>
 
 
@@ -146,14 +147,21 @@ ddc.phoneNumber("+1234567890");
 
 **Note:** user data is encrypted and handled in accordance with EU GDPR.
 
-## Modes supported by DDC
-
-* **On demand trigger**: Host app explicitly calls DDC to collect data whenever desired.
-* **Scheduled triggers** (recommended): DDC schedules data collection. It uses the [Android WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager/) for this.
 
 
+## Data collection
 
-## On demand trigger
+Data can be collected in two ways:
+
+- **On demand trigger**: Host app explicitly calls DDC to collect data whenever desired.
+- **Scheduled triggers** (recommended): DDC schedules data collection. It uses the [Android WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager/) for this.
+
+### Data collection frequency
+
+The higher the frequency of data collection (DDC events), the greater the business value. The bare minimum is to trigger events on app open and/or app close using the on demand trigger, but using scheduled data collection as well is ideal.
+
+
+### On demand trigger
 
 Collect data:
 
@@ -161,11 +169,9 @@ Collect data:
 ddc.run();
 ```
 
-**Note:** on demand triggering is not recommended. Read below how to enable scheduling.
+**Note:** on demand triggering on its own is not recommended. Read below how to enable scheduling as well.
 
-
-
-## Scheduled triggers
+### Scheduled triggers
 
 Scheduled jobs will in most cases continue running even when the host app is not running, or is put in background. Collection frequency is defined in the licence.
 
@@ -185,7 +191,7 @@ ddc.stopScheduler();
 
 If a user choses to opt in again, simply start the scheduler again. Calling *startScheduler* is safe, even if scheduling already is enabled.
 
-### Debugging
+#### Debugging
 
 You can see the scheduled jobs via [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb.html):
 
