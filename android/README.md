@@ -155,11 +155,11 @@ ddc.phoneNumber("+1234567890");
 Data can be collected in two ways:
 
 - **On demand trigger**: Host app explicitly calls DDC to collect data whenever desired.
-- **Scheduled triggers** (recommended): DDC schedules data collection. It uses the [Android WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager/) for this.
+- **Scheduled triggers**: DDC schedules data collection. It uses the [Android WorkManager](https://developer.android.com/topic/libraries/architecture/workmanager/) for this.
 
 ### Data collection frequency
 
-The higher the frequency of data collection (DDC events), the greater the business value. The bare minimum is to trigger events on app open and/or app close using the on demand trigger, but using scheduled data collection as well is ideal.
+The higher the frequency of data collection (DDC events), the greater the business value. The bare minimum is to trigger events on app open and/or app close using the on demand trigger, but **using scheduled data collection as well is ideal**.
 
 
 ### On demand trigger
