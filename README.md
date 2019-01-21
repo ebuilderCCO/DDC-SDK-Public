@@ -4,5 +4,4 @@
 
 Device Insights consists of three main components - the Device Data Collector (DDC) SDK, a machine learning platform and prediction reports that can be imported or integrated into CRM tools in order to drive retention and acquisition market activities.
 
-The Device Data Collector (DDC) SDK is available for [iOS](./ios) and [Android](./android) devices.
-
+The DDC SDK is available for [iOS](./ios) and [Android](./android) devices.
