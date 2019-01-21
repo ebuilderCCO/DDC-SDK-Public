@@ -20,13 +20,13 @@ The Device Data Collector (**DDC**) for iOS manual.
 iOS DDC SDK is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'iddc-xcode10.1', '0.1.209'
+pod 'iddc-xcode10.0', '0.1.209'
 ```
 
-Or if you are using Xcode 10.0:
+Or if you are using Xcode 10.1:
 
 ```ruby
-pod 'iddc-xcode10.0', '0.1.209'
+pod 'iddc-xcode10.1', '0.1.209'
 ```
 
 To install iddc.framework, run the script from command-line:
@@ -108,17 +108,17 @@ The following instance methods can be used to optionally provide additional user
 In Objective-C:
 
 ```objective-c
+ddc.advertisingID([adID UUIDString]);
 ddc.externalUserID = @"c23911a2-c455-4a59-96d0-c6fea09176b8";
 ddc.phoneNumber = @"+1234567890";
-ddc.advertisingID([adID UUIDString]);
 ```
 
 In Swift:
 
 ```java
+ddc.advertisingID(adID);
 ddc.externalUserID("c23911a2-c455-4a59-96d0-c6fea09176b8"); 
 ddc.phoneNumber("+1234567890");
-ddc.advertisingID(adID);
 ```
 
 **Note:** user data is encrypted and handled in accordance with EU GDPR.
@@ -256,7 +256,7 @@ In your POD file add a new target:
 
 ```ruby
 target 'iddcSwiftNotification' do
-    pod 'iddc-xcode10.1', '0.1.229'
+    pod 'iddc-xcode10.0', '0.1.229'
     use_frameworks!
 end
 ```
