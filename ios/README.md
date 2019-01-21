@@ -20,13 +20,13 @@ The Device Data Collector (**DDC**) for iOS manual and example implementations i
 iOS DDC SDK is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'iddc-xcode10.0', '0.1.209'
+pod 'iddc-xcode10.0', '0.1.229'
 ```
 
 Or if you are using Xcode 10.1:
 
 ```ruby
-pod 'iddc-xcode10.1', '0.1.209'
+pod 'iddc-xcode10.1', '0.1.229'
 ```
 
 To install iddc.framework, run the script from command-line:
