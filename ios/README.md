@@ -2,7 +2,7 @@
 
 The Device Data Collector (**DDC**) for iOS manual and example implementations in [Objective-C](./example-app-oc) and [Swift](./example-app-swift).
 
-[Requirements](#requirements)<br/>[Installation](#installation)<br/>[Usage](#usage)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Add the framework to a project](#add-the-framework-to-a-project)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use the framework in Objective-C project](#use-the-framework-in-objective-c-project)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use the framework in Swift project](#use-the-framework-in-swift-project)<br/> 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)<br/>        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Data collection frequency](#data-collection-frequency)<br/>[Trigger event on push notification](#trigger-event-on-push-notification)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[How it works](#how-it-works)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Shared data with App Groups](#shared-data-with-app-groups)<br/>        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Packaging](#packaging)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Create and configure a notification service extension](#create-and-configure-a-notification-service-extension)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SDK Usage](#sdk-usage)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Push notification requirements](#push-notification-requirements)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Example app](#example-app)
+[Requirements](#requirements)<br/>[Installation](#installation)<br/>[Usage](#usage)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Permissions](#permissions)<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Add the framework to a project](#add-the-framework-to-a-project)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use the framework in Objective-C project](#use-the-framework-in-objective-c-project)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use the framework in Swift project](#use-the-framework-in-swift-project)<br/> 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)<br/>        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Data collection frequency](#data-collection-frequency)<br/>[Trigger event on push notification](#trigger-event-on-push-notification)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[How it works](#how-it-works)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Shared data with App Groups](#shared-data-with-app-groups)<br/>        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Packaging](#packaging)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Create and configure a notification service extension](#create-and-configure-a-notification-service-extension)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SDK Usage](#sdk-usage)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Push notification requirements](#push-notification-requirements)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Example app](#example-app)
 
 
 
@@ -45,7 +45,30 @@ $ pod update
 
 ## Usage
 
+#### Permissions
+DDC SDK doesn't need any permissions in order to run (and won't ask for any). If no permissions are set by the host application, DDC will only collect data for which permissions are not required.
+
+However, there are some permissions that improve data quality if already granted to the host application:
+
+##### Access WiFi Information
+
+If Access WiFi capability and Access WiFi Information entitlement are enabled, DDC can collect collect SSID and (hashed) BSSID.
+
+##### NSBluetoothPeripheralUsageDescription
+
+If the host app has an existing use case, and the NSBluetoothPeripheralUsageDescription string is provided in the project's info.plist, DDC can collect information about the Bluetooth adapter and paired devices:
+
+```xml
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>DESCRIPTION-OF-USE-CASE</string>
+```
+
+##### Push Notifications and App Groups
+
+If enabled, DDC can collect data when the host application receives a push notification - even if it is not opened. Read more in the section [Trigger event on push notification](#trigger-event-on-push-notification).
+
 #### Use the framework in Objective-C project
+
 Select your project in **"TARGETS"** (**not** PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes**:
 ![embed-swift](./res/embed-swift.png "embed-swift")
 
