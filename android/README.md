@@ -15,20 +15,20 @@ Minimum supported [Android SDK version](https://source.android.com/source/build-
 ## Project Setup
 
 ### Permissions
-DDC SDK doesn't need any permissions in order to run. If no permissions are set by the host application, DDC will only collect data for which permissions are not required.
+DDC SDK doesn't need any permissions in order to run (and won't ask for any). If no permissions are set by the host application, DDC will only collect data for which permissions are not required.
 
 However, there are some permissions that improve data quality if already granted to the host application:
 
-| Permission                                                   | Description                                                  | Runtime |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------- |
-| android.permission.READ_PHONE_STATE                          | Retrieve device ids, network operator names                  | no      |
-| android.permission.ACCESS_WIFI_STATE                         | Retrieve WiFi status                                         | no      |
-| android.permission.ACCESS_NETWORK_STATE                      | Retrieve network status                                      | no      |
-| android.permission.BLUETOOTH                                 | Retrieve information about Bluetooth adapter and paired devices | no      |
-| android.permission.INTERNET                                  | To enable SDK to make network call                           | no      |
-| android.permission.RECEIVE_BOOT_COMPLETED                    | Used for scheduling jobs to run services-on-demand           | no      |
-| android.permission.WAKE_LOCK                                 | Used for scheduling jobs to run services-on-demand           | no      |
-| android.permission.ACCESS_COARSE_LOCATION<br />or<br />android.permission.ACCESS_FINE_LOCATION | Used to collect SSID and (hashed) BSSID                      |         |
+| Permission                                                   | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| android.permission.READ_PHONE_STATE                          | Retrieve device ids, network operator names                  |
+| android.permission.ACCESS_WIFI_STATE                         | Retrieve WiFi status                                         |
+| android.permission.ACCESS_NETWORK_STATE                      | Retrieve network status                                      |
+| android.permission.BLUETOOTH                                 | Retrieve information about Bluetooth adapter and paired devices |
+| android.permission.INTERNET                                  | To enable SDK to make network call                           |
+| android.permission.RECEIVE_BOOT_COMPLETED                    | Used for scheduling jobs to run services-on-demand           |
+| android.permission.WAKE_LOCK                                 | Used for scheduling jobs to run services-on-demand           |
+| android.permission.ACCESS_COARSE_LOCATION<br />or<br />android.permission.ACCESS_FINE_LOCATION | Used to collect SSID and (hashed) BSSID                      |
 
 
 
