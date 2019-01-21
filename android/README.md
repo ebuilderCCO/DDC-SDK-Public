@@ -140,9 +140,9 @@ The following instance methods can be used to optionally provide additional user
 Example:
 
 ```java
+ddc.advertisingId(adID);
 ddc.externalUserID("c23911a2-c455-4a59-96d0-c6fea09176b8"); 
 ddc.phoneNumber("+1234567890");
-ddc.advertisingId(adID);
 ```
 
 **Note:** user data is encrypted and handled in accordance with EU GDPR.
