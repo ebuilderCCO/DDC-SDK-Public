@@ -88,16 +88,11 @@ The host app is required to specify a unique app content uri. DDC reads this val
 
 ```groovy
 android {
-    compileSdkVersion ${COMPILE_SDK_VERSION}
     defaultConfig {
-        applicationId "com.company.app"
-        minSdkVersion ${MIN_SDK_VERSION}
-        targetSdkVersion ${TARGET_SDK_VERSION}
-        versionCode 1
-        versionName "1.0"
-
+        ...
         resValue "string", "data_content_provider_authority", "${applicationId}.ddc"
     }
+    ...
 }
 ```
 [SEE EXAMPLE](./android/example-app/ddc-example-app/build.gradle#L3)
