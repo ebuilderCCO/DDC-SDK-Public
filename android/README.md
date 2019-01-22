@@ -23,12 +23,12 @@ However, there are some permissions that improve data quality if already granted
 
 | Permission                                                   | Description                                                  |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| android.permission.READ_PHONE_STATE                          | Retrieve device ids, network operator names                  |
+| android.permission.READ_PHONE_STATE                          | Retrieve SIM card info                                       |
 | android.permission.ACCESS_WIFI_STATE                         | Retrieve WiFi status                                         |
 | android.permission.ACCESS_NETWORK_STATE                      | Retrieve network status                                      |
 | android.permission.BLUETOOTH                                 | Retrieve information about Bluetooth adapter and paired devices |
-| android.permission.RECEIVE_BOOT_COMPLETED                    | Used for scheduling jobs to run services-on-demand           |
-| android.permission.WAKE_LOCK                                 | Used for scheduling jobs to run services-on-demand           |
+| android.permission.RECEIVE_BOOT_COMPLETED                    | Improves scheduler reliability upon device restart on some devices |
+| android.permission.WAKE_LOCK                                 | Improves scheduler reliability on some devices               |
 | android.permission.ACCESS_COARSE_LOCATION<br />or<br />android.permission.ACCESS_FINE_LOCATION | Used to collect SSID and (hashed) BSSID                      |
 
 
@@ -88,13 +88,11 @@ The host app is required to specify a unique app content uri. DDC reads this val
 
 ```groovy
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
-
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.company.app"
         minSdkVersion 16
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -123,10 +121,10 @@ DeviceDataCollector.getDefault(...) has the following mandatory arguments:
 * *context* (Context) : application context
 * *licenseKey* (String) : the licence key provided by eBuilder
 
-Enable SDK logging (optional):
+Enable SDK logging (for debugging purposes):
 
 ```java
-ddc.loggingEnabled(true);
+ddc.loggingEnabled(true); // default is false
 ```
 
 #### Associating collected data with a user/device identity
@@ -134,15 +132,15 @@ The following instance methods can be used to optionally provide additional user
 
 | Name           | Description                                                  |
 | -------------- | ------------------------------------------------------------ |
-| advertisingID  | The [Android advertising ID](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/package-summary) of a device. |
-| externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
+| advertisingId  | The [Android advertising ID](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/package-summary) of a device. |
+| externalUserId | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
 | phoneNumber    | The user's phone number.                                     |
 
 Example:
 
 ```java
 ddc.advertisingId(adID);
-ddc.externalUserID("c23911a2-c455-4a59-96d0-c6fea09176b8"); 
+ddc.externalUserId("c23911a2-c455-4a59-96d0-c6fea09176b8"); 
 ddc.phoneNumber("+1234567890");
 ```
 
@@ -191,8 +189,6 @@ ddc.stopScheduler();
 ```
 
 If a user choses to opt in again, simply start the scheduler again. Calling *startScheduler* is safe, even if scheduling already is enabled.
-
-#### Debugging
 
 You can see the scheduled jobs via [Android Debug Bridge (adb)](https://developer.android.com/studio/command-line/adb.html):
 

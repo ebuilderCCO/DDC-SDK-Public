@@ -284,7 +284,19 @@ target 'iddcSwiftNotification' do
 end
 ```
 
+or:
+
+```ruby
+target 'iddcSwiftNotification' do
+    pod 'iddc-xcode10.1', '0.1.229'
+    use_frameworks!
+end
+```
+
+###### 
+
 ###### Step2: Install
+
 Execute the following commands:
 ```sh
 $ pod repo update
