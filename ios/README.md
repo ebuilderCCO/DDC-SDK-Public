@@ -279,8 +279,7 @@ target 'iddcSwiftNotification' do
     use_frameworks!
 end
 ```
-
-######[SEE EXAMPLE](./example-app-swift/Podfile#L26)
+[SEE EXAMPLE](./example-app-swift/Podfile#L26)
 
 ###### Step2: Install
 
