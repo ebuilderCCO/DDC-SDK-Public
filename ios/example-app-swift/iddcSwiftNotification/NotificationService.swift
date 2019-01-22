@@ -20,10 +20,7 @@ class NotificationService: UNNotificationServiceExtension {
         if let bestAttemptContent = bestAttemptContent {
             // Modify the notification content here...
             bestAttemptContent.title = "\(bestAttemptContent.title) [modified]"
-            
             contentHandler(bestAttemptContent)
-            print("############")
-            print("\(bestAttemptContent)")
         }
         
         DeviceDataCollector.run { error in
