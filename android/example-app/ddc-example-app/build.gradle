@@ -17,8 +17,10 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:27.1.1'
+    implementation "com.android.support:support-v4:27.1.1"
     implementation "com.android.support:appcompat-v7:27.1.1"
+    implementation "com.google.android.gms:play-services-ads:11.6.2"
+    implementation "com.google.android.gms:play-services-identity:11.6.2"
 
     implementation ("io.ebuilder.mobile.services:ddc-sdk:1.2.0.255") {
         exclude group: "com.android.support"
