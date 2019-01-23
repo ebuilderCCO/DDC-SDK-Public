@@ -1,0 +1,11 @@
+framework module iddc {
+  umbrella header "iddc.h"
+
+  export *
+  module * { export * }
+}
+
+module iddc.Swift {
+    header "iddc-Swift.h"
+    requires objc
+}

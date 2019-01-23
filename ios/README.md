@@ -1,208 +1,167 @@
-# iddc.framework
+# iOS
 
-[![Build Status](https://img.shields.io/badge/Platform-iOS-lightgrey.svg)](https://www.apple.com)   [![iOS](https://img.shields.io/badge/iOS-8.0-brightgreen.svg)](https://www.apple.com) [![Xcode](https://img.shields.io/badge/Xcode-9.4-brightgreen.svg)](https://img.shields.io/badge/Xcode-9.4-brightgreen.svg)
-[![Xcode](https://img.shields.io/badge/Xcode-10.0-brightgreen.svg)](https://img.shields.io/badge/Xcode-10.0-brightgreen.svg)
+The Device Data Collector (**DDC**) for iOS manual and example implementations in [Objective-C](./example-app-oc) and [Swift](./example-app-swift).
 
-## On this page:
-- [1. Example](#1-example)
-- [2. Requirements](#2-requirements)
-- [3. Installation](#3-installation)
-- [4. Usage](#4-usage)
-- [5. Trigger event on push notification](#5-trigger-event-on-push-notification)
-    - [5.1 How it works](#51-how-it-works)
-    - [5.2 Shared Data with App Groups](#52-shared-data-with-app-groups)
-    - [5.3 Packaging](#53-packaging)
-    - [5.4 Create and configure a Notification Service Extension](#54-create-and-configure-a-notification-service-extension)
-    - [5.5 SDK Usage](#55-sdk-usage)
-    - [5.6 Push notification requirements](#56-push-notification-requirements)
-    - [5.7 Sample app](#57-sample-app)
-
----
-
-## 1. Example
-
-To run the example project, clone the repo, and run `pod update` from the **iddc-oc** or **iddc-swift** directory first.
-```ruby
-pod update
-```
-
-After installing the Cocoapods library,  double click `*.xcworkspace`(NOT `*.xcodeproj`) to open the project in your Xcode, build & run it.
-
-## 2. Requirements
-
-| iddc.framework  | Xcode |
-| --------------- | ----- |
-| iddc-xcode9.4   | 9.4   |
-| iddc-xcode10.0  | 10.0  |
+[Requirements](#requirements)<br/>[Installation](#installation)<br/>[Usage](#usage)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Permissions](#permissions)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use the framework in Objective-C project](#use-the-framework-in-objective-c-project)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Use the framework in Swift project](#use-the-framework-in-swift-project)<br/> 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Associating collected data with a user/device identity](#associating-collected-data-with-a-userdevice-identity)<br/>        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Data collection frequency](#data-collection-frequency)<br/>[Trigger event on push notification](#trigger-event-on-push-notification)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[How it works](#how-it-works)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Shared data with App Groups](#shared-data-with-app-groups)<br/>        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Packaging](#packaging)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Create and configure a notification service extension](#create-and-configure-a-notification-service-extension)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SDK Usage](#sdk-usage)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Push notification requirements](#push-notification-requirements)<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Example app](#example-app)
 
 
-## 3. Installation
 
-iOS DDC SDK **iddc** is available through [CocoaPods](http://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+## Requirements
+
+| iddc.framework | Xcode |
+| -------------- | ----- |
+| iddc-xcode10.0 | 10.0  |
+| iddc-xcode10.1 | 10.1  |
+
+
+
+## Installation
+
+iOS DDC SDK is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'iddc-xcode10.0', '0.1.189'
-# or
-# pod 'iddc-xcode9.4', '0.1.189'
+pod 'iddc-xcode${XCODE_VERSION}', '${DDC_SDK_VERSION}'
 ```
 
-* To install iddc.framework, run the script from command-line:
-```ruby
-pod install
+[SEE EXAMPLE](./example-app-swift/Podfile#L11)
+
+To install iddc.framework, run the script from command-line:
+
+```sh
+$ pod install
 ```
 
-* To upgrade iddc.framework, run the script from command-line:
+To upgrade iddc.framework, run the script from command-line:
 
-```ruby
-pod update
+```sh
+$ pod update
 ```
 
-You can get available versions information of the framework by
 
-```
-pod trunk info iddc-xcode9.4
-```
 
-or
-```
-pod trunk info iddc-xcode10.0
-```
+## Usage
 
-## 4. Usage
+#### Permissions
+DDC SDK doesn't need any permissions in order to run (and won't ask for any). If no permissions are set by the host application, DDC will only collect data for which permissions are not required.
 
-#### 4.1 Add NSBluetoothPeripheralUsageDescription to Info.list
-Since **iddc.framework** need Bluetooth permission to read its status(on/off), it needs to contain an NSBluetoothPeripheralUsageDescription key with a string value explaining to the user how the app uses this data.
-But actually, the **iddc.framwork** won't show the permission dialogue at run time.
+However, there are some permissions that improve data quality if already granted to the host application:
+
+##### Access WiFi Information
+
+If Access WiFi capability and Access WiFi Information entitlement are enabled, DDC can collect collect SSID and (hashed) BSSID.
+
+##### NSBluetoothPeripheralUsageDescription
+
+If the host app has an existing use case, and the NSBluetoothPeripheralUsageDescription string is provided in the project's info.plist, DDC can collect information about the Bluetooth adapter and paired devices:
+
 ```xml
 <key>NSBluetoothPeripheralUsageDescription</key>
-<string>REASON-WHY-NEED-PERMISSION</string>
+<string>DESCRIPTION-OF-USE-CASE</string>
 ```
-> Please replace **REASON-WHY-NEED-PERMISSION** with some meaningful words.
 
-#### 4.2 Use the framework in Objective-C project
- * (Objective-C project only)Select your project in **"TARGETS"**(Not PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes**
-   ![embed-swift](./res/embed-swift.png "embed-swift")
+##### Push Notifications and App Groups
+
+If enabled, DDC can collect data when the host application receives a push notification - even if it is not opened. Read more in the section [Trigger event on push notification](#trigger-event-on-push-notification).
+
+#### Use the framework in Objective-C project
+
+Select your project in **"TARGETS"** (**not** PROJECT), click **Build Settings**, Set **Always Embed Swift Standard Libraries** to **Yes**:
+![embed-swift](./res/embed-swift.png "embed-swift")
+
+Import DDC:
 
 ```objective-c
 #import <iddc/iddc.h>
+```
 
-...
-...
+Create an instance:
+```objecive-c
+DeviceDataCollector *ddc = [DeviceDataCollector getDefaultWithKey: @"YOUR_LICENCE_KEY"];
+```
 
-/*
- initWithKey: License key for DDC
-    systemId: the name of the application using/embedding the SDK
-    deviceId: Unique id for the device.
-deviceIdType: The type for the deviceId, it could be IMEI/IDFA/PhoneNumber/InstallationId.
-*/
-DdcManager *ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" systemId: @"YOUR-SYSTEM-ID" deviceId: @"YOU-DEVICE-ID" deviceIdType: deviceIdType];
-[ddcManager runWithCompletion:^(DdcError * error) {
-    if (error == nil || [error code] == 0) {
-        NSLog(@"ddc succeed");
-    } else {
-        NSLog(@"ddc completed with error: %@",error);
+Collect data:
+
+```objecive-c
+[ddc runWithCompletion:^(DdcError *error) {
+    if (error) {
+        NSLog(@"%@",error);
     }
 }];
-
-```
-
-> In develop environment, the DDC log output can be enabled by setting:
-> ```
-> ddcManager.debug = true;
-> ```
-
-DeviceIdType in Objective-C
-
-```objective-c
-typedef SWIFT_ENUM(NSInteger, DeviceIdType) {
-  DeviceIdTypeImei = 0,
-  DeviceIdTypeIdfa = 2,
-  DeviceIdTypeIccid = 3,
-  DeviceIdTypePhoneNumber = 4,
-  DeviceIdTypeInstallationId = 5,
-};
 ```
 
 
-#### 4.3 Use the framework in Swift project
 
+#### Use the framework in Swift project
+
+Import DDC:
 ```Swift
 import iddc
-
-...
-...
-
-/*
-         key: License key for DDC
-    systemId: the name of the application using/embedding the SDK
-    deviceId: Unique id for the device.
-deviceIdType: The type for the deviceId, it could be IMEI/IDFA/PhoneNumber/InstallationId.
-*/
-let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: "YOU-DEVICE-ID", deviceIdType: deviceIdType)
-manager.run { (error) in
-    guard let ddcError = error else {
-        print("DDC succeed")
-        return
-    }
-
-    switch ddcError.code {
-    case DdcErrorCode.succeed.rawValue:
-        print("DDC succeed")
-    case DdcErrorCode.tooManyRequests.rawValue:
-        print("DDC failed due to too many requests in short time")
-    case DdcErrorCode.ddcIsRunning.rawValue:
-        print("DDC failed due to last requst is still running")
-    default:
-        // failed, other reason
-        print("failed: \(ddcError)")
-    }
-}
 ```
 
-
-DeviceIdType in Swift
-
+Create an instance:
 ```Swift
-public enum DeviceIdType : Int {
-    case imei
-    case idfa
-    case iccid
-    case phoneNumber
-    case installationId
+let ddc = DeviceDataCollector.getDefault(key: "YOUR_LICENCE_KEY")
+```
+
+Collect data:
+```Swift
+ddc.run { error in
+    if let err = error {
+        print("\(err.description)")
+    }
 }
 ```
 
-#### 4.4 Output:
-* **DdcManager.run()** returns a DdcError object. If `DdcError == nil or DdcError.code == 0`, that means DDC report succeed. Otherwise you can get the failure reason from `DdcError.description`
 
-#### 4.5 Alternatives for triggering DDC
-Generally, it is the responsibility of the host-app to trigger the DDC.
-Every time the host-app triggers the DDC - the DDC will collect and upload a DDC event.
-In order for the collected data to be of maximum business use a certain number of DDC events must be collected over time.
-Fewer DDC events collected means less value can be realised.
 
-Best practise is to trigger DDC based on location updates - however this requires the host-app to have a reason (use case) to subscribe to location updates from iOS.
+#### Associating collected data with a user/device identity
 
-Putting the DDC in the system-callback (e.g:`didUpdateToLocation`) event directly(e.g.: `didUpdateToLocation` ->
-`DDC`) ensures separation of concerns and eliminate any risk of impacting other features, and vice versa.
+The following properties can be used to optionally provide additional user/device identifiers:
+
+| Name           | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| advertisingID  | The [Apple advertising ID](https://developer.apple.com/documentation/adsupport/asidentifiermanager) of a device. |
+| externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
+| phoneNumber    | The user's phone number.                                     |
+
+These can be set in any order, at any time (once there is a ddc instance) and as many times as needed.
+
+In Objective-C:
+
+```objective-c
+ddc.advertisingID = [adID UUIDString];
+ddc.externalUserID = @"c23911a2-c455-4a59-96d0-c6fea09176b8";
+ddc.phoneNumber = @"+1234567890";
+```
+
+In Swift:
+
+```java
+ddc.advertisingID(adID);
+ddc.externalUserID("c23911a2-c455-4a59-96d0-c6fea09176b8"); 
+ddc.phoneNumber("+1234567890");
+```
+
+**Note:** user data is encrypted and handled in accordance with EU GDPR.
+
+
+
+#### Data collection frequency
+
+The higher the frequency of data collection (DDC events), the greater the business value. The bare minimum is to trigger events on app open ([applicationDidEnterBackground](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1622997-applicationdidenterbackground )) and/or app close ([applicationWillEnterForeground](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623076-applicationwillenterforeground)). Read more about [state transitions here](https://developer.apple.com/documentation/uikit/uiapplicationdelegate#1965924). There's a minimum interval between two events determined by the licence - so calling DDC too often is harmless.  
+
+An alternative  is to trigger DDC based on location updates. This, however, requires the host application to **already have a legitimate reason** (use case) to subscribe to location updates from iOS.
+
+Putting the DDC in the system-callback (e.g: `didUpdateToLocation`) event directly (e.g.: `didUpdateToLocation` ->`DDC`) ensures separation of concerns and eliminates any risk of impacting other features, and vice versa. An example (Objective-C):
 
 ```objective-c
 - (void)locationManager:(CLLocationManager * )manager didUpdateToLocation:(CLLocation * )newLocation fromLocation:(CLLocation * )oldLocation {
-    DdcManager * ddcManager = [[DdcManager alloc] initWithKey:@"YOUR-LICENSE-KEY" systemId: @"YOUR-SYSTEM-ID" deviceId: @"YOU-DEVICE-ID" deviceIdType: deviceIdType];
-    [ddcManager runWithCompletion:^(DdcError * error) {
-        if (error == nil || [error code] == 0) {
-            // succeed
-            NSLog(@"ddc succeed");
-        } else if( [error code] == DdcErrorCodeTooManyRequests ){
-            // failed due to too many requests in short time
-        } else if( [error code] == DdcErrorCodeDdcIsRunning ){
-            // failed due to last request is still running
-        } else {
-            // failed, other reason
-            NSLog(@"ddc completed with error: %@",error);
+    DeviceDataCollector *ddc = [DeviceDataCollector getDefaultWithKey:@"YOUR_LICENCE_KEY"];
+    [ddc runWithCompletion:^(DdcError *error) {
+        if (error) {
+            NSLog(@"%@",error);
         }
-    }];
+	}];
 }
 ```
 
@@ -210,53 +169,20 @@ Other options include tying triggering of DDC to:
 * Background fetch
 * Audio process
 
-As a last resort, DDC can be triggered when application state changes, e.g. when `func applicationDidEnterBackground(_ application: UIApplication)`, `func applicationWillEnterForeground(_ application: UIApplication)`
-
-......
-
-In our demo [Swift Demo App](./iddc-swift/iddc-swift/ViewController.swift), the DDC collections were triggered when a user tapped a Button.
-
-```swift
-@IBAction func buttonPressed(_ sender: UIButton) {
-    let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "uuid-unavailable"
-    let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: deviceId, deviceIdType: .installationId)
-    manager.run { (error) in
-        // result handling
-    }
-}
-```
-
-#### 4.6 User ID
-In order to predict churn events you need to provide an external user ID. This ID will be used to correlate user data across devices. It is important that the user ID remains consistent on all devices. For example a login ID (username). Here is an example of how to set this:
-```swift
-// you need to implement a function that fetches a user ID that is unique to the user.
-func getExternalUserID() -> String {
-    return "this is my unique value that identifies this user"
-}
-
-@IBAction func buttonPressed(_ sender: UIButton) {
-    let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? "uuid-unavailable"
-    let manager = DdcManager(key: "YOUR-LICENSE-KEY", systemId: "YOUR-SYSTEM-ID", deviceId: deviceId, deviceIdType: .installationId)
-
-    manager.externalUserID = getExternalUserID()
-
-    manager.run { (error) in
-        // result handling
-    }
-}
-```
-This data is of course encrypted and handled in accordance with GDPR in EU.
+In our example apps data collection is triggered when a button is pressed. Read below how trigger DDC events from within a **notification service extension** - especially if you are already using one.
 
 
-## 5. Trigger event on push notification
+
+
+## Trigger event on push notification
 
 You can trigger events on a push notification delivery.
-To achieve  this functionality you need to implement a notification service extension.(https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension)
+To achieve  this functionality you need to implement a [notification service extension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension).
 
-### 5.1 How it works
+### How it works
 Although bundled and published within your app, a notification service extension runs as a separate entity. Upon a push notification delivery the notification service is launched to perform needed work such as modify or enrich the content of the notification message. A lifecycle method is called to perform the work and we'll use same call to trigger an event.
 
-#### 5.2 Shared data with App Groups
+#### Shared data with App Groups
 The app and the extension run in their own separate sandboxes therefore not sharing data or objects in memory.
 However, App Groups feature allows data sharing between apps or between an app and the contained extension(s).
 
@@ -285,7 +211,7 @@ The initialization of the DDC  happens only in the app. As we'll see in a sectio
 
 If the triggering of events has been implemented in both the app and the extension the local storage serves also the purpose of bundling together the events originating from the app and extension, saving this way extra payload requests.
 
-#### 5.3 Packaging
+#### Packaging
 Although the app and the extension behave as separate entities at runtime, having minimal inter communication channels, having separate provisioning profiles, separate bundle IDs,  they are packaged together.
 There is only one ipa archive file that is published to appstore.
 
@@ -294,11 +220,11 @@ This is depicted in the figure bellow:
 ![ios_ddc_with_notification_extension_packaging](./res/ios_ddc_with_notification_extension_packaging.png "ios_ddc_with_notification_extension_packaging")
 
 
-#### 5.4 Create and configure a notification service extension
+#### Create and configure a notification service extension
 The notification service extension is created as a new target in the same Xcode project.
 It also requires its own provisioning profile.
 
-##### 5.4.1 Create a new target for Notification Service extension
+##### Create a new target for Notification Service extension
 Follow the steps bellow in Xcode to add the extension to your project.
 
 ###### Step1: File > New > Target ...
@@ -315,63 +241,63 @@ The new Notification Service Extension target is created:
 
 
 
-##### 5.4.2 Configure App Groups
+##### Configure App Groups
 AppGroups have to be configured for both the app and app extension. Follow the steps bellow.
 
-###### Step1: Choose the group id
+###### Choose the group id
 Let's assume the id is: *group.com.ebuilder.iddcdemo.swift.iddc-swift*
 
-###### Step2: Enable the App Groups Capability
+###### Enable the App Groups Capability
 App Groups Capability needs to be enabled in both the app and the extension.
 For each of the two targets go to Capabilities > App Groups and switch on the capability. Then specify the group id.
 ![add_app_groups_to_project.png](./res/add_app_groups_to_project.png "add_app_groups_to_project")
 
-###### Step3: Add APP_GROUP_ID property to Info.plist
+###### Add APP_GROUP_ID property to Info.plist
 DDC SDK needs to know also the group id in order to discover the shared location. By convention DDC looks in Info.plist for a property called APP_GROUP_ID.
 Since the DDC is integrated independently in both the app and the extension we need to specify the property in both targets.
 
 Add following snippet to both Info.plist's:
-```
+```xml
 <key>APP_GROUP_ID</key>
 <string>group.com.ebuilder.iddcdemo.swift.iddc-swift</string>
 ```
 
 
-##### 5.4.3 Provisioning profile
-The extension needs its own provisioning profile. Follow the usual steps to configure the provisioning profile in Apple Developer console. (https://help.apple.com/xcode/mac/current/#/dev3a05256b8)
+##### Provisioning profile
+The extension needs its own provisioning profile. Follow the usual steps to configure the provisioning profile in Apple Developer console. More on [app signing here](https://help.apple.com/xcode/mac/current/#/dev3a05256b8).
 
-#### 5.5 SDK Usage
+#### SDK Usage
 Upon the creation of the Notification Service Extension, Xcode creates also a service class with a basic implementation of the callback methods.
 
-##### 5.5.1 Install DDC dependencies
-Follow the steps bellow:
+##### Install DDC dependencies
+Follow the steps below:
 
 ###### Step1: Add extension target
 In your POD file add a new target:
 
-```
+```ruby
 target 'iddcSwiftNotification' do
-    pod 'iddc-xcode10.0', '0.1.189'
-    # or
-    # pod 'iddc-xcode9.4', '0.1.189'
+    pod 'iddc-xcode${XCODE_VERSION}', '${DDC_SDK_VERSION}'
     use_frameworks!
 end
 ```
+[SEE EXAMPLE](./example-app-swift/Podfile#L26)
 
 ###### Step2: Install
+
 Execute the following commands:
-```
-pod repo update
-pod install
+```sh
+$ pod repo update
+$ pod install
 ```
 
 Now you should see a new dependency added to your extension under *General > Linked Frameworks and Libraries*:
 
 ![dependencies_after_pod_install.png](./res/dependencies_after_pod_install.png "dependencies_after_pod_install")
 
-##### 5.5.2 Trigger DDC Event
+##### Trigger DDC Event
 
-Xcode has created following default bare implementation that you need to adjust based on your needs:
+Xcode has created the following default bare implementation that you need to adjust based on your needs:
 
 ```swift
 import UserNotifications
@@ -404,14 +330,13 @@ class NotificationService: UNNotificationServiceExtension {
 }
 ```
 
-To integrate DDC follow the steps:
+Now, to integrate DDC, first import DDC:
 
-###### Step1: Import DDC
 ```swift
 import iddc
 ```
 
-###### Step2: Trigger the event in the callback method
+Then, trigger data collection in the callback method:
 
 ```swift
 override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
@@ -419,11 +344,13 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
 
-        DdcManager.run { (error) in
+    	// Note that run() is called without instantiating DDC
+        // (that is already done in the main application):
+        DeviceDataCollector.run { error in
             if let err = error {
-                print("\(err.description)")
+            	print("\(err.description)")
             }
-        }
+		}
 
         if let bestAttemptContent = bestAttemptContent {
             // Modify the notification content here...
@@ -434,34 +361,28 @@ override func didReceive(_ request: UNNotificationRequest, withContentHandler co
 
 ```
 
-#### 5.6 Push notification requirements
-As described in Apple's documentation (https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension) the push notification must conform to following requirements in order for the extension to be triggered on notification arrival:
+#### Push notification requirements
+As described in [Apple's documentation](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension) the push notification must conform to following requirements in order for the extension to be triggered on notification arrival:
 
 ```
   - The remote notification is configured to display an alert
   - The remote notification's aps dictionary includes the mutable-content key with the value set to 1
 ```
+
   ```json
   {"aps": {"mutable-content": 1}}
   ```
 
 
-#### 5.7 Sample app
-For a code sample and project configuration check the sample app available in this repository.
-To setup and test Push Notifications check Apple's documentation: https://developer.apple.com/documentation/usernotifications
+#### Example app
+For an example implementation and project configuration see the [example-app-swift](./example-app-swift) in this repository. To setup and test Push Notifications check [Apple's documentation](https://developer.apple.com/documentation/usernotifications).
 
 In brief, following actions and settings need to be performed:
 
-  1. Enable Push Notifications capability in your app
+  1. Enable Push Notifications capability in your app:
 
     ![enable_push_notifications_capability.png](./res/enable_push_notifications_capability.png "enable_push_notifications_capability")
 
-  2. Ask permission to use notifications
+  2. Ask the user's [permission to use notifications](https://developer.apple.com/documentation/usernotifications/asking_permission_to_use_notifications).
 
-      https://developer.apple.com/documentation/usernotifications/asking_permission_to_use_notifications
-
-  3. Register your app with APN, retrieve app's device token ID and send it to your provider server
-
-      As a server you can also use a service provider such as https://www.pushwoosh.com
-
-      More details here: https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns
+  3. Register your app with APN, retrieve app's device token ID and send it to your provider server. As a server you can also use a service provider such as [Pushwoosh](https://www.pushwoosh.com). More details [here](https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns).
