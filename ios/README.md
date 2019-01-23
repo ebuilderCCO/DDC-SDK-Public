@@ -116,7 +116,7 @@ ddc.run { error in
 
 #### Associating collected data with a user/device identity
 
-The following instance methods can be used to optionally provide additional user/device identifiers:
+The following properties can be used to optionally provide additional user/device identifiers:
 
 | Name           | Description                                                  |
 | -------------- | ------------------------------------------------------------ |
@@ -124,10 +124,12 @@ The following instance methods can be used to optionally provide additional user
 | externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
 | phoneNumber    | The user's phone number.                                     |
 
+These can be set in any order, at any time (once there is a ddc instance) and as many time as needed.
+
 In Objective-C:
 
 ```objective-c
-ddc.advertisingID([adID UUIDString]);
+ddc.advertisingID = [adID UUIDString];
 ddc.externalUserID = @"c23911a2-c455-4a59-96d0-c6fea09176b8";
 ddc.phoneNumber = @"+1234567890";
 ```

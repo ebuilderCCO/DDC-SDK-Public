@@ -122,13 +122,15 @@ ddc.loggingEnabled(true); // default is false
 ```
 
 #### Associating collected data with a user/device identity
-The following instance methods can be used to optionally provide additional user/device identifiers:
+The following properties can be used to optionally provide additional user/device identifiers:
 
 | Name           | Description                                                  |
 | -------------- | ------------------------------------------------------------ |
 | advertisingId  | The [Android advertising ID](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/package-summary) of a device. |
 | externalUserId | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
 | phoneNumber    | The user's phone number.                                     |
+
+These can be set in any order, at any time (once there is a ddc instance) and as many time as needed.
 
 Example:
 
