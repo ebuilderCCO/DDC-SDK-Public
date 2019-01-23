@@ -63,7 +63,7 @@ dependencies {
     }
 }
 ```
-[SEE EXAMPLE](./android/example-app/ddc-example-app/build.gradle#L25)
+[SEE EXAMPLE](./example-app/ddc-example-app/build.gradle#L25)
 
 
 ### Proguard
@@ -95,7 +95,7 @@ android {
     ...
 }
 ```
-[SEE EXAMPLE](./android/example-app/ddc-example-app/build.gradle#L3)
+[SEE EXAMPLE](./example-app/ddc-example-app/build.gradle#L3)
 
 ## Initialization
 
