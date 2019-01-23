@@ -50,7 +50,7 @@ Add DDC SDK:
 
 ```groovy
 dependencies {
-    implementation "io.ebuilder.mobile.services:ddc-sdk:1.2.0.255"
+    implementation "io.ebuilder.mobile.services:ddc-sdk:${DDC_SDK_VERSION}"
 }
 ```
 
@@ -58,13 +58,13 @@ dependencies {
 
 ```groovy
 dependencies {
-    implementation ("io.ebuilder.mobile.services:ddc-sdk:1.2.0.255") {
+    implementation ("io.ebuilder.mobile.services:ddc-sdk:${DDC_SDK_VERSION}") {
         exclude group: "com.android.support"
     }
 }
 ```
+[SEE EXAMPLE](./android/example-app/ddc-example-app/build.gradle#L25)
 
-###  
 
 ### Proguard
 
@@ -84,24 +84,18 @@ Adjust your **proguard-rules.pro** file with the following lines:
 
 The SDK is using **Content Providers** to manage access to locally stored data. For more on Content Providers and their advantages see the [Android documentation](https://developer.android.com/guide/topics/providers/content-providers). 
 
-The host app is required to specify a unique app content uri. DDC reads this value as the attribute **data_content_provider_authority** that can be configured in *build.gradle*
+The host app is required to specify a unique app content uri. DDC reads this value as the attribute **data_content_provider_authority** that can be configured in *build.gradle*:
 
 ```groovy
 android {
-    compileSdkVersion 28
     defaultConfig {
-        applicationId "com.company.app"
-        minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-
+        ...
         resValue "string", "data_content_provider_authority", "${applicationId}.ddc"
     }
+    ...
 }
 ```
-
-
+[SEE EXAMPLE](./android/example-app/ddc-example-app/build.gradle#L3)
 
 ## Initialization
 
@@ -128,13 +122,15 @@ ddc.loggingEnabled(true); // default is false
 ```
 
 #### Associating collected data with a user/device identity
-The following instance methods can be used to optionally provide additional user/device identifiers:
+The following properties can be used to optionally provide additional user/device identifiers:
 
 | Name           | Description                                                  |
 | -------------- | ------------------------------------------------------------ |
 | advertisingId  | The [Android advertising ID](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/package-summary) of a device. |
 | externalUserId | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
 | phoneNumber    | The user's phone number.                                     |
+
+These can be set in any order, at any time (once there is a ddc instance) and as many time as needed.
 
 Example:
 

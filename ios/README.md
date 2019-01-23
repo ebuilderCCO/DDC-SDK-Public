@@ -20,14 +20,10 @@ The Device Data Collector (**DDC**) for iOS manual and example implementations i
 iOS DDC SDK is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'iddc-xcode10.0', '0.1.229'
+pod 'iddc-xcode${XCODE_VERSION}', '${DDC_SDK_VERSION}'
 ```
 
-Or if you are using Xcode 10.1:
-
-```ruby
-pod 'iddc-xcode10.1', '0.1.229'
-```
+[SEE EXAMPLE](./example-app-swift/Podfile#L11)
 
 To install iddc.framework, run the script from command-line:
 
@@ -120,7 +116,7 @@ ddc.run { error in
 
 #### Associating collected data with a user/device identity
 
-The following instance methods can be used to optionally provide additional user/device identifiers:
+The following properties can be used to optionally provide additional user/device identifiers:
 
 | Name           | Description                                                  |
 | -------------- | ------------------------------------------------------------ |
@@ -128,10 +124,12 @@ The following instance methods can be used to optionally provide additional user
 | externalUserID | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
 | phoneNumber    | The user's phone number.                                     |
 
+These can be set in any order, at any time (once there is a ddc instance) and as many time as needed.
+
 In Objective-C:
 
 ```objective-c
-ddc.advertisingID([adID UUIDString]);
+ddc.advertisingID = [adID UUIDString];
 ddc.externalUserID = @"c23911a2-c455-4a59-96d0-c6fea09176b8";
 ddc.phoneNumber = @"+1234567890";
 ```
@@ -279,21 +277,11 @@ In your POD file add a new target:
 
 ```ruby
 target 'iddcSwiftNotification' do
-    pod 'iddc-xcode10.0', '0.1.229'
+    pod 'iddc-xcode${XCODE_VERSION}', '${DDC_SDK_VERSION}'
     use_frameworks!
 end
 ```
-
-or:
-
-```ruby
-target 'iddcSwiftNotification' do
-    pod 'iddc-xcode10.1', '0.1.229'
-    use_frameworks!
-end
-```
-
-###### 
+[SEE EXAMPLE](./example-app-swift/Podfile#L26)
 
 ###### Step2: Install
 

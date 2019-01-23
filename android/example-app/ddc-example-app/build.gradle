@@ -6,7 +6,7 @@ android {
         applicationId "io.ebuilder.ddc.example.app"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 6
+        versionCode 1
         versionName "1.0"
         resValue "string", "data_content_provider_authority", "${applicationId}.ddc"
     }
