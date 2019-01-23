@@ -130,7 +130,7 @@ The following properties can be used to optionally provide additional user/devic
 | externalUserId | The host application's user identity. For example a (unique) user name, a user ID, an e-mail - or a hash thereof. |
 | phoneNumber    | The user's phone number.                                     |
 
-These can be set in any order, at any time (once there is a ddc instance) and as many time as needed.
+These can be set in any order, at any time (once there is a ddc instance) and as many times as needed.
 
 Example:
 
