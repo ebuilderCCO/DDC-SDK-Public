@@ -10,8 +10,8 @@ The Device Data Collector (**DDC**) for iOS manual and example implementations i
 
 | iddc.framework | Xcode |
 | -------------- | ----- |
-| iddc-xcode10.0 | 10.1  |
-| iddc-xcode10.1 | 10.2  |
+| iddc-xcode10.1 | 10.1  |
+| iddc-xcode10.2 | 10.2  |
 
 
 
