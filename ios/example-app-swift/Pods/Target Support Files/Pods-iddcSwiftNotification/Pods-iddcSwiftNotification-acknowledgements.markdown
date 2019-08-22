@@ -1,7 +1,7 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## iddc-xcode10.0
+## iddc-xcode10.1
 
 Copyright (c) 2017 eBuilder
 

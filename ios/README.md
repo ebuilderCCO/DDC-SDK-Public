@@ -10,8 +10,8 @@ The Device Data Collector (**DDC**) for iOS manual and example implementations i
 
 | iddc.framework | Xcode |
 | -------------- | ----- |
-| iddc-xcode10.0 | 10.0  |
-| iddc-xcode10.1 | 10.1  |
+| iddc-xcode10.0 | 10.1  |
+| iddc-xcode10.1 | 10.2  |
 
 
 
@@ -48,16 +48,8 @@ However, there are some permissions that improve data quality if already granted
 
 ##### Access WiFi Information
 
-If Access WiFi capability and Access WiFi Information entitlement are enabled, DDC can collect collect SSID and (hashed) BSSID.
+If Access WiFi capability and Access WiFi Information entitlement are enabled, DDC can collect SSID and (hashed) BSSID on iOS 11 and iOS 12 devices.
 
-##### NSBluetoothPeripheralUsageDescription
-
-If the host app has an existing use case, and the NSBluetoothPeripheralUsageDescription string is provided in the project's info.plist, DDC can collect information about the Bluetooth adapter and paired devices:
-
-```xml
-<key>NSBluetoothPeripheralUsageDescription</key>
-<string>DESCRIPTION-OF-USE-CASE</string>
-```
 
 ##### Push Notifications and App Groups
 

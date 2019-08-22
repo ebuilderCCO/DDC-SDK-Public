@@ -65,11 +65,11 @@
 		A0D8418D9838A99C4D29C4AD5E8C41F6 /* Pods-iddc-swift-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-iddc-swift-frameworks.sh"; sourceTree = "<group>"; };
 		A37D7559CD26357EAF00EF4322C9FAED /* Pods-iddc-swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iddc-swift.release.xcconfig"; sourceTree = "<group>"; };
 		A619255DF2EB49CF66EFCA4FAB80C880 /* Pods-iddc-swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iddc-swift.debug.xcconfig"; sourceTree = "<group>"; };
-		AE0EA6C695EF7784486DFE8A20BD414D /* iddc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iddc.framework; sourceTree = "<group>"; };
 		B3DC85F553BBDA13BD58ABB9D252CF72 /* Pods-iddc-swiftUITests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iddc-swiftUITests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		B4F2A41BA694A32281C9FCE54C8E1B79 /* Pods_iddc_swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_iddc_swift.framework; path = "Pods-iddc-swift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B699606B54CFB571EC1905B3930B6B02 /* Pods-iddcSwiftNotification-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iddcSwiftNotification-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BA462751003C8F11A707E0B561F8EEDC /* Pods-iddc-swiftTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-iddc-swiftTests.release.xcconfig"; sourceTree = "<group>"; };
+		BB677AA2A7CC393FA15D5B80BCEC855C /* iddc.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iddc.framework; sourceTree = "<group>"; };
 		C14B726D61271BEA325DF32CB8692022 /* Pods-iddc-swiftTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-iddc-swiftTests-dummy.m"; sourceTree = "<group>"; };
 		C28D5B1188450D48B82107B6470643E3 /* Pods-iddc-swiftUITests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-iddc-swiftUITests.modulemap"; sourceTree = "<group>"; };
 		CF9E5DC86427BD9CF5411D856E038C40 /* Pods-iddcSwiftNotification.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-iddcSwiftNotification.modulemap"; sourceTree = "<group>"; };
@@ -151,14 +151,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		37DE85068CF43020C1E80B48AB24BF3F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				AE0EA6C695EF7784486DFE8A20BD414D /* iddc.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		44D5347904CF754D6785B84253F2574A /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,12 +159,20 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		4E8BB8B404E229D30A24142086C5F9A1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BB677AA2A7CC393FA15D5B80BCEC855C /* iddc.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				A6F98DBBEA307FA877222A4579D63CF7 /* Pods */,
+				D3D346718F65CC18D470775943D7CD27 /* Pods */,
 				302F241E907A54566C9BA93A834F7941 /* Products */,
 				7EF50ECF6D37F13DECE9AABC4E67A5DE /* Targets Support Files */,
 			);
@@ -207,12 +207,13 @@
 			path = "Target Support Files/Pods-iddc-swift";
 			sourceTree = "<group>";
 		};
-		A6F98DBBEA307FA877222A4579D63CF7 /* Pods */ = {
+		A4CF32C0114D68C8F87163BE8EBD968A /* iddc-xcode10.1 */ = {
 			isa = PBXGroup;
 			children = (
-				D86735087B0858441F7756D5E5C757EF /* iddc-xcode10.0 */,
+				4E8BB8B404E229D30A24142086C5F9A1 /* Frameworks */,
 			);
-			name = Pods;
+			name = "iddc-xcode10.1";
+			path = "iddc-xcode10.1";
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -259,13 +260,12 @@
 			path = "Target Support Files/Pods-iddc-swiftTests";
 			sourceTree = "<group>";
 		};
-		D86735087B0858441F7756D5E5C757EF /* iddc-xcode10.0 */ = {
+		D3D346718F65CC18D470775943D7CD27 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				37DE85068CF43020C1E80B48AB24BF3F /* Frameworks */,
+				A4CF32C0114D68C8F87163BE8EBD968A /* iddc-xcode10.1 */,
 			);
-			name = "iddc-xcode10.0";
-			path = "iddc-xcode10.0";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

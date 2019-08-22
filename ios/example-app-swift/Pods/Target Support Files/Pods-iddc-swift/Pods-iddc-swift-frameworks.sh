@@ -143,10 +143,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${PODS_ROOT}/iddc-xcode10.0/iddc.framework"
+  install_framework "${PODS_ROOT}/iddc-xcode10.1/iddc.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${PODS_ROOT}/iddc-xcode10.0/iddc.framework"
+  install_framework "${PODS_ROOT}/iddc-xcode10.1/iddc.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
